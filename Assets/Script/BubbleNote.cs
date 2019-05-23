@@ -25,20 +25,20 @@ public class BubbleNote : PoolingObject.Object
     private float goodScale = 0.7f;
 
     //Insetup
-    private NotePlayer manager { get; set; }
+    private NotePlayer player { get; set; }
 
-    public void Setup()
+    public void Setup(NotePlayer _player)
     {
-
+        player = _player;
     }
 
-    protected override void OnSpawn()
+    public override void OnSpawn()
     {
         base.OnSpawn();
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
     }
 
-    protected override void Kill()
+    public override void Kill()
     {
         base.Kill();
         EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
@@ -48,12 +48,12 @@ public class BubbleNote : PoolingObject.Object
     {
         if (gesture.pickObject == easyTouchDetector.gameObject)
         {
-
+            PlayerHit();
         }
     }
 
     public void PlayerHit()
     {
-
+        anim.SetTrigger("Hit");
     }
 }

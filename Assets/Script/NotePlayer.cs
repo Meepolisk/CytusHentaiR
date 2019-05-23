@@ -6,6 +6,8 @@ public class NotePlayer : CytusPlayer
 {
     [SerializeField]
     private CytusPlayer MainCytusPlayer = null;
+    [SerializeField]
+    private BubbleNotePoolManager pool = null;
 
     [SerializeField]
     private List<iNoteProfile> noteList = null;
@@ -80,5 +82,5 @@ public class NotePlayer : CytusPlayer
 [System.Serializable]
 public class iNoteProfile
 {
-    float TimeAppear;
+    public float TimeAppear;
 }

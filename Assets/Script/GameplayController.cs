@@ -7,51 +7,21 @@ using UnityEditor;
 #endif
 
 [RequireComponent(typeof(VideoPlayer))]
-public class VideoBGMController : CytusPlayer
+public class GameplayController : MonoBehaviour
 {
-    public VideoPlayer Player { get; private set; }
-    public override bool isPlaying { get { return Player.isPlaying; } }
-    public bool isPause { get { return Player.isPaused; } }
-    public bool isPrepared { get { return Player.isPrepared; } }
-    
-    public override double Duration
+    [SerializeField]
+    private List<CytusPlayer> allCytusPlayer = null;
+
+    private void Start()
     {
-        get
+        StartCoroutine(_Start());
+    }
+    private IEnumerator _Start()
+    {
+        yield return new WaitForSeconds(2);
+        foreach (var item in allCytusPlayer)
         {
-            return Player.time;
+            item.Play();
         }
     }
-
-    [SerializeField]
-    private VideoPlayer videoPlayer = null;
-
-    private void Awake()
-    {
-        Player = GetComponent<VideoPlayer>();
-    }
-
-    public override void Pause()
-    {
-        Player.Pause();
-    }
-
-    public override void Play()
-    {
-        Player.Play();
-    }
-
-    public override void Stop()
-    {
-        Player.Stop();
-    }
-}
-
-public abstract class CytusPlayer : MonoBehaviour
-{
-    public abstract void Play();
-    public abstract void Pause();
-    public abstract void Stop();
-
-    public abstract bool isPlaying { get; }
-    public abstract double Duration { get; }
 }

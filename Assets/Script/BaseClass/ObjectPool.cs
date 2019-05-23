@@ -43,12 +43,12 @@ namespace PoolingObject
         public event Action onSpawned;
         public event Action<Object> onDead;
 
-        protected virtual void OnSpawn()
+        public virtual void OnSpawn()
         {
             if (onSpawned != null)
                 onSpawned();
         }
-        protected virtual void Kill()
+        public virtual void Kill()
         {
             if (onDead != null)
                 onDead(this);
