@@ -7,12 +7,12 @@ namespace PoolingObject
 {
     public abstract class Manager<T> : MonoBehaviour where T : Object
     {
-        protected abstract T prefabs { get; }
+        public abstract T Prefabs { get; }
 
         private List<Object> activeList = new List<Object>();
         private Queue<Object> inactiveQueue = new Queue<Object>();
 
-        protected T Spawn(Vector2 _localPos)
+        public T Spawn(Vector2 _pos)
         {
             Object obj = null;
             if (inactiveQueue.Count > 0)
@@ -22,9 +22,10 @@ namespace PoolingObject
             }
             else
             {
-                obj = Instantiate(prefabs, transform);
+                obj = Instantiate(Prefabs, transform);
                 //obj.Setup(this);
             }
+            obj.transform.localPosition = _pos;
             obj.OnSpawn();
             obj.onDead += ObjectOnDead;
             return obj as T;

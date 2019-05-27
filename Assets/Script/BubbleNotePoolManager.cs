@@ -6,11 +6,12 @@ public class BubbleNotePoolManager : PoolingObject.Manager<BubbleNote>
     [SerializeField]
     private BubbleNote _prefab = null;
 
-    protected override BubbleNote prefabs
+    public override BubbleNote Prefabs
     {
         get
         {
             return _prefab;
         }
     }
+
 }

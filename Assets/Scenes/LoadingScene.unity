@@ -318,7 +318,7 @@ MonoBehaviour:
   enableTwist: 1
   enablePinch: 1
   easyTouchCamera: {fileID: 1471449568}
-  autoSelect: 0
+  autoSelect: 1
   pickableLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -807,10 +807,18 @@ MonoBehaviour:
   MainCytusPlayer: {fileID: 601050754}
   pool: {fileID: 2076331164}
   noteList:
-  - TimeAppear: 3
-  - TimeAppear: 5
-  - TimeAppear: 6
-  - TimeAppear: 8
+  - hitTime: 3
+    position: {x: 80, y: 80}
+  - hitTime: 4
+    position: {x: 0, y: 0}
+  - hitTime: 4
+    position: {x: -80, y: 0}
+  - hitTime: 6
+    position: {x: 0, y: -50}
+  - hitTime: 7
+    position: {x: 0, y: -50}
+  - hitTime: 7
+    position: {x: -40, y: 20}
 --- !u!114 &2076331164
 MonoBehaviour:
   m_ObjectHideFlags: 0

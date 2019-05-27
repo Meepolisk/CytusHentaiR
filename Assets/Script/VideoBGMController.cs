@@ -6,7 +6,8 @@ using UnityEngine.Video;
 public class VideoBGMController : CytusPlayer
 {
     public VideoPlayer Player { get; private set; }
-    public override bool isPlaying { get { return Player.isPlaying; } }
+    public override bool IsPlaying { get { return Player.isPlaying; } }
+    public override float CurrentTime { get { return (float)Player.time; } }
     public bool isPause { get { return Player.isPaused; } }
     public bool isPrepared { get { return Player.isPrepared; } }
 
@@ -48,6 +49,7 @@ public abstract class CytusPlayer : MonoBehaviour
     public abstract void Pause();
     public abstract void Stop();
 
-    public abstract bool isPlaying { get; }
+    public abstract float CurrentTime { get; }
+    public abstract bool IsPlaying { get; }
     public abstract double Duration { get; }
 }

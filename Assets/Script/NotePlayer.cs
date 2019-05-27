@@ -10,77 +10,109 @@ public class NotePlayer : CytusPlayer
     private BubbleNotePoolManager pool = null;
 
     [SerializeField]
-    private List<iNoteProfile> noteList = null;
+    private List<NoteProfile> noteList = null;
+    private Queue<NoteProfile> noteQueue { get; set; }
     
-    private float timeTick = 0f;
     private Coroutine coroutine = null;
-
-    private bool _isPlaying = false;
-    public override bool isPlaying
-    {
-        get
-        {
-            return _isPlaying;
-        }
-    }
-
-    public override double Duration
-    {
-        get
-        {
-            return MainCytusPlayer.Duration;
-        }
-    }
+    public override bool IsPlaying => MainCytusPlayer.IsPlaying;
+    public override float CurrentTime => MainCytusPlayer.CurrentTime;
+    public override double Duration => MainCytusPlayer.Duration;
+    //private TimeFrameProfile timeFramProfile => pool.Prefabs.TimeFrameProfile;
 
     public override void Pause()
     {
-        _isPlaying = false;
+
     }
 
     public override void Play()
     {
+        PrepareQueue();
         if (coroutine != null)
-        {
             StopCoroutine(coroutine);
-        }
         coroutine = StartCoroutine(_Play());
     }
 
     private IEnumerator _Play()
     {
-        _isPlaying = true;
-        timeTick = 0f;
-        float maxTime = (float)Duration;
-        while (isPlaying)
+        while (MainCytusPlayer.IsPlaying == true)
         {
+            PerformAction();
             yield return null;
-            timeTick += Time.deltaTime;
-            if (timeTick >= maxTime)
-            {
-                timeTick = maxTime;
-                break;
-            }
-            else
-            {
-                PerformAction();
-            }
         }
         Stop();
     }
 
     public override void Stop()
     {
-        _isPlaying = false;
+        if (coroutine != null)
+            StopCoroutine(coroutine);
     }
 
+
+    private NoteProfile nextNote { get; set; }
+    private void PrepareQueue()
+    {
+        TimeFrameProfile timeFrameProfile = pool.Prefabs.TimeFrameProfile;
+        foreach (var item in noteList)
+        {
+            item.CalculateAppearTime(timeFrameProfile);
+        }
+        noteQueue = new Queue<NoteProfile>(noteList);
+        nextNote = noteQueue.Dequeue();
+    }
     private void PerformAction()
     {
-        //imple here
+        //Debug.Log("Time: " + CurrentTime);
+        CheckToPullNote();
     }
+    private void CheckToPullNote()
+    {
+        if (nextNote != null && nextNote.CanBePull(CurrentTime))
+        {
+            SpawnNote();
+            CheckToPullNote();
+        }
+    }
+    private void SpawnNote()
+    {
+        var newNote = pool.Spawn(nextNote.Position);
+        newNote.Setup(this);
+        newNote.Refresh(nextNote);
+        Debug.Log("Spawn: " + nextNote.ToString());
+        //dequeue
+
+        if (noteQueue.Count > 0)
+            nextNote = noteQueue.Dequeue();
+        else
+        {
+            nextNote = null;
+            Stop();
+        }
+    }
+    
 }
 
 [System.Serializable]
-public class iNoteProfile
+public class NoteProfile
 {
-    public float TimeAppear;
+    [SerializeField]
+    private float hitTime = 0f;
+    public float HitTime => hitTime;
+
+    [SerializeField]
+    private Vector2 position = Vector2.zero;
+    public Vector2 Position => position;
+
+    public float AppearTime { private set; get; }
+    public bool CanBePull(float _time) => (_time >= AppearTime);
+
+    public void CalculateAppearTime (TimeFrameProfile _timeFrameProfile)
+    {
+        AppearTime = HitTime - _timeFrameProfile.LiveFrames - _timeFrameProfile.InitFrames;
+    }
+
+    public new string ToString()
+    {
+        return ("AppearTime: " + AppearTime);
+    }
 }
