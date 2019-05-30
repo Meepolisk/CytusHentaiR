@@ -21,7 +21,6 @@ public class NotePlayer : CytusPlayer
 
     public override void Pause()
     {
-
     }
 
     public override void Play()
@@ -90,29 +89,4 @@ public class NotePlayer : CytusPlayer
         }
     }
     
-}
-
-[System.Serializable]
-public class NoteProfile
-{
-    [SerializeField]
-    private float hitTime = 0f;
-    public float HitTime => hitTime;
-
-    [SerializeField]
-    private Vector2 position = Vector2.zero;
-    public Vector2 Position => position;
-
-    public float AppearTime { private set; get; }
-    public bool CanBePull(float _time) => (_time >= AppearTime);
-
-    public void CalculateAppearTime (TimeFrameProfile _timeFrameProfile)
-    {
-        AppearTime = HitTime - _timeFrameProfile.LiveFrames - _timeFrameProfile.InitFrames;
-    }
-
-    public new string ToString()
-    {
-        return ("AppearTime: " + AppearTime);
-    }
 }

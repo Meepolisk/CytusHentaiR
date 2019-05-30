@@ -1,25 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using UnityEngine.UI;
+using RTool.PagingCanvas;
 
-[RequireComponent(typeof(VideoPlayer))]
 public class GameplayController : MonoBehaviour
 {
+    [Header("Component Ref")]
     [SerializeField]
-    private List<CytusPlayer> allCytusPlayer = null;
+    private MonoCanvasesController menuController = null;
+    [SerializeField]
+    private MonoCanvas panelModeSelector = null;
+    [SerializeField]
+    private Button btnRecordMode = null;
+    [SerializeField]
+    private Button btnPlayMode = null;
+    
+    [SerializeField]
+    private MonoCanvas panelStartGame = null;
+    [SerializeField]
+    private Button btnStart = null;
+    [SerializeField]
+    private Button btnBack = null;
+    
+    [SerializeField]
+    private MonoCanvas panelGame = null;
+    [SerializeField]
+    private CytusPlayer videoPlayer = null;
+    public CytusPlayer VideoPlayer => videoPlayer;
+    [SerializeField]
+    private CytusPlayer notePlayer = null;
+    public CytusPlayer NotePlayer => notePlayer;
+    [SerializeField]
+    private CytusPlayer noteRecorder = null;
+    public CytusPlayer NoteRecorder => noteRecorder;
 
-    private void Start()
+    public List<CytusPlayer> AllPlayers { get; private set; }
+
+    private void Awake()
     {
-        StartCoroutine(_Start());
+        btnPlayMode.onClick.AddListener( () =>
+        {
+            AllPlayers = new List<CytusPlayer> { videoPlayer, notePlayer };
+            OpenStartMenu();
+        });
+        btnRecordMode.onClick.AddListener( () =>
+        {
+            AllPlayers = new List<CytusPlayer> { videoPlayer, noteRecorder };
+            OpenStartMenu();
+        });
+        btnBack.onClick.AddListener(() =>
+        {
+            menuController.ReturnToPreviousMenu();
+        });
+        btnStart.onClick.AddListener(() =>
+        {
+            StartCoroutine(BtnStartPressed());
+        });
     }
-    private IEnumerator _Start()
+    private void OpenStartMenu()
     {
+        panelStartGame.Show();
+    }
+    IEnumerator BtnStartPressed()
+    {
+        panelGame.Show();
         yield return new WaitForSeconds(2);
-        foreach (var item in allCytusPlayer)
+        PlayAllCytus();
+    }
+    
+    private void PlayAllCytus()
+    {
+        foreach (var item in AllPlayers)
         {
             item.Play();
         }
