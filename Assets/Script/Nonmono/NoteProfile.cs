@@ -12,6 +12,12 @@ public class NoteProfile
     private Vector2 position = Vector2.zero;
     public Vector2 Position => position;
 
+    public NoteProfile (float _hitTime, Vector2 _pos)
+    {
+        hitTime = _hitTime;
+        position = _pos;
+    }
+
     public float AppearTime { private set; get; }
     public bool CanBePull(float _time) => (_time >= AppearTime);
 

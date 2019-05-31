@@ -7,8 +7,7 @@ public class NoteRecorder : CytusPlayer
     [SerializeField]
     private CytusPlayer MainCytusPlayer = null;
 
-    [SerializeField]
-    private List<NoteProfile> noteList = null;
+    private List<NoteProfile> noteList { get; set; }
 
     [SerializeField]
     private GameObject prefabs = null;
@@ -25,6 +24,7 @@ public class NoteRecorder : CytusPlayer
 
     public override void Play()
     {
+        noteList = new List<NoteProfile>();
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
 
         if (coroutine != null)
@@ -46,6 +46,10 @@ public class NoteRecorder : CytusPlayer
         EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
         if (coroutine != null)
             StopCoroutine(coroutine);
+        if (noteList != null)
+        {
+            NoteProfileStorer.Save(noteList);
+        }
     }
 
     private void EasyTouch_On_TouchStart(Gesture gesture)
@@ -53,9 +57,10 @@ public class NoteRecorder : CytusPlayer
         var position = gesture.position;
         GameObject debug = Instantiate(prefabs, this.transform, false);
         debug.transform.localPosition = position;
+        RecordNote(position);
     }
     private void RecordNote(Vector2 position)
     {
-
+        noteList.Add(new NoteProfile(CurrentTime, position));
     }
 }

@@ -26,6 +26,10 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private MonoCanvas panelGame = null;
     [SerializeField]
+    private Button btnStop = null;
+    [SerializeField]
+    private Button btnBack2 = null;
+    [SerializeField]
     private CytusPlayer videoPlayer = null;
     public CytusPlayer VideoPlayer => videoPlayer;
     [SerializeField]
@@ -53,9 +57,17 @@ public class GameplayController : MonoBehaviour
         {
             menuController.ReturnToPreviousMenu();
         });
+        btnBack2.onClick.AddListener(() =>
+        {
+            menuController.ReturnToPreviousMenu();
+        });
         btnStart.onClick.AddListener(() =>
         {
             StartCoroutine(BtnStartPressed());
+        });
+        btnStop.onClick.AddListener(() =>
+        {
+            StopAllCytus();
         });
     }
     private void OpenStartMenu()
@@ -74,6 +86,13 @@ public class GameplayController : MonoBehaviour
         foreach (var item in AllPlayers)
         {
             item.Play();
+        }
+    }
+    private void StopAllCytus()
+    {
+        foreach (var item in AllPlayers)
+        {
+            item.Stop();
         }
     }
 }

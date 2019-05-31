@@ -8,9 +8,7 @@ public class NotePlayer : CytusPlayer
     private CytusPlayer MainCytusPlayer = null;
     [SerializeField]
     private BubbleNotePoolManager pool = null;
-
-    [SerializeField]
-    private List<NoteProfile> noteList = null;
+    
     private Queue<NoteProfile> noteQueue { get; set; }
     
     private Coroutine coroutine = null;
@@ -51,6 +49,7 @@ public class NotePlayer : CytusPlayer
     private NoteProfile nextNote { get; set; }
     private void PrepareQueue()
     {
+        var noteList = NoteProfileStorer.Load();
         TimeFrameProfile timeFrameProfile = pool.Prefabs.TimeFrameProfile;
         foreach (var item in noteList)
         {
