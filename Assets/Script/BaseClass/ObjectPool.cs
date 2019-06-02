@@ -25,7 +25,7 @@ namespace PoolingObject
                 obj = Instantiate(Prefabs, transform);
                 //obj.Setup(this);
             }
-            obj.transform.localPosition = _pos;
+            obj.transform.position = _pos;
             obj.OnSpawn();
             obj.onDead += ObjectOnDead;
             return obj as T;

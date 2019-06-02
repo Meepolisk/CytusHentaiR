@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RTool.PagingCanvas;
+using RTool.EzCanvas;
+using RTool.Attribute;
 
 public class GameplayController : MonoBehaviour
 {
-    [Header("Component Ref")]
+    [Header("Component Ref: UI")]
     [SerializeField]
     private MonoCanvasesController menuController = null;
     [SerializeField]
@@ -29,28 +30,33 @@ public class GameplayController : MonoBehaviour
     private Button btnStop = null;
     [SerializeField]
     private Button btnBack2 = null;
+    [Header("Component Ref: CORE")]
     [SerializeField]
-    private CytusPlayer videoPlayer = null;
-    public CytusPlayer VideoPlayer => videoPlayer;
+    private VideoBGMController videoPlayer = null;
+    public VideoBGMController VideoPlayer => videoPlayer;
     [SerializeField]
-    private CytusPlayer notePlayer = null;
-    public CytusPlayer NotePlayer => notePlayer;
+    private NotePlayer notePlayer = null;
+    public NotePlayer NotePlayer => notePlayer;
     [SerializeField]
-    private CytusPlayer noteRecorder = null;
-    public CytusPlayer NoteRecorder => noteRecorder;
+    private NoteRecorder noteRecorder = null;
+    public NoteRecorder NoteRecorder => noteRecorder;
 
-    public List<CytusPlayer> AllPlayers { get; private set; }
+    public List<CytusPlayer> AllPlayers;// { get; private set; }
 
     private void Awake()
     {
         btnPlayMode.onClick.AddListener( () =>
         {
             AllPlayers = new List<CytusPlayer> { videoPlayer, notePlayer };
+            notePlayer.gameObject.SetActive(true);
+            noteRecorder.gameObject.SetActive(false);
             OpenStartMenu();
         });
         btnRecordMode.onClick.AddListener( () =>
         {
             AllPlayers = new List<CytusPlayer> { videoPlayer, noteRecorder };
+            notePlayer.gameObject.SetActive(false);
+            noteRecorder.gameObject.SetActive(true);
             OpenStartMenu();
         });
         btnBack.onClick.AddListener(() =>
@@ -77,7 +83,10 @@ public class GameplayController : MonoBehaviour
     IEnumerator BtnStartPressed()
     {
         panelGame.Show();
-        yield return new WaitForSeconds(2);
+        if (AllPlayers.Contains(notePlayer))
+            notePlayer.Setup();
+        VideoPlayer.Setup(SongStorer.CurrentSong.VideoClip);
+        yield return new WaitForSeconds(1);
         PlayAllCytus();
     }
     

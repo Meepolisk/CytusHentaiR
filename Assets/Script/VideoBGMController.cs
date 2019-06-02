@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
+[RequireComponent(typeof(VideoPlayer))]
 public class VideoBGMController : CytusPlayer
 {
+    public override bool IsPlaying => Player.isPlaying;
+    public override float CurrentTime => (float)Player.time;
+    public bool isPause => Player.isPaused;
+    public bool isPrepared => Player.isPrepared;
+    public override double Duration => Player.time;
+
     public VideoPlayer Player { get; private set; }
-    public override bool IsPlaying { get { return Player.isPlaying; } }
-    public override float CurrentTime { get { return (float)Player.time; } }
-    public bool isPause { get { return Player.isPaused; } }
-    public bool isPrepared { get { return Player.isPrepared; } }
 
-    public override double Duration
+    public void Setup(VideoClip _video)
     {
-        get
-        {
-            return Player.time;
-        }
+        Player.clip = _video;
     }
-
-    [SerializeField]
-    private VideoPlayer videoPlayer = null;
 
     private void Awake()
     {
