@@ -61,10 +61,6 @@ public class NoteRecorder : CytusPlayer
         var position = gesture.position;
         RecordNote(position);
     }
-    private void ToWorldPosition(Vector2 position)
-    {
-
-    }
     private void RecordNote(Vector2 scaledPos)
     {
         Debug.Log("Record: " + scaledPos);
@@ -76,6 +72,9 @@ public class NoteRecorder : CytusPlayer
     }
 
 #if UNITY_EDITOR
+    private const float verticalSteps = 10f;
+    private const float horizontalSteps = 6f;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -83,26 +82,38 @@ public class NoteRecorder : CytusPlayer
     }
     private readonly Dictionary<KeyCode, Vector2> bubbleEmuPos = new Dictionary<KeyCode, Vector2>
     {
-        { KeyCode.Keypad1, new Vector2(1f /6f, 1f /6f) },
-        { KeyCode.Keypad2, new Vector2(3f /6f, 1f /6f) },
-        { KeyCode.Keypad3, new Vector2(5f /6f, 1f /6f) },
-        { KeyCode.Keypad4, new Vector2(1f /6f, 3f /6f) },
-        { KeyCode.Keypad5, new Vector2(3f /6f, 3f /6f) },
-        { KeyCode.Keypad6, new Vector2(5f /6f, 3f /6f) },
-        { KeyCode.Keypad7, new Vector2(1f /6f, 5f /6f) },
-        { KeyCode.Keypad8, new Vector2(3f /6f, 5f /6f) },
-        { KeyCode.Keypad9, new Vector2(5f /6f, 5f /6f) }
+        { KeyCode.Q, new Vector2(1f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.W, new Vector2(3f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.E, new Vector2(5f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.A, new Vector2(1f /horizontalSteps, 9f /verticalSteps) },
+        { KeyCode.S, new Vector2(3f /horizontalSteps, 9f /verticalSteps) },
+        { KeyCode.D, new Vector2(5f /horizontalSteps, 9f /verticalSteps) },
+        { KeyCode.Keypad1, new Vector2(1f /horizontalSteps, 1f /verticalSteps) },
+        { KeyCode.Keypad2, new Vector2(3f /horizontalSteps, 1f /verticalSteps) },
+        { KeyCode.Keypad3, new Vector2(5f /horizontalSteps, 1f /verticalSteps) },
+        { KeyCode.Keypad4, new Vector2(1f /horizontalSteps, 3f /verticalSteps) },
+        { KeyCode.Keypad5, new Vector2(3f /horizontalSteps, 3f /verticalSteps) },
+        { KeyCode.Keypad6, new Vector2(5f /horizontalSteps, 3f /verticalSteps) },
+        { KeyCode.Keypad7, new Vector2(1f /horizontalSteps, 5f /verticalSteps) },
+        { KeyCode.Keypad8, new Vector2(3f /horizontalSteps, 5f /verticalSteps) },
+        { KeyCode.Keypad9, new Vector2(5f /horizontalSteps, 5f /verticalSteps) }
     };
     private void Update()
     {
         if (IsPlaying)
         {
+            UpdateOffset();
             RecordDebug();
         }
     }
+    private Vector2 offsetScale { get; set; }
+    private void UpdateOffset()
+    {
+        offsetScale = new Vector2(
+            Random.Range(0, horizontalSteps), Random.Range(0, verticalSteps));
+    }
     private void RecordDebug()
     {
-        //Debug.Log(Time.time);
         foreach (var item in bubbleEmuPos)
         {
             if (Input.GetKeyDown(item.Key))

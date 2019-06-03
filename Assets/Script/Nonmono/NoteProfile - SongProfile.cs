@@ -48,9 +48,13 @@ public class SongNoteProfile
     [SerializeField]
     private VideoClip videoClip = null;
     public VideoClip VideoClip => videoClip;
-    
+
     [SerializeField]
-    private List<NoteProfile> noteList = null;
+    private float bpm = 120;
+    public float BPM => bpm;
+
+    [SerializeField]
+    private List<NoteProfile> noteList = new List<NoteProfile>();
     public List<NoteProfile> NoteList => new List<NoteProfile>(noteList);
     public Queue<NoteProfile> NoteQueue => new Queue<NoteProfile>(noteList);
 

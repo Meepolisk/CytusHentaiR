@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SongStorer : SingletonBase<SongStorer>
 {
     [SerializeField]
-    private List<SongNoteProfile> songList;
+    private List<SongNoteProfile> songList = null;
     [SerializeField]
     private int songIndex = 0;
     public static int SongIndex => Instance.songIndex;

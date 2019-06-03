@@ -11,8 +11,6 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private MonoCanvasesController menuController = null;
     [SerializeField]
-    private MonoCanvas panelModeSelector = null;
-    [SerializeField]
     private Button btnRecordMode = null;
     [SerializeField]
     private Button btnPlayMode = null;

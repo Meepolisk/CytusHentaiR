@@ -310,7 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuController: {fileID: 80332880}
-  panelModeSelector: {fileID: 118224674}
   btnRecordMode: {fileID: 410464976}
   btnPlayMode: {fileID: 1862753334}
   panelStartGame: {fileID: 588844576}
@@ -806,10 +805,974 @@ MonoBehaviour:
   - name: "Anh L\xE0 Ai"
     previewImage: {fileID: 0}
     videoClip: {fileID: 32900000, guid: aacac8a33bb2f6045887d47a1c56f823, type: 3}
-    noteList: []
+    bpm: 120
+    noteList:
+    - hitTime: 20.4
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 20.72
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 20.96
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 21.24
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 21.88
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 22.76
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 23.04
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 23.32
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 23.68
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 24.4
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 25.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 25.6
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 25.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 26.2
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 26.84
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 27.16
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 27.52
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 28.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 28.84
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 30.36
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 30.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 31.64
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 31.64
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 32.88
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 32.88
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 34.12
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 35.4
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 36.68
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 37
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 37.24
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 37.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 44.28
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 45.52
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 46.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 47.08
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 47.36
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 49.28
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 50.56
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 51.8
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 52.12
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 52.4
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 54.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 54.36
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 55.64
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 55.68
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 57.52
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 58.16
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 58.84
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 59.32
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 60.36
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 60.64
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 61.28
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 61.6
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 62.16
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 62.52
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 62.84
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 63.16
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 63.76
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 63.76
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 64.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 64.72
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 65.08
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 65.72
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 65.72
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 66.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 66.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 66.68
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 66.92
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 67.6
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 67.64
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 68.24
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 68.92
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 68.92
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 69.48
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 69.48
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 70.08
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 70.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 70.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 71.4
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 73.32
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 73.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 73.92
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 74.24
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 74.52
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 75.2
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 75.84
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 76.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 76.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 77.04
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 77.04
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 77.68
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 78.96
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 78.96
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 79.56
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 79.56
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 80.24
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 80.8
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 81.48
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 81.48
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 81.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 81.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 82.44
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 82.44
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 83.4
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 83.4
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 84.04
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 84.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 84.64
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 85.32
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 85.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 85.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 85.92
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 86.56
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 86.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 86.88
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 87.56
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 87.6
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 88.44
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 89.08
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 89.08
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 89.4
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 89.4
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 90.04
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 90.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 90.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 90.96
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 91.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 91.92
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 92.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 92.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 93.52
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 93.52
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 94.12
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 94.12
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 94.76
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 94.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 95.44
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 95.44
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 96.08
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 96.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 96.64
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 97.32
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 97.92
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 98.52
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 98.52
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 99.16
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 99.16
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 100.48
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 101.12
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 101.12
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 101.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 101.4
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 102.04
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 102.68
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 102.96
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 103.6
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 103.92
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 104.2
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 104.52
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 104.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 105.52
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 106.16
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 106.44
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 106.76
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 107.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 107.76
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 108.04
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 108.72
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 108.72
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 109.28
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 109.92
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 109.92
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 110.52
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 111.16
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 111.48
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 111.76
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 112.4
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 112.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 113.04
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 113.68
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 113.72
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 114.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 115.04
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 115.04
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 115.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 115.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 115.72
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 115.72
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 116.28
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 116.84
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 117.44
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 117.44
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 118.16
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 118.16
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 118.8
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 119.08
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 119.36
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 120.08
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 120.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 120.68
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 121.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 121.92
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 122.2
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 122.92
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 123.2
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 123.52
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 123.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 124.48
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 124.48
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 125.44
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 125.72
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 126.4
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 126.72
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 127
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 127.28
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 127.96
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 127.96
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 128.24
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 128.24
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 128.88
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 129.16
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 129.48
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 129.76
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 130.44
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 130.68
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 131.04
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 131.72
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 132
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 132.32
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 132.64
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 132.96
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 133.28
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 133.6
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 133.96
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 134.56
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 134.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 135.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 135.84
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 136.56
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 136.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 137.08
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 137.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 138.08
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 138.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 138.64
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 139
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 139.28
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 139.6
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 139.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 140.2
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 140.56
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 140.88
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 141.2
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 141.48
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 141.84
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 142.12
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 142.48
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 143.16
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 143.16
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 143.44
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 143.44
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 144.04
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 144.04
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 145
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 145.6
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 145.92
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 146.16
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 146.64
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 147.16
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 147.48
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 148.16
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 148.44
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 148.76
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 149.08
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 149.08
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 149.72
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 150.04
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 150.64
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 151.04
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 151.24
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 151.52
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 152.2
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 152.52
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 154.16
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 154.16
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 155.4
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 155.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 156.6
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 156.64
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 157.92
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 157.92
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 159.2
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 159.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 160.4
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 161.04
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 161.68
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 161.96
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 162.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 162.6
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 163.24
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 163.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 164.28
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 164.28
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 164.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 164.88
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 165.52
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 165.56
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 166.12
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 166.12
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 166.76
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 166.76
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 167.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 168
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 168.32
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 169.48
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 169.48
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 169.96
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 169.96
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 170.6
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 170.6
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 171.2
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 171.2
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 171.8
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 171.8
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 172.76
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 173.04
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 173.4
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 174.4
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 174.64
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 174.96
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 175.24
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 175.6
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 176
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 176.24
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 177.2
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 177.52
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 177.8
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 178.4
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 179.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 180.4
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 180.96
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 181.28
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 181.96
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 182.2
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 182.52
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 182.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 183.56
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 183.84
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 184.48
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 184.76
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 185
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 185.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 185.68
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 186.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 186.92
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 187.96
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 188.64
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 188.92
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 190.16
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 190.16
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 191.44
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 191.44
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 192.68
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 192.96
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 193.28
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 193.56
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 193.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 194.2
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 195.24
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 195.24
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 196.44
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 196.44
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 197.68
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 197.96
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 199
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 199.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 200.2
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 201.48
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 202.76
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 203.04
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 203.68
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 204
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 204.68
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 206.52
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 207.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 208.44
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 209.72
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 210.32
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 211.28
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 211.64
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 212.28
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 212.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 212.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 212.92
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 213.84
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 214.12
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 215.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 215.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 216.4
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 216.68
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 216.96
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 217.92
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 218.96
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 218.96
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 219.28
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 219.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 220.4
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 221.4
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 222.96
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 223.92
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 223.92
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 224.28
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 224.28
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 225.48
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 225.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 226.48
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 226.8
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 227.44
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 227.72
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 228
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 228.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 228.64
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 229.24
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 229.88
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 230.92
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 230.92
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 231.24
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 231.24
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 231.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 233.08
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 234.04
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 234.36
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 234.64
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 235.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 235.6
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 235.92
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 236.24
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 236.56
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 236.92
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 237.52
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 238.16
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 238.16
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 238.8
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 239.08
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 239.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 240
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 240.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 240.6
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 240.92
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 241.68
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 242.28
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 242.6
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 243.12
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 243.8
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 244.12
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 244.4
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 245.12
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 245.4
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 245.68
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 245.96
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 246.2
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 246.56
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 247.56
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 256.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 256.88
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 259.4
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 259.44
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 261.96
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 261.96
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 264.52
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 264.52
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 265.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 266.96
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 268.24
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 269.48
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 270.88
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 272.08
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 272.44
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 272.72
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 273.32
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 273.32
+      position: {x: 0.8333333, y: 0.1}
   - name: BigDick
     previewImage: {fileID: 0}
     videoClip: {fileID: 32900000, guid: 69c94f68ce9b5324ba8026a48656fa06, type: 3}
+    bpm: 120
     noteList:
     - hitTime: 8.32
       position: {x: 0.16666667, y: 0.16666667}
@@ -1061,7 +2024,517 @@ MonoBehaviour:
       position: {x: 0.5, y: 0.16666667}
     - hitTime: 75.32
       position: {x: 0.16666667, y: 0.5}
-  songIndex: 1
+  - name: Ding Dong Song
+    previewImage: {fileID: 0}
+    videoClip: {fileID: 32900000, guid: 72b88f7de4d46684f9b7260183e2b3b9, type: 3}
+    bpm: 120
+    noteList:
+    - hitTime: 8.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 10.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 12.2
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 14.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 15.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 16.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 16.84
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 17.32
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 17.76
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 18.28
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 18.76
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 19.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 19.76
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 20.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 20.32
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 20.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 20.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 21.24
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 21.28
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 21.76
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 21.8
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 22.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 22.32
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 22.76
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 22.76
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 23.24
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 23.24
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 23.8
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 24.28
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 25.36
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 26.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 26.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 27.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 27.76
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 28.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 28.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 29.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 30.36
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 30.84
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 31.32
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 31.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 32.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 32.8
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 33.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 33.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 34.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 34.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 35.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 35.52
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 35.76
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 36.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 36.96
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 37.36
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 37.76
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 38.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 38.52
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 38.8
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 39.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 39.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 39.84
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 40.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 40.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 41.32
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 41.56
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 41.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 42.36
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 42.8
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 43.28
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 43.48
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 43.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 44.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 44.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 45.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 45.6
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 45.8
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 46.32
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 47.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 47.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 48.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 48.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 49.32
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 50.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 50.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 50.6
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 50.6
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 50.84
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 51.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 51.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 52.28
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 53.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 53.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 54.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 54.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 55.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 55.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 56.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 57.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 58.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 58.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 59.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 59.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 60.4
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 61.28
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 62.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 62.84
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 63.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 63.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 64.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 64.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 65.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 66.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 66.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 66.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 67.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 68.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 69.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 70.36
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 70.56
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 70.8
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 71.16
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 72.28
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 73.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 74.36
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 74.76
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 75.32
+      position: {x: 0.16666667, y: 0.5}
+  - name: Tek Club Copenhagen
+    previewImage: {fileID: 0}
+    videoClip: {fileID: 32900000, guid: 324c54c39e8ac0a42b1181b0d7d10fa9, type: 3}
+    bpm: 120
+    noteList:
+    - hitTime: 8.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 10.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 12.2
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 14.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 15.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 16.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 16.84
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 17.32
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 17.76
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 18.28
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 18.76
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 19.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 19.76
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 20.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 20.32
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 20.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 20.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 21.24
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 21.28
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 21.76
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 21.8
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 22.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 22.32
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 22.76
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 22.76
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 23.24
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 23.24
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 23.8
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 24.28
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 25.36
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 26.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 26.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 27.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 27.76
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 28.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 28.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 29.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 30.36
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 30.84
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 31.32
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 31.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 32.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 32.8
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 33.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 33.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 34.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 34.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 35.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 35.52
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 35.76
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 36.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 36.96
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 37.36
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 37.76
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 38.28
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 38.52
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 38.8
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 39.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 39.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 39.84
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 40.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 40.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 41.32
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 41.56
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 41.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 42.36
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 42.8
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 43.28
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 43.48
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 43.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 44.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 44.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 45.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 45.6
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 45.8
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 46.32
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 47.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 47.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 48.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 48.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 49.32
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 50.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 50.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 50.6
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 50.6
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 50.84
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 51.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 51.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 52.28
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 53.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 53.36
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 54.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 54.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 55.28
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 55.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 56.32
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 57.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 58.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 58.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 59.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 59.8
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 60.4
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 61.28
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 62.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 62.84
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 63.36
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 63.8
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 64.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 64.84
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 65.32
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 66.32
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 66.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 66.8
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 67.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 68.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 69.32
+      position: {x: 0.16666667, y: 0.8333333}
+    - hitTime: 70.36
+      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 70.56
+      position: {x: 0.5, y: 0.8333333}
+    - hitTime: 70.8
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 71.16
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 72.28
+      position: {x: 0.16666667, y: 0.16666667}
+    - hitTime: 73.28
+      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 74.36
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 74.76
+      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 75.32
+      position: {x: 0.16666667, y: 0.5}
+  songIndex: 3
 --- !u!1 &545253738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,49 +2988,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608095241}
   m_CullTransparentMesh: 0
---- !u!1 &672754487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 672754489}
-  - component: {fileID: 672754488}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &672754488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672754487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18134d2f8f7438048a738476b7e7527e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &672754489
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672754487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &719949381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +3234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1365335939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1842,9 +3272,9 @@ MonoBehaviour:
   playZone:
     serializedVersion: 2
     x: -4
-    y: -8
+    y: -9
     width: 8
-    height: 12
+    height: 15
 --- !u!114 &1365335941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2490,7 +3920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2076331162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2522,16 +3952,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79983b8b8d7644447b31f7b577e3a2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebugMode: 0
+  isDebugMode: 1
   MainCytusPlayer: {fileID: 601050754}
   pool: {fileID: 2076331164}
   playZone:
     serializedVersion: 2
     x: -4
-    y: -8
+    y: -9
     width: 8
-    height: 12
-  noteList: []
+    height: 15
 --- !u!114 &2076331164
 MonoBehaviour:
   m_ObjectHideFlags: 0

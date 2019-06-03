@@ -8,6 +8,7 @@ public class NotePlayer : CytusPlayer
     [Header("Debug")]
     [SerializeField]
     private bool isDebugMode = false;
+    public bool IsDebugMode => isDebugMode;
 #endif
 
     [Header("Component Ref")]
@@ -18,11 +19,8 @@ public class NotePlayer : CytusPlayer
 
     [SerializeField]
     private Rect playZone;
-
-    [SerializeField]
-    private Queue<NoteProfile> noteQueue;// { get; set; }
-    [SerializeField]
-    private List<NoteProfile> noteList;
+    
+    private Queue<NoteProfile> noteQueue { get; set; }
 
     private Coroutine coroutine = null;
     public override bool IsPlaying => MainCytusPlayer.IsPlaying;
@@ -66,13 +64,17 @@ public class NotePlayer : CytusPlayer
     private NoteProfile nextNote { get; set; }
     private void PrepareQueue()
     {
-        noteList = SongStorer.LoadList();
+        noteQueue = SongStorer.LoadQueue();
+
+        if (noteQueue.Count == 0)
+            return;
+
+        Debug.Log("Song Loaded: " + noteQueue.Count + " notes");
         TimeFrameProfile timeFrameProfile = pool.Prefabs.TimeFrameProfile;
-        foreach (var item in noteList)
+        foreach (var item in noteQueue)
         {
             item.CalculateAppearTime(timeFrameProfile);
         }
-        noteQueue = new Queue<NoteProfile>(noteList);
         nextNote = noteQueue.Dequeue();
     }
     private void PerformAction()

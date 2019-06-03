@@ -13,7 +13,7 @@ public class BubbleNote : NoteBase
     public override void OnSpawn()
     {
         base.OnSpawn();
-        this.transform.SetAsFirstSibling();
+        transform.SetAsFirstSibling();
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
     }
 
@@ -22,15 +22,6 @@ public class BubbleNote : NoteBase
         base.Kill();
         EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
     }
-    //private void OnEnable()
-    //{
-    //    EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
-    //}
 
     private void EasyTouch_On_TouchStart(Gesture gesture)
     {
@@ -40,24 +31,20 @@ public class BubbleNote : NoteBase
         }
     }
 
-    public void PlayerHit()
+    private const string animParamHit = "Hit";
+    private const string animParamHitType = "HitType";
+    protected override void Scoring(HitType hitType)
     {
-        anim.SetTrigger("Hit");
-        HitType hitType = Calculate(Player.CurrentTime);
-        switch (hitType)
+        anim.SetInteger(animParamHitType, (int)hitType);
+        anim.SetTrigger(animParamHit);
+    }
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Player.IsDebugMode && Player.CurrentTime >= (NoteProfile.HitTime - Time.deltaTime / 2f))
         {
-            case HitType.Perfect:
-                Debug.Log("Perfect");
-                break;
-            case HitType.Great:
-                Debug.Log("Great");
-                break;
-            case HitType.Good:
-                Debug.Log("Good");
-                break;
-            default:
-                Debug.Log("Bad");
-                break;
+            PlayerHit();
         }
     }
+#endif
 }

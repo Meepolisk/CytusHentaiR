@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public enum HitType
@@ -42,7 +43,9 @@ public abstract class NoteBase : PoolingObject.Object
     public TimeRange TR_Perfect { get; private set; }
     public TimeRange TR_Great { get; private set; }
     public TimeRange TR_Good { get; private set; }
-    //public TimeRange TR_Bad { get; private set; }
+    public NoteProfile NoteProfile { get; private set; }
+
+    public static event Action<NoteBase, HitType> aNoteScored;
 
     //Insetup
     public NotePlayer Player { get; protected set; }
@@ -52,13 +55,14 @@ public abstract class NoteBase : PoolingObject.Object
     }
     public virtual void Refresh(NoteProfile noteProfile)
     {
-        float hitTime = noteProfile.HitTime;
+        NoteProfile = noteProfile;
+        float hitTime = NoteProfile.HitTime;
         TR_Perfect = new TimeRange(hitTime, TimeFrameProfile, ScoreFrameProfile.PerfectScale);
         TR_Great = new TimeRange(hitTime, TimeFrameProfile, ScoreFrameProfile.GreateScale);
         TR_Good = new TimeRange(hitTime, TimeFrameProfile, ScoreFrameProfile.GoodScale);
         //TR_Bad = new TimeRange(hitTime, TimeFrameProfile);
 
-        //todo: imple phân đoạn cắt animation dựa theo chênh lệch
+        //todo: imple phân đoạn cắt animation dựa theo chênh lệch thời gian
     }
 
     protected virtual HitType Calculate(float _time)
@@ -71,4 +75,13 @@ public abstract class NoteBase : PoolingObject.Object
             return HitType.Good;
         return HitType.Bad;
     }
+
+    protected void PlayerHit()
+    {
+        HitType hitType = Calculate(Player.CurrentTime);
+        if (aNoteScored != null)
+            aNoteScored(this, hitType);
+        Scoring(hitType);
+    }
+    protected abstract void Scoring(HitType hitType);
 }
