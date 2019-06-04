@@ -10,11 +10,11 @@ public class ScoreHandler : MonoBehaviour
     [SerializeField]
     private Text scoreText;
     [SerializeField]
-    private NotePlayer notePlayer;
+    private BubbleNotePlayer notePlayer;
 
 
 
-    public void Setup(NotePlayer _notePlayer)
+    public void Setup(BubbleNotePlayer _notePlayer)
     {
         notePlayer = _notePlayer;
     }

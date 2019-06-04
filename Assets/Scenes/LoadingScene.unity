@@ -347,14 +347,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuController: {fileID: 80332880}
   btnRecordMode: {fileID: 410464976}
-  btnPlayMode: {fileID: 1862753334}
+  btnPlayBubble: {fileID: 1862753334}
+  btnPlayCytus: {fileID: 1722458461}
   panelStartGame: {fileID: 588844576}
   btnStart: {fileID: 415567502}
   btnBack: {fileID: 833031936}
   panelGame: {fileID: 608095243}
   btnStop: {fileID: 2088118031}
   videoPlayer: {fileID: 601050754}
-  notePlayer: {fileID: 2076331163}
+  bubblePlayer: {fileID: 2076331163}
+  cytusPlayer: {fileID: 1597581554}
   noteRecorder: {fileID: 1365335940}
   AllPlayers: []
 --- !u!114 &80332880
@@ -632,6 +634,7 @@ GameObject:
   - component: {fileID: 118224676}
   - component: {fileID: 118224675}
   - component: {fileID: 118224674}
+  - component: {fileID: 118224679}
   m_Layer: 5
   m_Name: PNL_ModeSelector
   m_TagString: Untagged
@@ -657,7 +660,7 @@ MonoBehaviour:
   IgnoreStack: 0
 --- !u!225 &118224675
 CanvasGroup:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -716,6 +719,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1862753333}
+  - {fileID: 1722458460}
   - {fileID: 410464975}
   m_Father: {fileID: 80332878}
   m_RootOrder: 0
@@ -725,6 +729,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &118224679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118224673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 74.58
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &125380371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,11 +1213,11 @@ RectTransform:
   m_Children:
   - {fileID: 1729586514}
   m_Father: {fileID: 118224678}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -256}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410464976
@@ -1271,6 +1298,134 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410464974}
+  m_CullTransparentMesh: 0
+--- !u!1 &410723103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410723104}
+  - component: {fileID: 410723107}
+  - component: {fileID: 410723106}
+  - component: {fileID: 410723105}
+  m_Layer: 5
+  m_Name: Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &410723104
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410723103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2044721988}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &410723105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410723103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 410723106}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 645867422}
+        m_MethodName: SelectSong
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &410723106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410723103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300004, guid: b7a2fc8db68b0db409a45d0fcf042336, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &410723107
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410723103}
   m_CullTransparentMesh: 0
 --- !u!1 &415567500
 GameObject:
@@ -1389,6 +1544,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415567500}
+  m_CullTransparentMesh: 0
+--- !u!1 &466562932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466562933}
+  - component: {fileID: 466562935}
+  - component: {fileID: 466562934}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &466562933
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466562932}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597581553}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -36.53, y: 141.7}
+  m_SizeDelta: {x: 1200, y: 25}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &466562934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466562932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.5235849, b: 0.95575726, a: 0.6313726}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &466562935
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466562932}
   m_CullTransparentMesh: 0
 --- !u!1 &536051334
 GameObject:
@@ -1626,8 +1855,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960fa6b4a0dc9fc44810d05986932f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broadcaster: {fileID: 0}
-  Player: {fileID: 0}
+  rootRect: {fileID: 601050751}
+  broadCaster: {fileID: 1666763399}
+  Player: {fileID: 601050755}
 --- !u!328 &601050755
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -1731,6 +1961,7 @@ RectTransform:
   m_Children:
   - {fileID: 601050751}
   - {fileID: 2076331162}
+  - {fileID: 1597581553}
   - {fileID: 1365335939}
   - {fileID: 2088118030}
   m_Father: {fileID: 80332878}
@@ -2881,256 +3112,244 @@ MonoBehaviour:
     videoClip: {fileID: 32900000, guid: 324c54c39e8ac0a42b1181b0d7d10fa9, type: 3}
     bpm: 132
     noteList:
-    - hitTime: 8.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 10.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 12.2
+    - hitTime: 7.397462
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 8.330475
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 9.29681
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 10.196501
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 11.096192
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 11.995884
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 12.895576
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 13.795266
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 14.728279
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 15.661293
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 16.527662
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 17.493998
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 18.360367
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 18.360367
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 19.260057
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 20.193071
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 20.193071
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 21.05944
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 22.025776
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 22.45896
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 22.892145
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 23.85848
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 24.291664
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 24.72485
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 25.657862
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 26.057726
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 26.49091
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 27.490566
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 27.89043
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 28.356937
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 29.28995
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 14.28
+    - hitTime: 29.723135
       position: {x: 0.5, y: 0.5}
-    - hitTime: 15.28
+    - hitTime: 30.156319
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 16.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 16.84
+    - hitTime: 31.056011
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 31.489195
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 31.989023
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 32.922035
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 33.35522
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 33.788406
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 34.72142
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 35.154606
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 35.587788
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 36.554123
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 36.554123
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 36.787376
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 36.787376
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 38.320183
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 38.320183
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 38.553436
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 38.58676
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 40.219532
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 40.452785
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 41.91895
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 42.152203
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 43.751656
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 44.71799
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 45.651
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 46.617336
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 47.483707
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 48.350075
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 49.28309
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 50.249424
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 51.548977
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 52.915176
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 53.81487
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 54.714558
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 56.613907
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 57.480278
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 58.41329
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 59.27966
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 60.212673
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 61.112362
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 62.012054
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 62.911747
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 63.811436
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 64.77777
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 67.51017
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 69.27623
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 70.20924
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 71.14226
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 71.57544
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 72.04195
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 72.44181
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 72.90832
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 73.80801
       position: {x: 0.5, y: 0.5}
-    - hitTime: 17.32
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 17.76
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 18.28
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 18.76
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 19.28
+    - hitTime: 74.74102
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 75.20753
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 75.64071
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 76.0739
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 76.50708
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 77.47342
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 78.37311
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 78.80629
       position: {x: 0.5, y: 0.5}
-    - hitTime: 19.76
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 20.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 20.32
+    - hitTime: 79.2728
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 20.8
+    - hitTime: 79.705986
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 80.17249
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 81.138824
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 82.005196
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 82.43838
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 82.87157
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 83.37139
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 83.771255
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 84.70427
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 85.63728
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 86.53697
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 87.469986
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 87.469986
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 87.70324
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 87.70324
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 89.26937
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 20.8
+    - hitTime: 89.26937
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 21.24
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 21.28
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 21.76
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 21.8
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 22.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 22.32
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 22.76
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 22.76
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 23.24
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 23.24
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 23.8
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 24.28
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 25.36
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 26.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 26.8
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 27.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 27.76
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 28.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 28.32
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 29.32
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 30.36
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 30.84
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 31.32
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 31.8
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 32.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 32.8
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 33.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 33.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 34.36
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 34.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 35.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 35.52
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 35.76
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 36.32
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 36.96
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 37.36
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 37.76
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 38.28
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 38.52
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 38.8
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 39.32
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 39.56
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 39.84
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 40.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 40.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 41.32
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 41.56
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 41.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 42.36
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 42.8
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 43.28
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 43.48
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 43.8
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 44.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 44.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 45.32
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 45.6
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 45.8
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 46.32
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 47.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 47.36
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 48.36
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 48.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 49.32
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 50.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 50.36
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 50.6
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 50.6
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 50.84
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 51.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 51.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 52.28
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 53.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 53.36
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 54.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 54.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 55.28
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 55.8
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 56.32
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 57.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 58.36
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 58.8
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 59.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 59.8
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 60.4
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 61.28
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 62.36
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 62.84
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 63.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 63.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 64.32
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 64.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 65.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 66.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 66.56
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 66.8
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 67.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 68.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 69.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 70.36
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 70.56
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 70.8
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 71.16
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 72.28
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 73.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 74.36
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 74.76
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 75.32
-      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 89.53594
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 89.53594
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 91.06875
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 91.302
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 91.535255
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 92.90146
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 93.13471
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 93.33464
+      position: {x: 0.16666667, y: 0.1}
   - name: Ding Dong Song
     composer: Gunther
     singer: Gunther
@@ -3139,256 +3358,1630 @@ MonoBehaviour:
     videoClip: {fileID: 32900000, guid: 72b88f7de4d46684f9b7260183e2b3b9, type: 3}
     bpm: 132
     noteList:
+    - hitTime: 8.141467
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 8.6086
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 9.075733
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 9.5095005
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 9.943267
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 10.4104
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 10.844167
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 11.3113
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 11.745067
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 12.2122
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 12.7127
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 13.146466
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 13.580234
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 14.014
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 14.5145
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 14.9149
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 15.4154005
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 15.849167
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 16.3163
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 16.8168
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 17.2172
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 17.684334
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 18.084734
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 18.551867
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 19.052366
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 19.486134
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 19.953266
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 20.387033
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 20.854166
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 21.354668
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 21.788433
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 22.188833
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 22.655968
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 22.655968
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 25.5255
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 25.5255
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 26.3263
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 26.359667
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 27.2272
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 27.2272
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 28.161467
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 28.161467
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 29.095734
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 29.095734
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 29.996634
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 29.996634
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 8.1081
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 9.042367
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 9.976633
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 10.9109
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 11.8118
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 12.7127
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 13.580234
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 14.581233
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 15.448767
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 16.383034
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 17.283934
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 18.184834
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 19.085733
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 19.986633
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 20.9209
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 21.788433
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 22.655968
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 22.655968
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 24.5245
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 24.691334
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 24.9249
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 26.359667
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 26.760067
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 27.2272
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 28.194834
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 28.595234
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 29.062366
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 29.996634
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 30.4304
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 30.864166
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 31.798433
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 32.2322
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 32.699333
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 33.600235
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 34.5345
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 35.435402
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 36.369667
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 37.2372
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 38.171467
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 39.07237
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 39.973267
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 40.87417
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 40.87417
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 42.8428
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 43.1431
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 43.6436
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 44.077366
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 44.511135
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 44.9449
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 45.4454
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 45.8458
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 46.312935
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 46.7467
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 47.213833
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 47.714333
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 48.1481
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 48.615234
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 49.082367
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 49.516132
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 49.98327
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 49.98327
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 50.917534
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 50.917534
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 51.81843
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 51.81843
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 52.719334
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 52.719334
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 53.620235
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 53.6536
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 54.5545
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 54.9549
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 55.4554
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 56.18947
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 56.790066
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 57.223835
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 58.1581
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 59.092365
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 59.993267
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 60.427032
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 60.827435
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 61.795067
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 62.69597
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 63.630234
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 64.5645
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 64.5645
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 65.43204
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 65.4654
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 66.33293
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 66.7667
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 67.20047
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 68.20147
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 68.20147
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 71.83843
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 72.20547
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 72.4724
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 72.9729
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 74.040634
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 74.30756
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 74.774704
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 75.8758
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 76.30957
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 76.54314
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 76.9769
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 77.44403
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 77.91116
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 78.34493
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 79.512764
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 79.7797
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 80.21347
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 81.34793
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 81.5815
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 82.04864
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 83.149734
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 83.5835
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 83.8838
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 84.25083
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 84.717964
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 84.95153
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 85.1851
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 85.65224
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 87.02026
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 87.7877
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 89.82307
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 90.3903
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 90.85744
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 91.825066
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 92.225464
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 92.65923
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 93.5935
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 94.02727
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 94.4944
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 97.23047
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 98.164734
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 99.065636
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 99.53277
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 99.96654
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 100.43367
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 100.86743
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 101.76833
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 102.7026
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 103.13637
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 103.6035
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 104.0039
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 104.537766
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 104.537766
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 105.43867
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 105.43867
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 106.33957
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 106.33957
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 107.273834
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 107.47404
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 107.67423
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 108.07463
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 109.142365
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 109.97653
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 110.87743
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 111.8117
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 111.8117
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 112.2121
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 112.2121
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 112.67924
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 112.67924
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 113.6135
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 113.6135
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 114.047264
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 114.047264
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 114.48103
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 115.44867
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 115.44867
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 115.84907
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 115.88243
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 116.28284
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 116.74997
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 117.18373
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 117.18373
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 117.684235
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 117.684235
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 118.18473
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 118.58514
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 119.08563
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 119.08563
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 120.854065
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 120.95417
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 122.55577
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 122.7226
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 124.457664
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 124.9248
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 125.39194
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 125.8257
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 126.3262
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 126.759964
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 127.227104
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 127.660866
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 128.16136
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 128.6285
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 129.06227
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 129.46266
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 129.96317
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 130.39693
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 130.8307
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 131.29784
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 131.76497
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 132.19873
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 132.7326
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 133.19974
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 133.60013
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 134.0339
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 134.50104
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 134.9348
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 135.46867
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 135.46867
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 136.3362
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 137.2371
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 137.70424
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 138.138
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 138.57176
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 140.00653
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 140.87407
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 141.77496
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 142.67587
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 143.20973
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 143.6435
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 144.51103
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 145.37857
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 146.31284
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 146.7466
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 147.18037
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 148.148
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 149.08226
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 149.98317
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 150.38356
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 150.88406
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 150.91743
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 151.7516
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 152.2521
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 152.68587
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 153.62013
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 153.62013
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 155.4553
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 155.68887
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 155.92244
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 157.2571
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 157.72423
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 158.158
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 158.59177
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 159.02553
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 159.49266
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 159.95981
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 160.42694
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 160.89407
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 161.29446
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 161.7616
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 162.22873
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 162.7626
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 163.19637
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 163.63013
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 164.0639
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 164.49767
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 164.93143
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 165.43193
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 165.8657
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 166.33284
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 166.7666
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 167.23373
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 167.73424
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 168.20137
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 168.60176
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 169.03554
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 169.50267
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 169.9698
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 170.40356
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 170.8707
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 171.33783
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 171.7716
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 172.70587
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 173.60677
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 174.4743
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 175.40857
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 176.3762
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 177.24373
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 177.6775
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 178.14464
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 178.5784
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 179.04553
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 179.0789
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 179.9798
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 179.9798
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 180.8807
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 180.8807
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 181.81497
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 181.81497
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 182.71587
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 182.71587
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 183.5834
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 184.08391
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 184.55104
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 184.95143
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 185.41856
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 185.8857
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 186.0859
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 186.31947
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 186.75323
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 187.22037
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 187.6875
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 188.12126
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 188.62177
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 189.12227
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 189.52267
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 189.75624
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 189.92307
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 190.4903
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 190.4903
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 190.9908
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 191.32446
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 191.7916
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 192.22537
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 192.65913
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 192.85933
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 193.12627
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 193.62677
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 194.02716
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 194.49431
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 194.96144
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 195.3952
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 195.86234
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 196.2961
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 196.52966
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 196.7966
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 196.93007
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 197.23036
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 197.63077
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 198.13127
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 198.56503
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 198.9988
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 199.43257
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 199.8997
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 200.36684
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 200.86734
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 200.86734
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 202.26874
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 202.76924
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 202.96944
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 203.16963
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 204.53767
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 204.97144
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 205.37184
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 205.8056
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 206.27274
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 206.73987
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 207.17363
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 207.67413
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 208.17464
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 208.57503
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 209.0088
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 209.44257
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 209.9097
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 210.4102
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 210.84396
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 211.34447
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 211.8116
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 212.17863
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 212.64577
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 213.07953
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 213.58003
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 214.0138
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 214.5143
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 214.9147
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 215.38184
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 215.78224
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 216.24937
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 216.74986
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 217.25037
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 217.65077
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 218.15126
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 218.58504
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 219.05217
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 219.05217
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 219.95306
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 220.4202
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 220.85397
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 220.88733
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 221.78824
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 222.222
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 222.65576
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 223.65677
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 223.65677
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 224.09053
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 224.49094
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 225.45857
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 225.65877
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 225.9257
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 226.09253
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 226.35947
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 226.79323
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 227.26036
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 227.69414
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 227.9277
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 228.16127
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 228.59503
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 228.8286
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 229.06216
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 229.26237
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 229.46257
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 229.69614
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 229.9297
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 230.4302
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 230.6304
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 230.86397
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 231.3311
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 231.59804
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 231.8316
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 232.26537
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 232.49893
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 232.69913
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 232.89934
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 233.1329
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 233.36647
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 233.60004
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 235.40184
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 235.60204
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 235.8356
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 238.6384
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 238.83861
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 239.07217
+      position: {x: 0.8333333, y: 0.1}
+  - name: Big Dick
+    composer: "H\xF2aDepTrai"
+    singer: 
+    icon: {fileID: 21300004, guid: b7a2fc8db68b0db409a45d0fcf042336, type: 3}
+    previewImage: {fileID: 21300002, guid: b7a2fc8db68b0db409a45d0fcf042336, type: 3}
+    videoClip: {fileID: 32900000, guid: 69c94f68ce9b5324ba8026a48656fa06, type: 3}
+    bpm: 132
+    noteList:
+    - hitTime: 4.36
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 5.28
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 6.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 7.36
+      position: {x: 0.5, y: 0.3}
     - hitTime: 8.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 10.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 12.2
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 14.28
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 15.28
+    - hitTime: 10.36
       position: {x: 0.8333333, y: 0.5}
+    - hitTime: 12.24
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 14.24
+      position: {x: 0.8333333, y: 0.3}
     - hitTime: 16.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 16.84
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 16.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 17.28
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 18.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 18.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 19.32
       position: {x: 0.5, y: 0.5}
-    - hitTime: 17.32
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 17.76
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 18.28
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 18.76
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 19.28
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 19.76
-      position: {x: 0.16666667, y: 0.8333333}
     - hitTime: 20.32
-      position: {x: 0.16666667, y: 0.5}
+      position: {x: 0.16666667, y: 0.7}
     - hitTime: 20.32
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 20.8
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 21.32
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 22.36
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 22.36
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 23.36
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 24.4
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 20.8
+    - hitTime: 24.4
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 21.24
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 21.28
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 21.76
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 21.8
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 22.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 22.32
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 22.76
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 22.76
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 23.24
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 23.24
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 23.8
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 24.28
-      position: {x: 0.5, y: 0.16666667}
     - hitTime: 25.36
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 26.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 26.8
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 27.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 27.76
-      position: {x: 0.8333333, y: 0.8333333}
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 26.4
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 26.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 27.36
+      position: {x: 0.5, y: 0.1}
     - hitTime: 28.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 28.32
-      position: {x: 0.8333333, y: 0.16666667}
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 28.8
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 29.32
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 29.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 30.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 30.8
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 31.36
       position: {x: 0.5, y: 0.5}
-    - hitTime: 30.36
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 30.84
+    - hitTime: 32.36
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 31.32
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 31.8
+    - hitTime: 32.36
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 32.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 32.8
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 33.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 33.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 34.36
-      position: {x: 0.5, y: 0.5}
+    - hitTime: 33.36
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 34.4
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 34.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 35.32
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 35.52
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 35.76
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 36.32
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 36.96
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 37.36
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 37.76
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 38.28
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 38.52
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 38.8
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 39.32
       position: {x: 0.5, y: 0.5}
-    - hitTime: 39.56
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 39.84
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 40.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 40.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 41.32
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 41.56
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 41.84
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 42.36
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 42.8
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 43.28
-      position: {x: 0.16666667, y: 0.5}
-    - hitTime: 43.48
-      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 35.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 36.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 37.28
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 38.36
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 38.88
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 39.36
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 41.28
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 42.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 43.36
+      position: {x: 0.5, y: 0.1}
     - hitTime: 43.8
-      position: {x: 0.5, y: 0.16666667}
+      position: {x: 0.8333333, y: 0.1}
     - hitTime: 44.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 44.8
-      position: {x: 0.8333333, y: 0.16666667}
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 45.32
       position: {x: 0.5, y: 0.5}
-    - hitTime: 45.6
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 45.8
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 46.32
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 47.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 47.36
-      position: {x: 0.8333333, y: 0.16666667}
+    - hitTime: 46.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 46.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 47.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 47.84
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 48.36
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 48.36
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 48.36
+    - hitTime: 49.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 49.4
       position: {x: 0.8333333, y: 0.5}
-    - hitTime: 49.32
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 50.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 50.36
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 50.6
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 50.6
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 50.84
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 51.32
-      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 50.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 50.8
+      position: {x: 0.5, y: 0.1}
     - hitTime: 51.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 52.28
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 53.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 53.36
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 54.32
-      position: {x: 0.16666667, y: 0.5}
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 52.32
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 52.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 53.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 54.36
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 54.84
-      position: {x: 0.5, y: 0.8333333}
+      position: {x: 0.5, y: 0.1}
     - hitTime: 55.28
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 55.8
-      position: {x: 0.8333333, y: 0.5}
+      position: {x: 0.8333333, y: 0.3}
     - hitTime: 56.32
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 57.32
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 58.36
-      position: {x: 0.5, y: 0.5}
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 56.84
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 57.28
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 58.32
+      position: {x: 0.16666667, y: 0.9}
     - hitTime: 58.8
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 59.36
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 59.8
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 59.28
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 60.36
       position: {x: 0.16666667, y: 0.5}
-    - hitTime: 60.4
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 61.28
-      position: {x: 0.8333333, y: 0.8333333}
+    - hitTime: 61.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 61.8
+      position: {x: 0.8333333, y: 0.5}
     - hitTime: 62.36
-      position: {x: 0.16666667, y: 0.5}
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 62.56
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 62.84
-      position: {x: 0.8333333, y: 0.5}
-    - hitTime: 63.36
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 63.8
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 64.32
-      position: {x: 0.5, y: 0.5}
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 63.12
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 63.4
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 63.6
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 64.36
+      position: {x: 0.16666667, y: 0.3}
     - hitTime: 64.84
-      position: {x: 0.5, y: 0.8333333}
+      position: {x: 0.5, y: 0.5}
     - hitTime: 65.32
-      position: {x: 0.16666667, y: 0.5}
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 65.76
+      position: {x: 0.8333333, y: 0.3}
     - hitTime: 66.32
-      position: {x: 0.16666667, y: 0.16666667}
+      position: {x: 0.16666667, y: 0.1}
     - hitTime: 66.56
-      position: {x: 0.5, y: 0.5}
-    - hitTime: 66.8
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 67.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 68.36
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 66.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 67.08
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 67.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 67.84
       position: {x: 0.8333333, y: 0.5}
+    - hitTime: 68.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 68.8
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 69.04
+      position: {x: 0.5, y: 0.5}
     - hitTime: 69.32
-      position: {x: 0.16666667, y: 0.8333333}
-    - hitTime: 70.36
-      position: {x: 0.8333333, y: 0.8333333}
-    - hitTime: 70.56
-      position: {x: 0.5, y: 0.8333333}
-    - hitTime: 70.8
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 69.8
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 70.04
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 70.32
       position: {x: 0.5, y: 0.5}
-    - hitTime: 71.16
+    - hitTime: 70.6
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 70.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 71.12
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 71.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 71.56
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 71.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 72.08
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 72.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 72.84
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 73.08
       position: {x: 0.5, y: 0.5}
-    - hitTime: 72.28
-      position: {x: 0.16666667, y: 0.16666667}
-    - hitTime: 73.28
-      position: {x: 0.8333333, y: 0.16666667}
-    - hitTime: 74.36
-      position: {x: 0.5, y: 0.16666667}
+    - hitTime: 73.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 73.84
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 74.08
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 74.32
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 74.56
+      position: {x: 0.5, y: 0.5}
     - hitTime: 74.76
-      position: {x: 0.5, y: 0.16666667}
-    - hitTime: 75.32
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 75
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 75.24
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 75.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 76.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 76.32
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 76.84
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 77.04
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 77.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 77.8
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 78.08
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 78.28
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 78.52
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 78.72
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 78.92
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 79.16
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 79.36
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 79.64
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 79.84
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 80
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 80.24
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 80.8
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 80.8
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 81.32
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 81.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 81.8
       position: {x: 0.16666667, y: 0.5}
+    - hitTime: 81.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 82.32
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 82.32
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 82.8
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 82.8
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 83.36
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 83.6
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 83.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 84.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 84.76
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 85.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 85.52
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 85.8
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 86.28
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 86.8
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 87.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 87.56
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 87.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 88.32
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 88.88
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 89.32
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 89.56
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 89.8
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 90.28
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 90.72
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 91.28
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 91.56
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 91.84
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 92.28
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 92.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 93.32
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 93.56
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 93.84
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 94.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 94.76
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 95.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 95.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 95.6
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 95.64
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 95.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 96.28
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 97.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 97.36
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 98.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 98.36
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 99.36
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 99.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 100.36
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 100.4
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 101.36
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 101.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 102.4
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 102.4
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 103.4
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 103.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 104.4
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 104.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 105.32
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 105.8
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 106.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 106.84
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 107.4
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 107.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 108.36
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 108.88
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 109.36
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 109.84
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 110.4
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 110.64
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 110.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 111.12
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 111.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 111.64
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 111.88
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 112.12
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 112.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 112.6
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 112.84
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 113.08
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 113.36
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 113.6
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 113.88
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 114.12
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 114.4
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 114.64
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 114.88
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 115.12
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 115.36
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 115.6
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 115.88
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 116.12
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 116.44
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 116.6
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 116.88
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 116.96
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 117.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 117.56
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 118
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 118.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 118.6
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 118.92
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 119.16
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 119.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 120.36
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 120.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 121.08
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 121.36
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 121.84
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 122.04
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 122.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 122.76
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 123.08
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 123.56
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 123.84
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 124.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 124.2
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 124.4
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 124.8
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 125.12
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 125.6
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 125.84
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 126.04
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 126.32
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 126.72
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 127.08
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 127.64
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 127.88
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 128.08
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 128.36
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 128.76
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 129.04
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 129.36
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 129.72
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 130.04
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 130.24
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 130.72
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 131.04
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 131.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 131.72
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 132
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 132.24
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 132.72
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 133.12
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 133.6
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 134.16
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 134.36
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 134.76
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 135.08
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 135.6
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 135.84
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 136.12
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 136.32
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 136.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 137.12
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 137.36
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 137.6
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 137.88
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 138.36
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 138.84
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 139.2
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 139.6
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 139.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 140.32
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 140.84
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 141.08
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 141.32
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 141.84
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 142.4
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 142.6
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 142.8
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 143.12
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 143.32
+      position: {x: 0.8333333, y: 0.5}
+    - hitTime: 143.6
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 143.84
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 144.08
+      position: {x: 0.8333333, y: 0.7}
+    - hitTime: 144.32
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 145.32
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 146.36
+      position: {x: 0.5, y: 0.1}
+    - hitTime: 146.8
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 147
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 147.32
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 147.52
+      position: {x: 0.8333333, y: 0.1}
+    - hitTime: 147.76
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 148.36
+      position: {x: 0.16666667, y: 0.3}
+    - hitTime: 148.8
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 149.32
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 149.88
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 150.4
+      position: {x: 0.8333333, y: 0.3}
+    - hitTime: 150.64
+      position: {x: 0.16666667, y: 0.7}
+    - hitTime: 150.84
+      position: {x: 0.5, y: 0.5}
+    - hitTime: 151.08
+      position: {x: 0.5, y: 0.9}
+    - hitTime: 151.28
+      position: {x: 0.5, y: 0.3}
+    - hitTime: 151.6
+      position: {x: 0.5, y: 0.7}
+    - hitTime: 151.8
+      position: {x: 0.16666667, y: 0.1}
+    - hitTime: 152.36
+      position: {x: 0.16666667, y: 0.5}
+    - hitTime: 154.28
+      position: {x: 0.8333333, y: 0.9}
+    - hitTime: 156.36
+      position: {x: 0.16666667, y: 0.9}
+    - hitTime: 158.4
+      position: {x: 0.5, y: 0.3}
   songIndex: 0
 --- !u!1 &719949381
 GameObject:
@@ -3719,6 +5312,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848113907}
+  m_CullTransparentMesh: 0
+--- !u!1 &892323916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892323917}
+  - component: {fileID: 892323919}
+  - component: {fileID: 892323918}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &892323917
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892323916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1722458460}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &892323918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892323916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: CYTUS
+--- !u!222 &892323919
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892323916}
   m_CullTransparentMesh: 0
 --- !u!1 &917326904
 GameObject:
@@ -4109,7 +5781,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 125380372}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.71915567
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4451,7 +6123,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 608095242}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4961,7 +6633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PLAY
+  m_Text: BUBBLE
 --- !u!222 &1530848446
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5093,6 +6765,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571925667}
   m_CullTransparentMesh: 0
+--- !u!1 &1597581552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597581553}
+  - component: {fileID: 1597581555}
+  - component: {fileID: 1597581554}
+  m_Layer: 5
+  m_Name: CytusNotePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1597581553
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597581552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_Children:
+  - {fileID: 466562933}
+  m_Father: {fileID: 608095242}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1597581554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597581552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66feea9f116d51c44aac95991da8d3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebugMode: 1
+  MainCytusPlayer: {fileID: 601050754}
+  pool: {fileID: 1597581555}
+  playZone:
+    serializedVersion: 2
+    x: -4
+    y: -9
+    width: 8
+    height: 15
+  cytusBarDuration: 1.5
+  cytusBar: {fileID: 466562933}
+--- !u!114 &1597581555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597581552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2040dbf5e3f6bad41a25849ffb8ce8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7702463409526424058, guid: 4b40483c06b0cbb419ade8214843da98, type: 3}
 --- !u!1 &1666763397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,6 +6850,7 @@ GameObject:
   - component: {fileID: 1666763398}
   - component: {fileID: 1666763400}
   - component: {fileID: 1666763399}
+  - component: {fileID: 1666763401}
   m_Layer: 5
   m_Name: BroadCaster
   m_TagString: Untagged
@@ -5129,7 +6876,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666763399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5165,6 +6912,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666763397}
   m_CullTransparentMesh: 0
+--- !u!114 &1666763401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666763397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed484df6ea7d1f4e8b9ecc94f621f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687085658
 GameObject:
   m_ObjectHideFlags: 0
@@ -5238,6 +6997,124 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687085658}
+  m_CullTransparentMesh: 0
+--- !u!1 &1722458459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1722458460}
+  - component: {fileID: 1722458463}
+  - component: {fileID: 1722458462}
+  - component: {fileID: 1722458461}
+  m_Layer: 5
+  m_Name: BTN_PlayCytus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1722458460
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722458459}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_Children:
+  - {fileID: 892323917}
+  m_Father: {fileID: 118224678}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1722458461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722458459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1722458462}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1722458462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722458459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1722458463
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722458459}
   m_CullTransparentMesh: 0
 --- !u!1 &1729586513
 GameObject:
@@ -5410,7 +7287,7 @@ GameObject:
   - component: {fileID: 1862753335}
   - component: {fileID: 1862753334}
   m_Layer: 5
-  m_Name: BTN_Play
+  m_Name: BTN_PlayBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5431,9 +7308,9 @@ RectTransform:
   m_Father: {fileID: 118224678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 272}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862753334
@@ -5546,13 +7423,14 @@ RectTransform:
   - {fileID: 604580286}
   - {fileID: 1486416709}
   - {fileID: 63543624}
+  - {fileID: 2044721988}
   m_Father: {fileID: 93339740}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000030517578}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 1177.77, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1917706072
 MonoBehaviour:
@@ -5576,8 +7454,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 256, y: 250}
   m_Spacing: {x: 29.71, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &2011605344
 GameObject:
   m_ObjectHideFlags: 0
@@ -5614,6 +7492,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2044721987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044721988}
+  m_Layer: 5
+  m_Name: Song_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2044721988
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044721987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_Children:
+  - {fileID: 410723104}
+  m_Father: {fileID: 1917706071}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 985.13, y: -150}
+  m_SizeDelta: {x: 256, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2076331161
 GameObject:
   m_ObjectHideFlags: 0
@@ -5626,7 +7540,7 @@ GameObject:
   - component: {fileID: 2076331164}
   - component: {fileID: 2076331163}
   m_Layer: 5
-  m_Name: NotePlayer
+  m_Name: BubbleNotePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5663,7 +7577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79983b8b8d7644447b31f7b577e3a2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebugMode: 0
+  isDebugMode: 1
   MainCytusPlayer: {fileID: 601050754}
   pool: {fileID: 2076331164}
   playZone:
@@ -5717,7 +7631,7 @@ RectTransform:
   m_Children:
   - {fileID: 1417816852}
   m_Father: {fileID: 608095242}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

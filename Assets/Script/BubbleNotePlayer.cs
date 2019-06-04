@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NotePlayer : CytusPlayer
+public class BubbleNotePlayer : CytusPlayer
 {
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -13,12 +13,12 @@ public class NotePlayer : CytusPlayer
 
     [Header("Component Ref")]
     [SerializeField]
-    private CytusPlayer MainCytusPlayer = null;
+    protected CytusPlayer MainCytusPlayer = null;
     [SerializeField]
-    private BubbleNotePoolManager pool = null;
+    protected BubbleNotePoolManager pool = null;
 
     [SerializeField]
-    private Rect playZone;
+    protected Rect playZone;
     
     private Queue<NoteProfile> noteQueue { get; set; }
 
@@ -92,11 +92,10 @@ public class NotePlayer : CytusPlayer
     }
     private void SpawnNote()
     {
-        Vector2 realPos = new Vector2(playZone.x + (nextNote.Position.x * playZone.width), playZone.y + (nextNote.Position.y * playZone.height));
+        Vector2 realPos = CalculateNewPos(nextNote.Position);
         BubbleNote newNote = pool.Spawn(realPos);
         newNote.Setup(this);
         newNote.Refresh(nextNote);
-        //Debug.Log("Spawn: " + nextNote.ToString());
         //dequeue
 
         if (noteQueue.Count > 0)
@@ -106,6 +105,10 @@ public class NotePlayer : CytusPlayer
             nextNote = null;
             Stop();
         }
+    }
+    protected virtual Vector2 CalculateNewPos(Vector2 _pos)
+    {
+        return (new Vector2(playZone.x + (_pos.x * playZone.width), playZone.y + (_pos.y * playZone.height)));
     }
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

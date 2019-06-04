@@ -29,7 +29,7 @@ public class NoteRecorder : CytusPlayer
 
     public override void Play()
     {
-        //EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
+        EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
 
         if (coroutine != null)
             StopCoroutine(coroutine);
@@ -47,7 +47,7 @@ public class NoteRecorder : CytusPlayer
 
     public override void Stop()
     {
-        //EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
+        EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
         if (coroutine != null)
             StopCoroutine(coroutine);
         if (noteList != null)

@@ -13,8 +13,10 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private Button btnRecordMode = null;
     [SerializeField]
-    private Button btnPlayMode = null;
-    
+    private Button btnPlayBubble = null;
+    [SerializeField]
+    private Button btnPlayCytus = null;
+
     [SerializeField]
     private MonoCanvas panelStartGame = null;
     [SerializeField]
@@ -31,8 +33,11 @@ public class GameplayController : MonoBehaviour
     private VideoBGMController videoPlayer = null;
     public VideoBGMController VideoPlayer => videoPlayer;
     [SerializeField]
-    private NotePlayer notePlayer = null;
-    public NotePlayer NotePlayer => notePlayer;
+    private BubbleNotePlayer bubblePlayer = null;
+    public BubbleNotePlayer BubblePlayer => bubblePlayer;
+    [SerializeField]
+    private BubbleNotePlayer cytusPlayer = null;
+    public BubbleNotePlayer CytusPlayer => cytusPlayer;
     [SerializeField]
     private NoteRecorder noteRecorder = null;
     public NoteRecorder NoteRecorder => noteRecorder;
@@ -41,17 +46,27 @@ public class GameplayController : MonoBehaviour
 
     private void Awake()
     {
-        btnPlayMode.onClick.AddListener( () =>
+        btnPlayBubble.onClick.AddListener( () =>
         {
-            AllPlayers = new List<CytusPlayer> { videoPlayer, notePlayer };
-            notePlayer.gameObject.SetActive(true);
+            AllPlayers = new List<CytusPlayer> { videoPlayer, bubblePlayer };
+            bubblePlayer.gameObject.SetActive(true);
+            cytusPlayer.gameObject.SetActive(false);
+            noteRecorder.gameObject.SetActive(false);
+            OpenStartMenu();
+        });
+        btnPlayCytus.onClick.AddListener(() =>
+        {
+            AllPlayers = new List<CytusPlayer> { videoPlayer, cytusPlayer };
+            bubblePlayer.gameObject.SetActive(false);
+            cytusPlayer.gameObject.SetActive(true);
             noteRecorder.gameObject.SetActive(false);
             OpenStartMenu();
         });
         btnRecordMode.onClick.AddListener( () =>
         {
             AllPlayers = new List<CytusPlayer> { videoPlayer, noteRecorder };
-            notePlayer.gameObject.SetActive(false);
+            bubblePlayer.gameObject.SetActive(false);
+            cytusPlayer.gameObject.SetActive(false);
             noteRecorder.gameObject.SetActive(true);
             OpenStartMenu();
         });
@@ -76,8 +91,8 @@ public class GameplayController : MonoBehaviour
     IEnumerator BtnStartPressed()
     {
         panelGame.Show();
-        if (AllPlayers.Contains(notePlayer))
-            notePlayer.Setup();
+        if (AllPlayers.Contains(bubblePlayer))
+            bubblePlayer.Setup();
         VideoPlayer.Setup(SongSelector.CurrentSong.VideoClip);
         yield return new WaitForSeconds(1);
         PlayAllCytus();

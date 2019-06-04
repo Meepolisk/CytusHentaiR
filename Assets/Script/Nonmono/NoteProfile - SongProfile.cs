@@ -25,7 +25,7 @@ public class NoteProfile
 
     public void CalculateAppearTime(TimeFrameProfile _timeFrameProfile)
     {
-        AppearTime = HitTime - _timeFrameProfile.LiveFrames - _timeFrameProfile.InitFrames;
+        AppearTime = HitTime - _timeFrameProfile.LiveFrames;
     }
 
     public new string ToString()

@@ -490,7 +490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeFrameProfile:
-    initFrames: 0.2
     liveFrames: 1
     decayFrames: 0.6
   scoreFrameProfile:

@@ -49,8 +49,8 @@ public abstract class NoteBase : PoolingObject.Object
 
     //Insetup
     public bool IsAlive { get; private set; }
-    public NotePlayer Player { get; protected set; }
-    public void Setup(NotePlayer _player)
+    public BubbleNotePlayer Player { get; protected set; }
+    public void Setup(BubbleNotePlayer _player)
     {
         Player = _player;
     }

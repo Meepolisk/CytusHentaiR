@@ -4,9 +4,9 @@ using System.Collections;
 [System.Serializable]
 public class TimeFrameProfile
 {
-    [SerializeField, Range(0, 1)]
-    private float initFrames = 0.2f;
-    public float InitFrames => initFrames;
+    //[SerializeField, Range(0, 1)]
+    //private float initFrames = 0.2f;
+    //public float InitFrames => initFrames;
 
     [SerializeField, Range(0, 2)]
     private float liveFrames = 1f;
