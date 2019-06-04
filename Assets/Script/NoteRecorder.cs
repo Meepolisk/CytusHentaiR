@@ -52,7 +52,7 @@ public class NoteRecorder : CytusPlayer
             StopCoroutine(coroutine);
         if (noteList != null)
         {
-            SongStorer.Save(noteList);
+            SongSelector.Save(noteList);
         }
     }
 
@@ -82,12 +82,6 @@ public class NoteRecorder : CytusPlayer
     }
     private readonly Dictionary<KeyCode, Vector2> bubbleEmuPos = new Dictionary<KeyCode, Vector2>
     {
-        { KeyCode.Q, new Vector2(1f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.W, new Vector2(3f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.E, new Vector2(5f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.A, new Vector2(1f /horizontalSteps, 9f /verticalSteps) },
-        { KeyCode.S, new Vector2(3f /horizontalSteps, 9f /verticalSteps) },
-        { KeyCode.D, new Vector2(5f /horizontalSteps, 9f /verticalSteps) },
         { KeyCode.Keypad1, new Vector2(1f /horizontalSteps, 1f /verticalSteps) },
         { KeyCode.Keypad2, new Vector2(3f /horizontalSteps, 1f /verticalSteps) },
         { KeyCode.Keypad3, new Vector2(5f /horizontalSteps, 1f /verticalSteps) },
@@ -96,21 +90,20 @@ public class NoteRecorder : CytusPlayer
         { KeyCode.Keypad6, new Vector2(5f /horizontalSteps, 3f /verticalSteps) },
         { KeyCode.Keypad7, new Vector2(1f /horizontalSteps, 5f /verticalSteps) },
         { KeyCode.Keypad8, new Vector2(3f /horizontalSteps, 5f /verticalSteps) },
-        { KeyCode.Keypad9, new Vector2(5f /horizontalSteps, 5f /verticalSteps) }
+        { KeyCode.Keypad9, new Vector2(5f /horizontalSteps, 5f /verticalSteps) },
+        { KeyCode.A, new Vector2(1f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.S, new Vector2(3f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.D, new Vector2(5f /horizontalSteps, 7f /verticalSteps) },
+        { KeyCode.Q, new Vector2(1f /horizontalSteps, 9f /verticalSteps) },
+        { KeyCode.W, new Vector2(3f /horizontalSteps, 9f /verticalSteps) },
+        { KeyCode.E, new Vector2(5f /horizontalSteps, 9f /verticalSteps) }
     };
     private void Update()
     {
         if (IsPlaying)
         {
-            UpdateOffset();
             RecordDebug();
         }
-    }
-    private Vector2 offsetScale { get; set; }
-    private void UpdateOffset()
-    {
-        offsetScale = new Vector2(
-            Random.Range(0, horizontalSteps), Random.Range(0, verticalSteps));
     }
     private void RecordDebug()
     {

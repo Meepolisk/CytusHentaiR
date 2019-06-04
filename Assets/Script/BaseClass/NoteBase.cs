@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum HitType
 {
-    Bad, Good, Great, Perfect
+    Perfect, Great, Good, Bad
 }
 
 public struct TimeRange
@@ -48,6 +48,7 @@ public abstract class NoteBase : PoolingObject.Object
     public static event Action<NoteBase, HitType> aNoteScored;
 
     //Insetup
+    public bool IsAlive { get; private set; }
     public NotePlayer Player { get; protected set; }
     public void Setup(NotePlayer _player)
     {
@@ -55,6 +56,7 @@ public abstract class NoteBase : PoolingObject.Object
     }
     public virtual void Refresh(NoteProfile noteProfile)
     {
+        IsAlive = true;
         NoteProfile = noteProfile;
         float hitTime = NoteProfile.HitTime;
         TR_Perfect = new TimeRange(hitTime, TimeFrameProfile, ScoreFrameProfile.PerfectScale);
@@ -78,10 +80,23 @@ public abstract class NoteBase : PoolingObject.Object
 
     protected void PlayerHit()
     {
+        if (IsAlive == false)
+            return;
+
+        IsAlive = false;
         HitType hitType = Calculate(Player.CurrentTime);
         if (aNoteScored != null)
             aNoteScored(this, hitType);
         Scoring(hitType);
     }
     protected abstract void Scoring(HitType hitType);
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Player.IsDebugMode && IsAlive && Player.CurrentTime >= (NoteProfile.HitTime - Time.deltaTime / 2f))
+        {
+            PlayerHit();
+        }
+    }
+#endif
 }

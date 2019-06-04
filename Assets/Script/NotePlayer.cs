@@ -64,7 +64,7 @@ public class NotePlayer : CytusPlayer
     private NoteProfile nextNote { get; set; }
     private void PrepareQueue()
     {
-        noteQueue = SongStorer.LoadQueue();
+        noteQueue = SongSelector.LoadQueue();
 
         if (noteQueue.Count == 0)
             return;
@@ -96,7 +96,7 @@ public class NotePlayer : CytusPlayer
         BubbleNote newNote = pool.Spawn(realPos);
         newNote.Setup(this);
         newNote.Refresh(nextNote);
-        Debug.Log("Spawn: " + nextNote.ToString());
+        //Debug.Log("Spawn: " + nextNote.ToString());
         //dequeue
 
         if (noteQueue.Count > 0)

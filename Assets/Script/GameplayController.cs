@@ -26,8 +26,6 @@ public class GameplayController : MonoBehaviour
     private MonoCanvas panelGame = null;
     [SerializeField]
     private Button btnStop = null;
-    [SerializeField]
-    private Button btnBack2 = null;
     [Header("Component Ref: CORE")]
     [SerializeField]
     private VideoBGMController videoPlayer = null;
@@ -61,10 +59,6 @@ public class GameplayController : MonoBehaviour
         {
             menuController.ReturnToPreviousMenu();
         });
-        btnBack2.onClick.AddListener(() =>
-        {
-            menuController.ReturnToPreviousMenu();
-        });
         btnStart.onClick.AddListener(() =>
         {
             StartCoroutine(BtnStartPressed());
@@ -72,6 +66,7 @@ public class GameplayController : MonoBehaviour
         btnStop.onClick.AddListener(() =>
         {
             StopAllCytus();
+            menuController.ReturnToPreviousMenu();
         });
     }
     private void OpenStartMenu()
@@ -83,7 +78,7 @@ public class GameplayController : MonoBehaviour
         panelGame.Show();
         if (AllPlayers.Contains(notePlayer))
             notePlayer.Setup();
-        VideoPlayer.Setup(SongStorer.CurrentSong.VideoClip);
+        VideoPlayer.Setup(SongSelector.CurrentSong.VideoClip);
         yield return new WaitForSeconds(1);
         PlayAllCytus();
     }

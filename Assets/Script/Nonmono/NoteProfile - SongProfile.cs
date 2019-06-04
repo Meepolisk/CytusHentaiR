@@ -40,10 +40,19 @@ public class SongNoteProfile
     [SerializeField]
     private string name = "";
     public string Name => name;
+    [SerializeField]
+    private string composer = "";
+    public string Composer => composer;
+    [SerializeField]
+    private string singer = "";
+    public string Singer => singer;
 
     [SerializeField]
-    private Texture2D previewImage = null;
-    public Texture2D PreviewImage => previewImage;
+    private Sprite icon = null;
+    public Sprite Icon => icon;
+    [SerializeField]
+    private Sprite previewImage = null;
+    public Sprite PreviewImage => previewImage;
 
     [SerializeField]
     private VideoClip videoClip = null;

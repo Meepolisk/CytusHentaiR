@@ -21,14 +21,14 @@ public class TimeFrameProfile
 public class ScoreFrameProfile
 {
     [SerializeField]
-    private float perfectScale = 0.2f;
+    private float perfectScale = 0.4f;
     public float PerfectScale => perfectScale;
 
     [SerializeField]
-    private float greateScale = 0.4f;
+    private float greateScale = 0.5f;
     public float GreateScale => greateScale;
 
     [SerializeField]
-    private float goodScale = 0.7f;
+    private float goodScale = 0.9f;
     public float GoodScale => goodScale;
 }

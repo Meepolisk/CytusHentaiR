@@ -14,6 +14,7 @@ public class BubbleNote : NoteBase
     {
         base.OnSpawn();
         transform.SetAsFirstSibling();
+        easyTouchDetector.gameObject.SetActive(true);
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
     }
 
@@ -28,6 +29,7 @@ public class BubbleNote : NoteBase
         if (gesture.pickObject == easyTouchDetector.gameObject)
         {
             PlayerHit();
+            easyTouchDetector.gameObject.SetActive(false);
         }
     }
 
@@ -38,13 +40,4 @@ public class BubbleNote : NoteBase
         anim.SetInteger(animParamHitType, (int)hitType);
         anim.SetTrigger(animParamHit);
     }
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Player.IsDebugMode && Player.CurrentTime >= (NoteProfile.HitTime - Time.deltaTime / 2f))
-        {
-            PlayerHit();
-        }
-    }
-#endif
 }
