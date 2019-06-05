@@ -36,8 +36,8 @@ public class GameplayController : MonoBehaviour
     private BubbleNotePlayer bubblePlayer = null;
     public BubbleNotePlayer BubblePlayer => bubblePlayer;
     [SerializeField]
-    private BubbleNotePlayer cytusPlayer = null;
-    public BubbleNotePlayer CytusPlayer => cytusPlayer;
+    private CytusNotePlayer cytusPlayer = null;
+    public CytusNotePlayer CytusPlayer => cytusPlayer;
     [SerializeField]
     private NoteRecorder noteRecorder = null;
     public NoteRecorder NoteRecorder => noteRecorder;
@@ -91,8 +91,10 @@ public class GameplayController : MonoBehaviour
     IEnumerator BtnStartPressed()
     {
         panelGame.Show();
-        if (AllPlayers.Contains(bubblePlayer))
+        if (AllPlayers.Contains(bubblePlayer) == true)
             bubblePlayer.Setup();
+        if (AllPlayers.Contains(cytusPlayer) == true)
+            cytusPlayer.Setup();
         VideoPlayer.Setup(SongSelector.CurrentSong.VideoClip);
         yield return new WaitForSeconds(1);
         PlayAllCytus();

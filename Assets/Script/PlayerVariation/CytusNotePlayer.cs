@@ -7,7 +7,7 @@ public class CytusNotePlayer : BubbleNotePlayer
 {
     [Header("Config: Cytus")]
     [SerializeField, Range(1, 5), ReadOnlyWhenPlaying]
-    private float cytusBarDuration = 1.5f;
+    private float cytusRoundTime = 2.5f;
     [SerializeField]
     private Transform cytusBar = null;
 
@@ -23,24 +23,23 @@ public class CytusNotePlayer : BubbleNotePlayer
     private IEnumerator _CytusBarChange()
     {
         yield return new WaitUntil(() => { return MainCytusPlayer.IsPlaying == true;});
-        float timeTick = 0; float sign = 1f;
         while (MainCytusPlayer.IsPlaying == true)
         {
-            timeTick += (sign * Time.deltaTime);
-            if (timeTick >= cytusBarDuration)
-            {
-                timeTick = cytusBarDuration;
-                sign = -1;
-            }
-            else if (timeTick <= 0)
-            {
-                timeTick = 0;
-                sign = 1;
-            }
-            cytusBar.transform.position = new Vector2(cytusBar.transform.position.x, playZone.x + ((timeTick / cytusBarDuration) * playZone.width));
+            UpdateCytusBar();
             yield return null;
         }
         Stop();
+    }
+    private float GetCytusYPos(float time)
+    {
+        float round = time / cytusRoundTime;
+        float roundScale = (round - (int)round);
+        float yScale = (1f - Mathf.Abs((roundScale * 2f) - 1f));
+        return playZone.y + (yScale * playZone.height);
+    }
+    private void UpdateCytusBar()
+    {
+        cytusBar.transform.position = new Vector2(cytusBar.transform.position.x, GetCytusYPos(CurrentTime));
     }
 
     public override void Stop()
@@ -50,9 +49,9 @@ public class CytusNotePlayer : BubbleNotePlayer
             StopCoroutine(cytusCoroutine);
     }
 
-    protected override Vector2 CalculateNewPos(Vector2 _pos)
+    protected override Vector2 CalculateNewPos(NoteProfile note)
     {
-        return (new Vector2(playZone.x + (_pos.x * playZone.width), cytusBar.transform.position.y));
+        return (new Vector2(playZone.x + (note.Position.x * playZone.width), GetCytusYPos(note.HitTime)));
     }
 
 }

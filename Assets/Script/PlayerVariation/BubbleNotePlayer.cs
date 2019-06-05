@@ -26,7 +26,6 @@ public class BubbleNotePlayer : CytusPlayer
     public override bool IsPlaying => MainCytusPlayer.IsPlaying;
     public override float CurrentTime => MainCytusPlayer.CurrentTime;
     public override double Duration => MainCytusPlayer.Duration;
-    //private TimeFrameProfile timeFramProfile => pool.Prefabs.TimeFrameProfile;
     
     public void Setup()
     {
@@ -35,6 +34,7 @@ public class BubbleNotePlayer : CytusPlayer
 
     public override void Pause()
     {
+
     }
     public override void Play()
     {
@@ -92,7 +92,7 @@ public class BubbleNotePlayer : CytusPlayer
     }
     private void SpawnNote()
     {
-        Vector2 realPos = CalculateNewPos(nextNote.Position);
+        Vector2 realPos = CalculateNewPos(nextNote);
         BubbleNote newNote = pool.Spawn(realPos);
         newNote.Setup(this);
         newNote.Refresh(nextNote);
@@ -106,9 +106,9 @@ public class BubbleNotePlayer : CytusPlayer
             Stop();
         }
     }
-    protected virtual Vector2 CalculateNewPos(Vector2 _pos)
+    protected virtual Vector2 CalculateNewPos(NoteProfile note)
     {
-        return (new Vector2(playZone.x + (_pos.x * playZone.width), playZone.y + (_pos.y * playZone.height)));
+        return (new Vector2(playZone.x + (note.Position.x * playZone.width), playZone.y + (note.Position.y * playZone.height)));
     }
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
