@@ -13,14 +13,8 @@ namespace REditor
         private T _handler;
         public T handler
         {
-            protected set
-            {
-                _handler = value;
-            }
-            get
-            {
-                return _handler;
-            }
+            protected set => _handler = value;
+            get => _handler;
         }
 
         protected virtual void OnEnable()

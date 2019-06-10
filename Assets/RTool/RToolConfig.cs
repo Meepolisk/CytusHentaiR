@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor.SceneManagement;
 using UnityEditor;
-#endif
 namespace RTool
 {
     internal static class RTool
@@ -33,5 +33,19 @@ namespace RTool
         //[MenuItem(menuNameOff, true)]
         //private static bool CanDebugOFF() => IsDebug == true;
 
+        [MenuItem(rootNameSpace + " / Clear PlayerPrefs")]
+        private static void NewMenuOption()
+        {
+            PlayerPrefs.DeleteAll();
+            Debug.Log("All PlayerPrefs cleared");
+        }
+
+        [MenuItem("Assets/Load Additive Scene")]
+        private static void LoadAdditiveScene()
+        {
+            var selected = Selection.activeObject;
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(selected));
+        }
     }
 }
+#endif

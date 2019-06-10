@@ -6,176 +6,142 @@ using UnityEngine;
 
 namespace RTool.UTask
 {
-    public interface iTask<T>
+    public sealed class UTask
     {
-        iTask<T> onFinished(Action<iTask<T>> _onFinishedAction);
-        iTask<T> onSucceeded(Action _onSucceededAction);
-        iTask<T> onFailed(Action<Exception> _onFailedAction);
-    }
-
-    public abstract class UTaskBase<T> : iTask<T> where T : Task
-    {
+        private Task task { get; set; }
         private Coroutine coroutine { get; set; }
-        private bool forceStopCheck { get; set; }
-        public MonoBehaviour Handler { get; private set; }
-        protected T task { get; private set; }
+        public MonoBehaviour Handler => UTaskHandler.Instance;
         
-        protected UTaskBase(MonoBehaviour _handler, T _task)
+        public bool isSucceeded { get; private set; }
+        public Exception exception { get; private set; }
+        public bool isFinished => (isSucceeded || exception != null);
+
+        private List<Action<UTask>> onFinishedActionList { get; set; }
+        private List<Action> onSucceededActionList { get; set; }
+        private List<Action<Exception>> onFailedActionList { get; set; }
+
+        private UTask(Exception _exception)
+        {
+            exception = _exception;
+            coroutine = Handler.StartCoroutine(_Coroutine());
+        }
+        private UTask()
+        {
+            isSucceeded = true;
+            coroutine = Handler.StartCoroutine(_Coroutine());
+        }
+        public UTask(Task _task, float _timeOut = 5f)
         {
             try
             {
-                Handler = _handler;
                 task = _task;
-                coroutine = Handler.StartCoroutine(_Coroutine());
                 task.ContinueWith(task =>
                 {
-                    forceStopCheck = true;
+                    if (task.IsCanceled)
+                        exception = new Exception("Task is canceled");
+                    else if (task.IsFaulted)
+                        exception = task.Exception;
+                    else
+                        isSucceeded = true;
                 });
             }
-            catch(Exception exception)
+            catch (Exception _exception)
             {
-                Handler.StartCoroutine(_ForstopCoroutine(exception));
+                exception = _exception;
+            }
+            finally
+            {
+                coroutine = Handler.StartCoroutine(_Coroutine(_timeOut));
             }
         }
-        private IEnumerator _Coroutine()
+        /// <summary>
+        /// Create a Failed UTask;
+        /// </summary>
+        public static UTask ForceFail(Exception exception) => new UTask(exception);
+        /// <summary>
+        /// Create a Succeed UTask with result;
+        /// </summary>
+        public static UTask ForceSuccess() => new UTask();
+
+        private IEnumerator _Coroutine(float timeOut = 1f)
         {
-            forceStopCheck = false;
-            while (forceStopCheck != true)
+            float timeTick = 0;
+            while (isFinished != true || timeTick < timeOut)
             {
                 yield return null;
+                timeTick += Time.deltaTime;
             }
             OnCoroutineComplete();
             coroutine = null;
         }
-        private IEnumerator _ForstopCoroutine(Exception exception)
+        private void OnCoroutineComplete()
         {
-            yield return null;
-            OnCoroutineComplete(exception);
-        }
-        private void OnCoroutineComplete(Exception _forceException = null)
-        {
-            if (task.IsCanceled)
-            {
-                CallBack_Failed(new Exception("Task canceled!"));
-                CallBack_Canceled();
-            }
-            else if (task.IsFaulted)
-            {
-                CallBack_Failed(task.Exception);
-                CallBack_Fault(task.Exception);
-            }
-            else //is succeeded
+            if (isSucceeded)
             {
                 CallBack_Succeeded();
             }
+            else
+            {
+                if (exception == null)
+                    exception = new Exception("OH NO");
+                CallBack_Failed(exception);
+            }
             CallBack_Finished();
         }
-        protected virtual void CallBack_Failed(Exception exception)
-        {
-            if (onFailedActionList != null)
-                foreach (var function in onFailedActionList)
-                    function(exception);
-        }
-        protected virtual void CallBack_Canceled()
-        {
-            if (onCanceledActionList != null)
-                foreach (var function in onCanceledActionList)
-                    function();
-        }
-        protected virtual void CallBack_Fault(Exception exception)
-        {
-            if (onFaultedActionList != null)
-                foreach (var function in onFaultedActionList)
-                    function(exception);
-        }
-        protected virtual void CallBack_Finished()
+        #region CallBack
+        private void CallBack_Finished()
         {
             if (onFinishedActionList != null)
                 foreach (var function in onFinishedActionList)
                     function(this);
         }
-        protected virtual void CallBack_Succeeded()
+        private void CallBack_Succeeded()
         {
             if (onSucceededActionList != null)
                 foreach (var function in onSucceededActionList)
                     function();
         }
+        private void CallBack_Failed(Exception exception)
+        {
+            if (onFailedActionList != null)
+                foreach (var function in onFailedActionList)
+                    function(exception);
+        }
+        #endregion
 
-        private List<Action<iTask<T>>> onFinishedActionList { get; set; }
-        private List<Action> onSucceededActionList { get; set; }
-        private List<Action<Exception>> onFailedActionList { get; set; }
-        private List<Action> onCanceledActionList { get; set; }
-        private List<Action<Exception>> onFaultedActionList { get; set; }
-
-        public iTask<T> onFinished(Action<iTask<T>> _onFinishedAction)
+        #region public call
+        public UTask onFinished(Action<UTask> _onFinishedAction)
         {
             if (onFinishedActionList == null)
-                onFinishedActionList = new List<Action<iTask<T>>>();
+                onFinishedActionList = new List<Action<UTask>>();
             onFinishedActionList.Add(_onFinishedAction);
             return this;
         }
-        public iTask<T> onSucceeded(Action _onSucceededAction)
+        public UTask onSucceeded(Action _onSucceededAction)
         {
             if (onSucceededActionList == null)
                 onSucceededActionList = new List<Action>();
             onSucceededActionList.Add(_onSucceededAction);
             return this;
         }
-        public iTask<T> onFailed(Action<Exception> _onFailedAction)
+        public UTask onFailed(Action<Exception> _onFailedAction)
         {
             if (onFailedActionList == null)
                 onFailedActionList = new List<Action<Exception>>();
             onFailedActionList.Add(_onFailedAction);
             return this;
         }
-        public iTask<T> onCanceled(Action _onCanceledAction)
-        {
-            if (onCanceledActionList == null)
-                onCanceledActionList = new List<Action>();
-            onCanceledActionList.Add(_onCanceledAction);
-            return this;
-        }
-        public iTask<T> onFaulted(Action<Exception> _onFaultedAction)
-        {
-            if (onFaultedActionList == null)
-                onFaultedActionList = new List<Action<Exception>>();
-            onFaultedActionList.Add(_onFaultedAction);
-            return this;
-        }
-    }
-    public class UTask : UTaskBase<Task>
-    {
-        public UTask(MonoBehaviour _handler, Task _task) : base(_handler, _task) { }
-    }
-    public class UTask<T> : UTaskBase<Task<T>>
-    {
-        public UTask(MonoBehaviour _handler, Task<T> _task) : base(_handler, _task) { }
-
-        protected override void CallBack_Succeeded()
-        {
-            if (onSucceededActionR != null)
-                foreach (var function in onSucceededActionR)
-                    function(task.Result);
-            base.CallBack_Succeeded();
-        }
-        private List<Action<T>> onSucceededActionR { get; set; }
-        public UTask<T> onSucceededR(Action<T> _onSucceededAction)
-        {
-            if (onSucceededActionR == null)
-                onSucceededActionR = new List<Action<T>>();
-            onSucceededActionR.Add(_onSucceededAction);
-            return this;
-        }
+        #endregion
     }
     public static class UTaskExtension
     {
-        public static UTask<T> UTask<T>(this MonoBehaviour _handler, Task<T> _task)
+        public static UTask<T> StartUTask<T>(this Task<T> _task, float _timeOut = 5f)
         {
-            return new UTask<T>(_handler, _task);
+            return new UTask<T>(_task, _timeOut);
         }
-        public static UTask UTask(this MonoBehaviour _handler, Task _task)
+        public static UTask StartUTask(this Task _task, float _timeOut = 5f)
         {
-            return new UTask(_handler, _task);
+            return new UTask(_task, _timeOut);
         }
     }
 }
