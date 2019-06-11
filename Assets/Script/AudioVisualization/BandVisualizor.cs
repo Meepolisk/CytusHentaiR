@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RTool.AudioAnalyze;
 
-public class BandVisualizor : MonoBehaviour
+public class BandVisualizor : BandVisualizorBase
 {
     [Header("Component Ref")]
     [SerializeField]
-    private BandVisualizorController controller = null;
-    [SerializeField]
-    private AudioPeer audioPeer = null;
-    [SerializeField]
-    private BandType bandType = BandType.SubBass;
+    BandVisualizorController controller;
     [SerializeField]
     private Image mesh = null;
     [SerializeField]
@@ -20,28 +17,23 @@ public class BandVisualizor : MonoBehaviour
     private new Text name = null;
     [SerializeField]
     private Text value = null;
+    private float boost => controller.UpScale;
 
-    private float UpScale => controller.UpScale;
-
-    private void Start()
+    protected override void Start()
     {
-        audioPeer.BandsDict[bandType].onUpdateValue += ValueUpdate;
+        base.Start();
         name.text = bandType.ToString();
-    }
-    private void OnDestroy()
-    {
-        audioPeer.BandsDict[bandType].onUpdateValue -= ValueUpdate;
     }
 
     private const float minY = 5f;
-    private void ValueUpdate(float Value, float bufferedValue)
+    protected override void ValueUpdate(float Value, float bufferedValue)
     {
         Vector2 meshSD = mesh.rectTransform.sizeDelta;
-        meshSD.y = Mathf.Clamp(Value * UpScale, minY, 999999999);
+        meshSD.y = Mathf.Clamp(Value * boost, minY, 999999999);
         mesh.rectTransform.sizeDelta = meshSD;
 
         Vector2 bufferedMeshSD = bufferedMesh.rectTransform.sizeDelta;
-        bufferedMeshSD.y = Mathf.Clamp(bufferedValue * UpScale, minY, 999999999);
+        bufferedMeshSD.y = Mathf.Clamp(bufferedValue * boost, minY, 999999999);
         bufferedMesh.rectTransform.sizeDelta = bufferedMeshSD;
 
         value.text = bufferedValue.ToString();

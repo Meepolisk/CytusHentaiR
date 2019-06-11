@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,6 +9,12 @@ using UnityEditor;
 
 public class Test : MonoBehaviour
 {
+    public float testFloat = 0;
+    public float SetFloat
+    {
+        set => testFloat = value;
+    }
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(Test))]
     private class editor : Editor
@@ -29,8 +36,8 @@ public class Test : MonoBehaviour
 
             if (GUILayout.Button("640x480"))
             {
-                rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 640);
-                rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 480);
+                //rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 640);
+                //rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 480);
             }
             if (GUILayout.Button("Reset"))
             {

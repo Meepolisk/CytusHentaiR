@@ -55,8 +55,8 @@ public class SongNoteProfile
     public Sprite PreviewImage => previewImage;
 
     [SerializeField]
-    private VideoClip videoClip = null;
-    public VideoClip VideoClip => videoClip;
+    private AudioClip audioClip = null;
+    public AudioClip AudioClip => audioClip;
 
     [SerializeField]
     private float bpm = 120;

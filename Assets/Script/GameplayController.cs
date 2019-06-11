@@ -30,8 +30,8 @@ public class GameplayController : MonoBehaviour
     private Button btnStop = null;
     [Header("Component Ref: CORE")]
     [SerializeField]
-    private VideoBGMController videoPlayer = null;
-    public VideoBGMController VideoPlayer => videoPlayer;
+    private AudioBGMController corePlayer = null;
+    public AudioBGMController CorePlayer => corePlayer;
     [SerializeField]
     private BubbleNotePlayer bubblePlayer = null;
     public BubbleNotePlayer BubblePlayer => bubblePlayer;
@@ -48,7 +48,7 @@ public class GameplayController : MonoBehaviour
     {
         btnPlayBubble.onClick.AddListener( () =>
         {
-            AllPlayers = new List<CytusPlayer> { videoPlayer, bubblePlayer };
+            AllPlayers = new List<CytusPlayer> { corePlayer, bubblePlayer };
             bubblePlayer.gameObject.SetActive(true);
             cytusPlayer.gameObject.SetActive(false);
             noteRecorder.gameObject.SetActive(false);
@@ -56,7 +56,7 @@ public class GameplayController : MonoBehaviour
         });
         btnPlayCytus.onClick.AddListener(() =>
         {
-            AllPlayers = new List<CytusPlayer> { videoPlayer, cytusPlayer };
+            AllPlayers = new List<CytusPlayer> { corePlayer, cytusPlayer };
             bubblePlayer.gameObject.SetActive(false);
             cytusPlayer.gameObject.SetActive(true);
             noteRecorder.gameObject.SetActive(false);
@@ -64,7 +64,7 @@ public class GameplayController : MonoBehaviour
         });
         btnRecordMode.onClick.AddListener( () =>
         {
-            AllPlayers = new List<CytusPlayer> { videoPlayer, noteRecorder };
+            AllPlayers = new List<CytusPlayer> { corePlayer, noteRecorder };
             bubblePlayer.gameObject.SetActive(false);
             cytusPlayer.gameObject.SetActive(false);
             noteRecorder.gameObject.SetActive(true);
@@ -95,7 +95,7 @@ public class GameplayController : MonoBehaviour
             bubblePlayer.Setup();
         if (AllPlayers.Contains(cytusPlayer) == true)
             cytusPlayer.Setup();
-        VideoPlayer.Setup(SongSelector.CurrentSong.VideoClip);
+        CorePlayer.Setup(SongSelector.CurrentSong.AudioClip);
         yield return new WaitForSeconds(1);
         PlayAllCytus();
     }

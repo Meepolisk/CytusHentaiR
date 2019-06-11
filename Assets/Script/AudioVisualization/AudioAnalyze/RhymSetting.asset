@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b34e64da4ccc48429fc5f23a1b53e9d, type: 3}
+  m_Name: RhymSetting
+  m_EditorClassIdentifier: 
+  bfDownScale: 1.5
+  bfSafeScale: 1.2
+  totalBoost: 3
+  SubBass:
+    hertzMin: 20
+    hertzMax: 60
+    boost: 1
+  Bass:
+    hertzMin: 60
+    hertzMax: 200
+    boost: 1
+  LowMid:
+    hertzMin: 200
+    hertzMax: 1000
+    boost: 3
+  HighMid:
+    hertzMin: 1000
+    hertzMax: 5000
+    boost: 12
+  Treble:
+    hertzMin: 5000
+    hertzMax: 10000
+    boost: 16

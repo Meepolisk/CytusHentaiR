@@ -39,7 +39,7 @@ public class CytusNotePlayer : BubbleNotePlayer
     }
     private void UpdateCytusBar()
     {
-        cytusBar.transform.position = new Vector2(cytusBar.transform.position.x, GetCytusYPos(CurrentTime));
+        cytusBar.transform.position = new Vector3(cytusBar.transform.position.x, GetCytusYPos(CurrentTime), transform.position.z);
     }
 
     public override void Stop()

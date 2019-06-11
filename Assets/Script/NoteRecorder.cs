@@ -31,6 +31,7 @@ public class NoteRecorder : CytusPlayer
     {
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
 
+        Debug.Log("RecordPlay");
         if (coroutine != null)
             StopCoroutine(coroutine);
         coroutine = StartCoroutine(_Play());
@@ -38,6 +39,7 @@ public class NoteRecorder : CytusPlayer
 
     private IEnumerator _Play()
     {
+        yield return new WaitUntil(() => { return (MainCytusPlayer.IsPlaying == true); });
         while (MainCytusPlayer.IsPlaying == true)
         {
             yield return null;
@@ -47,6 +49,7 @@ public class NoteRecorder : CytusPlayer
 
     public override void Stop()
     {
+        Debug.Log("RecordStopped");
         EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
         if (coroutine != null)
             StopCoroutine(coroutine);
@@ -72,7 +75,7 @@ public class NoteRecorder : CytusPlayer
     }
 
 #if UNITY_EDITOR
-    private const float verticalSteps = 10f;
+    private const float verticalSteps = 6f;
     private const float horizontalSteps = 6f;
 
     private void OnDrawGizmosSelected()
@@ -91,17 +94,12 @@ public class NoteRecorder : CytusPlayer
         { KeyCode.Keypad7, new Vector2(1f /horizontalSteps, 5f /verticalSteps) },
         { KeyCode.Keypad8, new Vector2(3f /horizontalSteps, 5f /verticalSteps) },
         { KeyCode.Keypad9, new Vector2(5f /horizontalSteps, 5f /verticalSteps) },
-        { KeyCode.A, new Vector2(1f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.S, new Vector2(3f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.D, new Vector2(5f /horizontalSteps, 7f /verticalSteps) },
-        { KeyCode.Q, new Vector2(1f /horizontalSteps, 9f /verticalSteps) },
-        { KeyCode.W, new Vector2(3f /horizontalSteps, 9f /verticalSteps) },
-        { KeyCode.E, new Vector2(5f /horizontalSteps, 9f /verticalSteps) }
     };
     private void Update()
     {
         if (IsPlaying)
         {
+            Debug.Log("yeah");
             RecordDebug();
         }
     }
