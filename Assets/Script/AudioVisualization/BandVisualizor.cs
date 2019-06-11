@@ -1,37 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BandVisualizor : MonoBehaviour
 {
-    [SerializeField, Range(50f,200f)]
-    private float upScale = 50f;
+    [Header("Component Ref")]
     [SerializeField]
-    private AudioPeer audioPeer;
+    private BandVisualizorController controller = null;
     [SerializeField]
-    private GameObject prefabs;
+    private AudioPeer audioPeer = null;
+    [SerializeField]
+    private BandType bandType = BandType.SubBass;
+    [SerializeField]
+    private Image mesh = null;
+    [SerializeField]
+    private Image bufferedMesh = null;
+    [SerializeField]
+    private new Text name = null;
+    [SerializeField]
+    private Text value = null;
 
-    private GameObject[] cubes { get; set; }
-    const float normalScale = 10f;
-    const float range = 2f;
+    private float UpScale => controller.UpScale;
 
     private void Start()
     {
-        cubes = new GameObject[audioPeer.GetFreqBands.Length];
-        for (int i = 0; i < cubes.Length; i++)
-        {
-            GameObject newGO = Instantiate(prefabs, transform);
-            newGO.name = "Bands " + i;
-            cubes[i] = newGO;
-        }
+        audioPeer.BandsDict[bandType].onUpdateValue += ValueUpdate;
+        name.text = bandType.ToString();
+    }
+    private void OnDestroy()
+    {
+        audioPeer.BandsDict[bandType].onUpdateValue -= ValueUpdate;
     }
 
-    private void Update()
+    private const float minY = 5f;
+    private void ValueUpdate(float Value, float bufferedValue)
     {
-        for (int i = 0; i< cubes.Length; i++)
-        {
-            cubes[i].transform.localScale = new Vector3(normalScale, audioPeer.GetFreqBands[i].value * upScale, normalScale);
-            cubes[i].transform.localPosition = new Vector3(((float)i * normalScale) + range, audioPeer.GetFreqBands[i].value * (upScale / 2f), 0);
-        }
+        Vector2 meshSD = mesh.rectTransform.sizeDelta;
+        meshSD.y = Mathf.Clamp(Value * UpScale, minY, 999999999);
+        mesh.rectTransform.sizeDelta = meshSD;
+
+        Vector2 bufferedMeshSD = bufferedMesh.rectTransform.sizeDelta;
+        bufferedMeshSD.y = Mathf.Clamp(bufferedValue * UpScale, minY, 999999999);
+        bufferedMesh.rectTransform.sizeDelta = bufferedMeshSD;
+
+        value.text = bufferedValue.ToString();
     }
 }
