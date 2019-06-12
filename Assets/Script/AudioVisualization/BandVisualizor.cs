@@ -8,7 +8,7 @@ public class BandVisualizor : BandVisualizorBase
 {
     [Header("Component Ref")]
     [SerializeField]
-    BandVisualizorController controller;
+    BandVisualizorController controller = null;
     [SerializeField]
     private Image mesh = null;
     [SerializeField]

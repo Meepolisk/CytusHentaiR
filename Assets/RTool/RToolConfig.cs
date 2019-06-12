@@ -48,4 +48,24 @@ namespace RTool
         }
     }
 }
+public class UnityObjectEditor<T> : Editor where T : UnityEngine.Object
+{
+    private T _handler;
+    public T handler
+    {
+        protected set
+        {
+            _handler = value;
+        }
+        get
+        {
+            return _handler;
+        }
+    }
+
+    protected virtual void OnEnable()
+    {
+        _handler = (T)target;
+    }
+}
 #endif

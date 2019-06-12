@@ -443,7 +443,6 @@ namespace RTool.Localization
         [CustomEditor(typeof(LocalizedDataManager))]
         public class LocalizationEditor : UnityObjectEditor<LocalizedDataManager>
         {
-
             protected override void OnEnable()
             {
                 base.OnEnable();
@@ -1048,27 +1047,5 @@ namespace RTool.Localization
 #endif
 
     }
-
-#if UNITY_EDITOR
-    public class UnityObjectEditor<T> : Editor where T : UnityEngine.Object
-    {
-        private T _handler;
-        public T handler
-        {
-            protected set
-            {
-                _handler = value;
-            }
-            get
-            {
-                return _handler;
-            }
-        }
-
-        protected virtual void OnEnable()
-        {
-            _handler = (T)target;
-        }
-    }
-#endif
+    
 }

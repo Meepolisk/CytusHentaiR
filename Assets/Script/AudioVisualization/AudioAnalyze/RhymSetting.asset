@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b34e64da4ccc48429fc5f23a1b53e9d, type: 3}
   m_Name: RhymSetting
   m_EditorClassIdentifier: 
-  bfDownScale: 1.5
+  bfDownScale: 0.6
   bfSafeScale: 1.2
   totalBoost: 3
   SubBass:
