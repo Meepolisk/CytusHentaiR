@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using REditor;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -10,6 +11,13 @@ namespace RTool.Database
     public abstract partial class ScriptableDatabase : ScriptableObject
     {
         protected abstract Type dataType { get; }
+        internal abstract IEnumerable<string> keyIDs { get; }
+
+        internal abstract string GetName(string _key);
+        internal abstract void SetName(string _key, string _value);
+        internal abstract void AddNewID(string _key);
+        internal abstract void RemoveData(string _key);
+        internal abstract void ChangeKey(string _oldID, string _newID);
 
         [CustomEditor(typeof(ScriptableDatabase),true)]
         private class CustomInspector : UnityObjectEditor<ScriptableDatabase>
@@ -17,11 +25,11 @@ namespace RTool.Database
             protected override void OnEnable()
             {
                 base.OnEnable();
-                //editHelper = new DataEditHelper<string>(this);
+                editHelper = new EditHelper(this);
             }
             protected void OnDisable()
             {
-
+                handler.SerializeToList();
             }
 
             public override void OnInspectorGUI()
@@ -58,78 +66,41 @@ namespace RTool.Database
                 }
                 EditorGUILayout.EndVertical();
             }
+            private void DrawingDetailHelper()
+            {
+                if (editHelper != null)
+                {
+                    editHelper.DrawingStuff();
+                }
+            }
             #region Draw ReorderableList
             private EditHelper editHelper;
-
-            private abstract class EditHelper
+            private class EditHelper
             {
-                protected ScriptableDatabase handler;
+                private CustomInspector handler;
+                private ScriptableDatabase database => handler.handler;
+                private IEnumerable<string> idList => database.keyIDs;
+                //private IEnumerable<string> idList;
 
-                internal ReorderableList reorderableList;
-                internal abstract void DrawingStuff();
-
-                protected string UniqueID(string _id, List<string> checkList)
-                {
-                    if (checkList.Contains(_id) == false)
-                        return _id;
-
-                    ushort count = 1;
-                    while (true)
-                    {
-                        string result = _id + count.ToString();
-                        if (checkList.Contains(result) == false)
-                            return result;
-                        count++;
-                    }
-                }
-
-                protected bool CheckValidKey(string _old, string _new, List<string> _list)
-                {
-                    if (_old == _new)
-                        return false;
-                    if (string.IsNullOrEmpty(_new))
-                        return false;
-                    List<string> compare = new List<string>(_list);
-                    compare.Remove(_old);
-                    if (compare.Contains(_new))
-                        return false;
-                    return true;
-                }
-            }
-            private abstract class DataEditHelper : EditHelper
-            {
+                private ReorderableList reorderableList;
                 protected List<string> filteredIDList;
                 protected string filter = "";
-
-                public abstract void RefreshFilter(string _filter);
-                public abstract void DrawItemValue(int _languageIndex);
-            }
-            private class DataEditHelper<T> : DataEditHelper
-            {
-                private ScriptableDatabase<T> localizeDictionaryRef;
-                private List<string> idList
-                {
-                    get
-                    {
-                        return localizeDictionaryRef.keyIDs;
-                    }
-                }
-
                 private string reorderableList_editingKeyID = "";
-                public DataEditHelper(CustomInspector _handler)
+
+                public EditHelper(CustomInspector _handler)
                 {
-                    selectedLanguageIndex = 0;
                     handler = _handler;
-                    localizeDictionaryRef = handler.handler.GetLocalizationDictionary<T>();
-                    localizeDictionaryRef.CheckToSerialize();
+                    database.CheckDeserialize();
+                    //idList = database.keyIDs;
+
+                    selectedLanguageIndex = 0;
                     filteredIDList = new List<string>();
                     RefreshFilter(filterText);
-                    reorderableList = new ReorderableList(filteredIDList, typeof(T), false, false, true, true);
+                    reorderableList = new ReorderableList(filteredIDList, typeof(string), false, false, true, true);
                     reorderableList.drawElementCallback = (rect, index, isActive, isFocused) =>
                     {
                         rect.y += 2;
                         string keyID = filteredIDList[index];
-                        Dictionary<string, T> currentDictionary = localizeDictionaryRef.dict[selectedLanguageIndex];
                         string languageControlName = "keyID_" + keyID;
 
                         Rect keyRect = new Rect(rect.x, rect.y, rect.width * 0.4f, EditorGUIUtility.singleLineHeight);
@@ -151,18 +122,18 @@ namespace RTool.Database
                             }
                             else
                                 GUI.TextField(keyRect, keyID);
-                            currentDictionary[keyID] = REditorUtils.DoField(valueRect, currentDictionary[keyID]);
+                            database.SetName(keyID, GUI.TextField(valueRect, database.GetName(keyID)));
                         }
                         else
                         {
                             EditorGUI.LabelField(keyRect, keyID);
                             GUI.enabled = false;
-                            REditorUtils.DoField(valueRect, currentDictionary[keyID]);
+                            GUI.TextField(valueRect, database.GetName(keyID));
                             GUI.enabled = true;
                         }
                         if (UnfocusedControl == languageControlName)
                         {
-                            bool save = CheckValidKey(keyID, reorderableList_editingKeyID, localizeDictionaryRef.keyIDs);
+                            bool save = CheckValidKey(keyID, reorderableList_editingKeyID, database.keyIDs);
                             if (save)
                             {
                                 reorderableList.GrabKeyboardFocus();
@@ -178,34 +149,63 @@ namespace RTool.Database
                     };
                     reorderableList.onAddCallback = (list) =>
                     {
-                        string newName = UniqueID("newData", idList);
-                        localizeDictionaryRef.AddNewID(newName);
+                        string newName = UniqueID("newKey", idList);
+                        database.AddNewID(newName);
                         filteredIDList.Add(newName);
                     };
                     reorderableList.onRemoveCallback = (list) =>
                     {
                         string removedKey = filteredIDList[reorderableList.index];
                         filteredIDList.RemoveAt(reorderableList.index);
-                        localizeDictionaryRef.RemoveOldID(removedKey);
+                        database.RemoveData(removedKey);
                     };
                 }
+
+                internal static string UniqueID(string _id, IEnumerable<string> _checkList)
+                {
+                    List<string> checkList = new List<string>(_checkList);
+                    if (checkList.Contains(_id) == false)
+                        return _id;
+
+                    ushort count = 1;
+                    while (true)
+                    {
+                        string result = _id + count.ToString();
+                        if (checkList.Contains(result) == false)
+                            return result;
+                        count++;
+                    }
+                }
+                internal static bool CheckValidKey(string _old, string _new, IEnumerable<string> _checkList)
+                {
+                    if (_old == _new)
+                        return false;
+                    if (string.IsNullOrEmpty(_new))
+                        return false;
+                    List<string> compare = new List<string>(_checkList);
+                    compare.Remove(_old);
+                    if (compare.Contains(_new))
+                        return false;
+                    return true;
+                }
+
                 private void ChangeKeyID(string _old, string _new)
                 {
-                    localizeDictionaryRef.ChangeID(_old, _new);
+                    database.ChangeKey(_old, _new);
                     filteredIDList[filteredIDList.IndexOf(_old)] = _new;
                 }
 
-                public override void RefreshFilter(string _filter)
+                public void RefreshFilter(string _filter)
                 {
                     filter = _filter;
                     filteredIDList.Clear();
                     if (string.IsNullOrEmpty(filter))
                     {
-                        filteredIDList.AddRange(localizeDictionaryRef.keyIDs);
+                        filteredIDList.AddRange(database.keyIDs);
                     }
                     else
                     {
-                        foreach (var itemID in localizeDictionaryRef.keyIDs)
+                        foreach (var itemID in database.keyIDs)
                         {
                             if (itemID.Contains(filter))
                             {
@@ -219,44 +219,44 @@ namespace RTool.Database
                 }
                 private string selectedID = "";
                 private string editingID = "";
-                private Dictionary<int, T> editingValue = new Dictionary<int, T>();
+                private Dictionary<string, string> editingValue = new Dictionary<string, string>();
                 const float refreshBtnW = 15f;
                 const float refreshBtnH = 15f;
-                public override void DrawItemValue(int _index)
+                internal void DrawItemValue(int _index)
                 {
-                    bool isDirty = CheckValueDirty(_index);
-                    string label = handler.handler.languageID[_index];
+                    //bool isDirty = CheckValueDirty(_index);
+                    //string label = database.languageID[_index];
 
-                    EditorGUILayout.BeginVertical();
-                    EditorGUILayout.BeginHorizontal();
-                    Rect row = EditorGUILayout.GetControlRect();
+                    //EditorGUILayout.BeginVertical();
+                    //EditorGUILayout.BeginHorizontal();
+                    //Rect row = EditorGUILayout.GetControlRect();
 
-                    if (isDirty)
-                        label += "*";
-                    EditorGUI.LabelField(row, label, EditorStyles.centeredGreyMiniLabel);
-                    if (isDirty)
-                    {
-                        Rect button = new Rect(row.xMax - refreshBtnW, row.y + (row.height - refreshBtnH), refreshBtnW, refreshBtnH);
-                        GUIStyle style = new GUIStyle();
-                        style.normal.textColor = Color.black;
-                        style.hover.textColor = Color.gray;
-                        style.active.textColor = Color.blue;
-                        style.fontSize = 15;
-                        style.fontStyle = FontStyle.Bold;
-                        style.onFocused.textColor = Color.red;
-                        if (GUI.Button(button, new GUIContent("↶", "Revert data to original"), style))
-                        {
-                            editingValue[_index] = localizeDictionaryRef.GetData(_index, selectedID);
-                            GUI.FocusControl(null);
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-                    editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], "Unsupported value", null, GUILayout.Height(100f));
-                    EditorGUILayout.EndVertical();
+                    //if (isDirty)
+                    //    label += "*";
+                    //EditorGUI.LabelField(row, label, EditorStyles.centeredGreyMiniLabel);
+                    //if (isDirty)
+                    //{
+                    //    Rect button = new Rect(row.xMax - refreshBtnW, row.y + (row.height - refreshBtnH), refreshBtnW, refreshBtnH);
+                    //    GUIStyle style = new GUIStyle();
+                    //    style.normal.textColor = Color.black;
+                    //    style.hover.textColor = Color.gray;
+                    //    style.active.textColor = Color.blue;
+                    //    style.fontSize = 15;
+                    //    style.fontStyle = FontStyle.Bold;
+                    //    style.onFocused.textColor = Color.red;
+                    //    if (GUI.Button(button, new GUIContent("↶", "Revert data to original"), style))
+                    //    {
+                    //        editingValue[_index] = localizeDictionaryRef.GetData(_index, selectedID);
+                    //        GUI.FocusControl(null);
+                    //    }
+                    //}
+                    //EditorGUILayout.EndHorizontal();
+                    //editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], "Unsupported value", null, GUILayout.Height(100f));
+                    //EditorGUILayout.EndVertical();
                 }
 
                 Vector2 scrollPos;
-                internal override void DrawingStuff()
+                internal void DrawingStuff()
                 {
                     DrawSelectRegion();
                     DrawEditRegion();
@@ -275,16 +275,16 @@ namespace RTool.Database
                 private int selectedLanguageIndex { get; set; }
                 private void DrawLanguageSelector()
                 {
-                    if (selectedLanguageIndex < 0)
-                        selectedLanguageIndex = 0;
+                    //if (selectedLanguageIndex < 0)
+                    //    selectedLanguageIndex = 0;
 
-                    EditorGUILayout.BeginHorizontal();
-                    Rect r = EditorGUILayout.GetControlRect();
-                    Rect labelRect = new Rect(r.x, r.y, 85f, r.height);
-                    Rect popupRect = new Rect(labelRect.xMax, r.y, r.width - labelRect.width, r.height);
-                    EditorGUI.LabelField(labelRect, new GUIContent("Language", "Choose preview language"));
-                    selectedLanguageIndex = EditorGUI.Popup(popupRect, selectedLanguageIndex, handler.handler.languageID.ToArray());
-                    EditorGUILayout.EndHorizontal();
+                    //EditorGUILayout.BeginHorizontal();
+                    //Rect r = EditorGUILayout.GetControlRect();
+                    //Rect labelRect = new Rect(r.x, r.y, 85f, r.height);
+                    //Rect popupRect = new Rect(labelRect.xMax, r.y, r.width - labelRect.width, r.height);
+                    //EditorGUI.LabelField(labelRect, new GUIContent("Language", "Choose preview language"));
+                    //selectedLanguageIndex = EditorGUI.Popup(popupRect, selectedLanguageIndex, handler.handler.languageID.ToArray());
+                    //EditorGUILayout.EndHorizontal();
                 }
                 string filterText = "";
                 private void DrawSearchFilter()
@@ -310,56 +310,28 @@ namespace RTool.Database
                 private bool showEditRegion = false;
                 internal void DrawEditRegion()
                 {
-                    showEditRegion = GUILayout.Toggle(showEditRegion, new GUIContent("Advanced Editor",
-                        "Show more detail on selected record and more function to control the data"),
-                        EditorStyles.miniButton);
-                    if (showEditRegion)
-                    {
-                        GUI.enabled = !string.IsNullOrEmpty(selectedID);
-                        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                        editingID = EditorGUILayout.TextField(editingID);
+                    //showEditRegion = GUILayout.Toggle(showEditRegion, new GUIContent("Advanced Editor",
+                    //    "Show more detail on selected record and more function to control the data"),
+                    //    EditorStyles.miniButton);
+                    //if (showEditRegion)
+                    //{
+                    //    GUI.enabled = !string.IsNullOrEmpty(selectedID);
+                    //    EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                    //    editingID = EditorGUILayout.TextField(editingID);
 
-                        for (int index = 0; index < handler.handler.languageID.Count; index++)
-                            DrawItemValue(index);
+                    //    for (int index = 0; index < handler.handler.languageID.Count; index++)
+                    //        DrawItemValue(index);
 
-                        EditorGUILayout.BeginHorizontal();
-                        GUI.enabled = isDirty;
-                        if (GUILayout.Button("Save"))
-                            Edit_Save();
-                        if (GUILayout.Button("Cancel"))
-                            Edit_Cancel();
-                        GUI.enabled = true;
-                        EditorGUILayout.EndHorizontal();
-                        EditorGUILayout.EndVertical();
-                    }
-                }
-                private bool isDirty
-                {
-                    get
-                    {
-                        if (editingID != selectedID)
-                            return true;
-                        foreach (var item in editingValue)
-                        {
-                            if (CheckValueDirty(item.Key))
-                                return true;
-                        }
-                        return false;
-                    }
-                }
-                private bool CheckValueDirty(int _key)
-                {
-                    var _1 = localizeDictionaryRef.GetData(_key, selectedID);
-                    var _2 = editingValue[_key];
-                    if (ObjectIsNull(_1) && ObjectIsNull(_2))
-                        return false;
-                    if (_1 != null && !_1.Equals(_2))
-                        return true;
-                    return false;
-                }
-                private static bool ObjectIsNull(object _object)
-                {
-                    return (_object == null || ReferenceEquals(_object, null) || _object.Equals(null));
+                    //    EditorGUILayout.BeginHorizontal();
+                    //    GUI.enabled = isDirty;
+                    //    if (GUILayout.Button("Save"))
+                    //        Edit_Save();
+                    //    if (GUILayout.Button("Cancel"))
+                    //        Edit_Cancel();
+                    //    GUI.enabled = true;
+                    //    EditorGUILayout.EndHorizontal();
+                    //    EditorGUILayout.EndVertical();
+                    //}
                 }
 
                 void Edit_Select(string _idKey = "")
@@ -369,48 +341,48 @@ namespace RTool.Database
                 }
                 void Edit_Save()
                 {
-                    string errorTitle = "";
-                    string errorDecr = "";
-                    string newName = "";
-                    if (checkIDError(ref errorTitle, ref errorDecr, ref newName))
-                    {
-                        if (EditorUtility.DisplayDialog(errorTitle, errorDecr, "OK", "Cancel") == false)
-                        {
-                            return;
-                        }
-                    }
-                    if (selectedID != newName)
-                    {
-                        localizeDictionaryRef.ChangeID(selectedID, newName);
-                        int index = filteredIDList.IndexOf(selectedID);
-                        filteredIDList[index] = newName;
-                    }
-                    for (int index = 0; index < handler.handler.languageID.Count; index++)
-                    {
-                        localizeDictionaryRef.SetData(index, newName, editingValue[index]);
-                    }
+                    //string errorTitle = "";
+                    //string errorDecr = "";
+                    //string newName = "";
+                    //if (checkIDError(ref errorTitle, ref errorDecr, ref newName))
+                    //{
+                    //    if (EditorUtility.DisplayDialog(errorTitle, errorDecr, "OK", "Cancel") == false)
+                    //    {
+                    //        return;
+                    //    }
+                    //}
+                    //if (selectedID != newName)
+                    //{
+                    //    localizeDictionaryRef.ChangeID(selectedID, newName);
+                    //    int index = filteredIDList.IndexOf(selectedID);
+                    //    filteredIDList[index] = newName;
+                    //}
+                    //for (int index = 0; index < handler.handler.languageID.Count; index++)
+                    //{
+                    //    localizeDictionaryRef.SetData(index, newName, editingValue[index]);
+                    //}
                     selectedID = editingID;
                 }
                 bool checkIDError(ref string _title, ref string _description, ref string _newName, string dataName = "ID")
                 {
-                    if (string.IsNullOrEmpty(editingID))
-                    {
-                        _title = "Invalid " + dataName;
-                        _newName = UniqueID("newData", filteredIDList);
-                        _description = "New " + dataName + " can not be blank. Save as \"" + _newName + "\"?";
-                        return true;
-                    }
-                    if (localizeDictionaryRef.keyIDs.Contains(editingID) == true)
-                    {
-                        if (editingID != selectedID)
-                        {
-                            _title = "Invalid " + dataName;
-                            _newName = UniqueID(editingID, filteredIDList);
-                            _description = "Already contain " + dataName + "  \"" + editingID + "\". Save as \"" + _newName + "\"?";
-                            return true;
-                        }
-                    }
-                    _newName = editingID;
+                    //if (string.IsNullOrEmpty(editingID))
+                    //{
+                    //    _title = "Invalid " + dataName;
+                    //    _newName = UniqueID("newData", filteredIDList);
+                    //    _description = "New " + dataName + " can not be blank. Save as \"" + _newName + "\"?";
+                    //    return true;
+                    //}
+                    //if (localizeDictionaryRef.keyIDs.Contains(editingID) == true)
+                    //{
+                    //    if (editingID != selectedID)
+                    //    {
+                    //        _title = "Invalid " + dataName;
+                    //        _newName = UniqueID(editingID, filteredIDList);
+                    //        _description = "Already contain " + dataName + "  \"" + editingID + "\". Save as \"" + _newName + "\"?";
+                    //        return true;
+                    //    }
+                    //}
+                    //_newName = editingID;
                     return false;
                 }
 
@@ -424,10 +396,10 @@ namespace RTool.Database
                 {
                     editingID = selectedID;
                     editingValue.Clear();
-                    for (int langIndex = 0; langIndex < handler.handler.languageID.Count; langIndex++)
-                    {
-                        editingValue.Add(langIndex, localizeDictionaryRef.GetData(langIndex, editingID));
-                    }
+                    //for (int langIndex = 0; langIndex < handler.handler.languageID.Count; langIndex++)
+                    //{
+                    //    editingValue.Add(langIndex, localizeDictionaryRef.GetData(langIndex, editingID));
+                    //}
                 }
             }
 
@@ -456,9 +428,23 @@ namespace RTool.Database
         }
     }
 
-    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase
+    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
         protected sealed override Type dataType => typeof(T);
+        internal sealed override IEnumerable<string> keyIDs => dataDict.Keys;
+
+        internal override string GetName(string _key) => dataDict[_key].Name;
+        internal override void SetName(string _key, string _value) => dataDict[_key].Name = _value;
+        internal override void AddNewID(string _key) => dataDict.Add(_key, new T());
+        internal override void RemoveData(string _key) => dataDict.Remove(_key);
+        internal override void ChangeKey(string _oldID, string _newID)
+        {
+            if (_oldID == _newID)
+                return;
+
+            dataDict.Add(_newID, dataDict[_oldID]);
+            dataDict.Remove(_oldID);
+        }
     }
 }
 #endif

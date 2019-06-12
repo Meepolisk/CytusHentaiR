@@ -9,6 +9,9 @@ namespace RTool.Database
     {
         [SerializeField]
         protected string key = "";
+        [SerializeField]
+        protected string name = "";
+        public string Name { get => name; set => name = value; }
 
         public abstract string Key { get; }
     }
@@ -27,34 +30,55 @@ namespace RTool.Database
         public string ParentKey => parentData.Key;
         public sealed override string Key => parentData.Key + "." + key;
     }
-
-
-
+    
     public abstract partial class ScriptableDatabase: ScriptableObject
     {
         [SerializeField, HideInInspector]
         protected ScriptableDatabase parentDatabase = null;
 
+        public abstract void DeserializeToDict();
+        public abstract void SerializeToList();
+        internal abstract void CheckDeserialize();
     }
 
-    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase
+    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
-        [SerializeField]
-        private List<T> data = new List<T>();
+        [SerializeField, HideInInspector]
+        private List<T> dataList = new List<T>();
 
-        private Dictionary<string, T>
+        private Dictionary<string, T> dataDict { get; set; }
 
-        private Dictionary<string, T> Data
+        public sealed override void DeserializeToDict()
         {
-            get
+            dataDict = new Dictionary<string, T>();
+            foreach (var item in dataList)
             {
-                Dictionary<string, T> result = new Dictionary<string, T>();
-                foreach (var item in data)
-                {
-                    result.Add(item.Key, item);
-                }
-                return result;
+                dataDict.Add(item.Key, item);
             }
+        }
+        public sealed override void SerializeToList()
+        {
+            if (dataList == null || dataList.Count == 0)
+                return;
+
+            dataList = new List<T>(dataDict.Values);
+        }
+        internal sealed override void CheckDeserialize()
+        {
+            if (dataDict == null)
+                DeserializeToDict();
+        }
+        public T Get(string _key)
+        {
+            CheckDeserialize();
+
+            return dataDict[_key];
+        }
+        public void Add (string _key, T _data)
+        {
+            CheckDeserialize();
+
+            dataDict.Add(_key, _data);
         }
     }
 }

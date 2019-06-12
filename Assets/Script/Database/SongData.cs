@@ -7,9 +7,6 @@ using RTool.Database;
 public class SongData : IdenticalData
 {
     [SerializeField]
-    private string name = "";
-    public string Name => name;
-    [SerializeField]
     private string gerne = "";
     public string Gerne => gerne;
     [SerializeField]
@@ -36,10 +33,6 @@ public class SongData : IdenticalData
 [System.Serializable]
 public class NoteDataset : IdenticalData<SongData>
 {
-    [SerializeField]
-    private string name = "";
-    public string Name => name;
-
     [SerializeField]
     private List<NoteProfile> noteList = new List<NoteProfile>();
     public List<NoteProfile> NoteList => new List<NoteProfile>(noteList);
