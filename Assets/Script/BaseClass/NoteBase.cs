@@ -46,6 +46,7 @@ public abstract class NoteBase : PoolingObject.Object
     public NoteProfile NoteProfile { get; private set; }
 
     public static event Action<NoteBase, HitType> aNoteScored;
+    public static event Action<NoteBase> aNoteMissed;
 
     //Insetup
     public bool IsAlive { get; private set; }
@@ -88,6 +89,15 @@ public abstract class NoteBase : PoolingObject.Object
         if (aNoteScored != null)
             aNoteScored(this, hitType);
         Scoring(hitType);
+    }
+    public override void Kill()
+    {
+        base.Kill();
+        if (IsAlive)
+        {
+            if (aNoteMissed != null)
+                aNoteMissed(this);
+        }
     }
     protected abstract void Scoring(HitType hitType);
 #if UNITY_EDITOR

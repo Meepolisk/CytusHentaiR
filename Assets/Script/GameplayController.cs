@@ -39,9 +39,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private NoteRecorder noteRecorder = null;
     public NoteRecorder NoteRecorder => noteRecorder;
-
-    public List<CytusPlayer> AllPlayers;// { get; private set; }
-
+    
     private void Awake()
     {
         btnStart.onClick.AddListener(() =>
@@ -50,7 +48,7 @@ public class GameplayController : MonoBehaviour
         });
         btnStop.onClick.AddListener(() =>
         {
-            StopAllCytus();
+            corePlayer.Stop();
             menuController.ReturnToPreviousMenu();
         });
     }
@@ -58,47 +56,21 @@ public class GameplayController : MonoBehaviour
     {
         if (btnPlayBubble.isOn)
         {
-            AllPlayers = new List<CytusPlayer> { corePlayer, bubblePlayer };
-            bubblePlayer.gameObject.SetActive(true);
-            cytusPlayer.gameObject.SetActive(false);
-            noteRecorder.gameObject.SetActive(false);
+            corePlayer.RegistFollower(bubblePlayer);
+            bubblePlayer.Setup();
         }
         else if (btnPlayCytus.isOn)
         {
-            AllPlayers = new List<CytusPlayer> { corePlayer, cytusPlayer };
-            bubblePlayer.gameObject.SetActive(false);
-            cytusPlayer.gameObject.SetActive(true);
-            noteRecorder.gameObject.SetActive(false);
+            corePlayer.RegistFollower(bubblePlayer);
+            bubblePlayer.Setup();
         }
         else if (btnRecordMode.isOn)
         {
-            AllPlayers = new List<CytusPlayer> { corePlayer, noteRecorder };
-            bubblePlayer.gameObject.SetActive(false);
-            cytusPlayer.gameObject.SetActive(false);
-            noteRecorder.gameObject.SetActive(true);
+            corePlayer.RegistFollower(noteRecorder);
         }
         panelGame.Show();
-        if (AllPlayers.Contains(bubblePlayer) == true)
-            bubblePlayer.Setup();
-        if (AllPlayers.Contains(cytusPlayer) == true)
-            cytusPlayer.Setup();
         CorePlayer.Setup(SongSelector.CurrentSong.AudioClip);
         yield return new WaitForSeconds(1);
-        PlayAllCytus();
-    }
-    
-    private void PlayAllCytus()
-    {
-        foreach (var item in AllPlayers)
-        {
-            item.Play();
-        }
-    }
-    private void StopAllCytus()
-    {
-        foreach (var item in AllPlayers)
-        {
-            item.Stop();
-        }
+        corePlayer.Play();
     }
 }

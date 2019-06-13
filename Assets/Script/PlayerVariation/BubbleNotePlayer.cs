@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleNotePlayer : CytusPlayer
+public class BubbleNotePlayer : CoreFollower
 {
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -13,51 +13,43 @@ public class BubbleNotePlayer : CytusPlayer
 
     [Header("Component Ref")]
     [SerializeField]
-    protected CytusPlayer MainCytusPlayer = null;
-    [SerializeField]
     protected BubbleNotePoolManager pool = null;
 
-    [SerializeField]
-    protected Rect playZone;
+    protected Rect playZone => CorePlayer.PlayZone;
     
     private Queue<NoteProfile> noteQueue { get; set; }
-
     private Coroutine coroutine = null;
-    public override bool IsPlaying => MainCytusPlayer.IsPlaying;
-    public override float CurrentTime => MainCytusPlayer.CurrentTime;
-    public override double Duration => MainCytusPlayer.Duration;
     
     public void Setup()
     {
         PrepareQueue();
     }
 
-    public override void Pause()
-    {
-
-    }
-    public override void Play()
+    public override void OnPlay()
     {
         if (coroutine != null)
             StopCoroutine(coroutine);
         coroutine = StartCoroutine(_Play());
     }
 
+    public override void OnPause() { }
+    public override void OnResume() { }
+
+    public override void OnStop()
+    {
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+    }
+
     private IEnumerator _Play()
     {
-        yield return new WaitUntil(() => { return MainCytusPlayer.IsPlaying == true;});
-        while (MainCytusPlayer.IsPlaying == true)
+        yield return new WaitUntil(() => { return CorePlayer.IsPlaying == true;});
+        while (CorePlayer.IsPlaying == true)
         {
             PerformAction();
             yield return null;
         }
-        Stop();
-    }
-
-    public override void Stop()
-    {
-        if (coroutine != null)
-            StopCoroutine(coroutine);
+        OnStop();
     }
 
 
@@ -101,21 +93,13 @@ public class BubbleNotePlayer : CytusPlayer
         if (noteQueue.Count > 0)
             nextNote = noteQueue.Dequeue();
         else
-        {
             nextNote = null;
-            Stop();
-        }
     }
     protected virtual Vector2 CalculateNewPos(NoteProfile note)
     {
         return (new Vector2(playZone.x + (note.Position.x * playZone.width), playZone.y + (note.Position.y * playZone.height)));
     }
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(playZone.center, playZone.size);
-    }
     private readonly Dictionary<KeyCode, Vector2> bubbleEmuPos = new Dictionary<KeyCode, Vector2>
     {
         { KeyCode.Alpha1, new Vector2(1/6, 1/6) },

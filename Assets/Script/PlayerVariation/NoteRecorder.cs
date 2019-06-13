@@ -3,31 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteRecorder : CytusPlayer
+public class NoteRecorder : CoreFollower
 {
-    [SerializeField]
-    private CytusPlayer MainCytusPlayer = null;
-
     [SerializeField]
     private TouchEffectPoolManager pool = null;
 
     [SerializeField, ReadOnly]
     private List<NoteProfile> noteList = null;
 
-    [SerializeField]
-    private Rect playZone;
+
+    private Rect playZone => CorePlayer.PlayZone;
     
     private Coroutine coroutine = null;
-    public override bool IsPlaying => MainCytusPlayer.IsPlaying;
-    public override float CurrentTime => MainCytusPlayer.CurrentTime;
-    public override double Duration => MainCytusPlayer.Duration;
 
-    public override void Pause()
-    {
-
-    }
-
-    public override void Play()
+    public override void OnPlay()
     {
         EasyTouch.On_TouchStart += EasyTouch_On_TouchStart;
 
@@ -36,18 +25,20 @@ public class NoteRecorder : CytusPlayer
             StopCoroutine(coroutine);
         coroutine = StartCoroutine(_Play());
     }
+    public override void OnPause() { }
+    public override void OnResume() { }
 
     private IEnumerator _Play()
     {
-        yield return new WaitUntil(() => { return (MainCytusPlayer.IsPlaying == true); });
-        while (MainCytusPlayer.IsPlaying == true)
+        yield return new WaitUntil(() => { return (CorePlayer.IsPlaying == true); });
+        while (CorePlayer.IsPlaying == true)
         {
             yield return null;
         }
-        Stop();
+        OnStop();
     }
 
-    public override void Stop()
+    public override void OnStop()
     {
         Debug.Log("RecordStopped");
         EasyTouch.On_TouchStart -= EasyTouch_On_TouchStart;
@@ -77,12 +68,6 @@ public class NoteRecorder : CytusPlayer
 #if UNITY_EDITOR
     private const float verticalSteps = 6f;
     private const float horizontalSteps = 6f;
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(playZone.center, playZone.size);
-    }
     private readonly Dictionary<KeyCode, Vector2> bubbleEmuPos = new Dictionary<KeyCode, Vector2>
     {
         { KeyCode.Keypad1, new Vector2(1f /horizontalSteps, 1f /verticalSteps) },
@@ -102,6 +87,7 @@ public class NoteRecorder : CytusPlayer
             RecordDebug();
         }
     }
+
     private void RecordDebug()
     {
         foreach (var item in bubbleEmuPos)
