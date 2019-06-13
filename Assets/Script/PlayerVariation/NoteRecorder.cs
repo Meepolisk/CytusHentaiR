@@ -99,7 +99,6 @@ public class NoteRecorder : CytusPlayer
     {
         if (IsPlaying)
         {
-            Debug.Log("yeah");
             RecordDebug();
         }
     }

@@ -11,18 +11,16 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private MonoCanvasesController menuController = null;
     [SerializeField]
-    private Button btnRecordMode = null;
+    private Toggle btnRecordMode = null;
     [SerializeField]
-    private Button btnPlayBubble = null;
+    private Toggle btnPlayBubble = null;
     [SerializeField]
-    private Button btnPlayCytus = null;
+    private Toggle btnPlayCytus = null;
 
     [SerializeField]
     private MonoCanvas panelStartGame = null;
     [SerializeField]
     private Button btnStart = null;
-    [SerializeField]
-    private Button btnBack = null;
     
     [SerializeField]
     private MonoCanvas panelGame = null;
@@ -46,34 +44,6 @@ public class GameplayController : MonoBehaviour
 
     private void Awake()
     {
-        btnPlayBubble.onClick.AddListener( () =>
-        {
-            AllPlayers = new List<CytusPlayer> { corePlayer, bubblePlayer };
-            bubblePlayer.gameObject.SetActive(true);
-            cytusPlayer.gameObject.SetActive(false);
-            noteRecorder.gameObject.SetActive(false);
-            OpenStartMenu();
-        });
-        btnPlayCytus.onClick.AddListener(() =>
-        {
-            AllPlayers = new List<CytusPlayer> { corePlayer, cytusPlayer };
-            bubblePlayer.gameObject.SetActive(false);
-            cytusPlayer.gameObject.SetActive(true);
-            noteRecorder.gameObject.SetActive(false);
-            OpenStartMenu();
-        });
-        btnRecordMode.onClick.AddListener( () =>
-        {
-            AllPlayers = new List<CytusPlayer> { corePlayer, noteRecorder };
-            bubblePlayer.gameObject.SetActive(false);
-            cytusPlayer.gameObject.SetActive(false);
-            noteRecorder.gameObject.SetActive(true);
-            OpenStartMenu();
-        });
-        btnBack.onClick.AddListener(() =>
-        {
-            menuController.ReturnToPreviousMenu();
-        });
         btnStart.onClick.AddListener(() =>
         {
             StartCoroutine(BtnStartPressed());
@@ -84,12 +54,29 @@ public class GameplayController : MonoBehaviour
             menuController.ReturnToPreviousMenu();
         });
     }
-    private void OpenStartMenu()
-    {
-        panelStartGame.Show();
-    }
     IEnumerator BtnStartPressed()
     {
+        if (btnPlayBubble.isOn)
+        {
+            AllPlayers = new List<CytusPlayer> { corePlayer, bubblePlayer };
+            bubblePlayer.gameObject.SetActive(true);
+            cytusPlayer.gameObject.SetActive(false);
+            noteRecorder.gameObject.SetActive(false);
+        }
+        else if (btnPlayCytus.isOn)
+        {
+            AllPlayers = new List<CytusPlayer> { corePlayer, cytusPlayer };
+            bubblePlayer.gameObject.SetActive(false);
+            cytusPlayer.gameObject.SetActive(true);
+            noteRecorder.gameObject.SetActive(false);
+        }
+        else if (btnRecordMode.isOn)
+        {
+            AllPlayers = new List<CytusPlayer> { corePlayer, noteRecorder };
+            bubblePlayer.gameObject.SetActive(false);
+            cytusPlayer.gameObject.SetActive(false);
+            noteRecorder.gameObject.SetActive(true);
+        }
         panelGame.Show();
         if (AllPlayers.Contains(bubblePlayer) == true)
             bubblePlayer.Setup();

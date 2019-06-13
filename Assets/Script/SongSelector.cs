@@ -18,7 +18,11 @@ public class SongSelector : SingletonBase<SongSelector>
     private Text songComposer = null;
     [SerializeField]
     private Text songStepCount = null;
-
+    
+    private void Start()
+    {
+        SelectSong(songIndex);
+    }
     public void SelectSong(int index)
     {
         songIndex = index;

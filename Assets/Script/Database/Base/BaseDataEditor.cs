@@ -311,8 +311,7 @@ namespace RTool.Database
                 internal void DrawEditRegion()
                 {
                     //showEditRegion = GUILayout.Toggle(showEditRegion, new GUIContent("Advanced Editor",
-                    //    "Show more detail on selected record and more function to control the data"),
-                    //    EditorStyles.miniButton);
+                    //    "Show more detail on selected record"), EditorStyles.miniButton);
                     //if (showEditRegion)
                     //{
                     //    GUI.enabled = !string.IsNullOrEmpty(selectedID);
@@ -322,14 +321,7 @@ namespace RTool.Database
                     //    for (int index = 0; index < handler.handler.languageID.Count; index++)
                     //        DrawItemValue(index);
 
-                    //    EditorGUILayout.BeginHorizontal();
-                    //    GUI.enabled = isDirty;
-                    //    if (GUILayout.Button("Save"))
-                    //        Edit_Save();
-                    //    if (GUILayout.Button("Cancel"))
-                    //        Edit_Cancel();
-                    //    GUI.enabled = true;
-                    //    EditorGUILayout.EndHorizontal();
+                        
                     //    EditorGUILayout.EndVertical();
                     //}
                 }
