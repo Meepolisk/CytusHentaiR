@@ -29,13 +29,22 @@ public class BandVisualizor : BandVisualizorBase
     protected override void ValueUpdate(float Value, float bufferedValue)
     {
         Vector2 meshSD = mesh.rectTransform.sizeDelta;
-        meshSD.y = Mathf.Clamp(Value * boost, minY, 999999999);
+        meshSD.x = Mathf.Clamp(Value * boost, minY, 999999999);
         mesh.rectTransform.sizeDelta = meshSD;
 
         Vector2 bufferedMeshSD = bufferedMesh.rectTransform.sizeDelta;
-        bufferedMeshSD.y = Mathf.Clamp(bufferedValue * boost, minY, 999999999);
+        bufferedMeshSD.x = Mathf.Clamp(bufferedValue * boost, minY, 999999999);
         bufferedMesh.rectTransform.sizeDelta = bufferedMeshSD;
 
         value.text = bufferedValue.ToString();
+    }
+
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+        if (name)
+        {
+            name.text = bandType.ToString();
+        }
     }
 }

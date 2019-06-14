@@ -49,6 +49,12 @@ public class BandVisualizorTuneController : BandVisualizorBase
     [SerializeField]
     private Cloth fogCloth = null;
     [SerializeField]
+    private float fogVibrateRate = 1f;
+    [SerializeField]
+    private Transform rotator = null;
+    [SerializeField]
+    private float rotateRate = 10f;
+    [SerializeField]
     private List<Light> lights = null;
     private List<LightBehaviour> lightPubs { get; set; }
 
@@ -64,20 +70,26 @@ public class BandVisualizorTuneController : BandVisualizorBase
     protected override void Start()
     {
         base.Start();
+        fogFirstPosZ = fogCloth.transform.localPosition.z;
         lightPubs = new List<LightBehaviour>();
 
         lights.ForEach(x => {
             lightPubs.Add(new LightBehaviour(this, x));
         });
     }
+    private float fogFirstPosZ { get; set; }
     private void Update()
     {
         lightPubs.ForEach(x => { x.InternalUpdate(); });
+
+        Vector3 rot = rotator.transform.localEulerAngles;
+        rot.z += rotateRate * Time.deltaTime;
+        rotator.transform.localEulerAngles = rot;
+
     }
     private void TriggerLight()
     {
         lightPubs[Random.Range(0, lightPubs.Count)].Trigger();
-        Debug.Log("Light");
     }
 
     private bool active = false;
@@ -92,5 +104,9 @@ public class BandVisualizorTuneController : BandVisualizorBase
         {
             active = false;
         }
+
+        Vector3 vec = fogCloth.transform.localPosition;
+        vec.z = fogFirstPosZ + bufferedValue;
+        fogCloth.transform.localPosition = vec;
     }
 }

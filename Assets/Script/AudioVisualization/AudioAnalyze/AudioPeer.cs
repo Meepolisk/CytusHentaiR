@@ -12,6 +12,7 @@ namespace RTool.AudioAnalyze
         [Header("Component Ref")]
         [SerializeField]
         private AudioSource audioSource = null;
+        public AudioSource AudioSource => audioSource;
         [SerializeField]
         private RhymSetting rhymSetting = null;
 

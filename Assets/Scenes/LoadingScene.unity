@@ -5335,7 +5335,7 @@ MonoBehaviour:
   enable2FingersGesture: 1
   enableTwist: 1
   enablePinch: 1
-  easyTouchCamera: {fileID: 0}
+  easyTouchCamera: {fileID: 820294350}
   autoSelect: 1
   pickableLayers:
     serializedVersion: 2
@@ -6481,7 +6481,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -6499,7 +6499,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -10492,7 +10492,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -10510,7 +10510,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -10714,7 +10714,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -10732,7 +10732,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -11660,7 +11660,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -11678,7 +11678,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -12842,7 +12842,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -12860,7 +12860,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -13326,7 +13326,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -13344,7 +13344,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -14602,7 +14602,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.6436324, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 25
   m_SpotAngle: 120
   m_CookieSize: 10
@@ -14620,7 +14620,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -15289,7 +15289,7 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: d675d9d54febfc941af2c5711cae07d2, type: 2}
+  m_Flare: {fileID: 0}
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2

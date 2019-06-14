@@ -20,5 +20,10 @@ namespace RTool.AudioAnalyze
         }
 
         protected abstract void ValueUpdate(float Value, float bufferedValue);
+
+        protected virtual void OnValidate()
+        {
+            gameObject.name = bandType.ToString();
+        }
     }
 }
