@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class BandDrawer : BandVisualizorBase
 {
     [SerializeField]
+    private RectTransform beatPrefabs = null;
+    [SerializeField]
     private RectTransform drawMark = null;
     [SerializeField]
     private RectTransform content = null;
@@ -40,5 +42,12 @@ public class BandDrawer : BandVisualizorBase
         renderer.positionCount++;
         renderer.SetPosition(renderer.positionCount - 1, new Vector3(lastPosX, _value * 100f, 0f));
     }
+
+    protected override void BeatUpdate()
+    {
+        RectTransform newGO = Instantiate(beatPrefabs, transform);
+        newGO.position = new Vector3(drawMark.position.x, transform.position.y, transform.position.z);
+    }
+
     private float GetX => drawMark.anchoredPosition.x - content.sizeDelta.x;
 }

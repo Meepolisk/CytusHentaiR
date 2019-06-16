@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 557347902310989173}
   - component: {fileID: 557347902310989179}
   - component: {fileID: 557347902310989172}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BfMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 557347902475443306}
   - component: {fileID: 557347902475443304}
   - component: {fileID: 557347902475443305}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,13 +13,16 @@ namespace RTool.AudioAnalyze
         protected virtual void Start()
         {
             AudioPeer.BandsDict[bandType].onUpdateValue += ValueUpdate;
+            AudioPeer.BandsDict[bandType].onBeat += BeatUpdate;
         }
         protected virtual void OnDestroy()
         {
             AudioPeer.BandsDict[bandType].onUpdateValue -= ValueUpdate;
+            AudioPeer.BandsDict[bandType].onBeat -= BeatUpdate;
         }
 
         protected abstract void ValueUpdate(float Value, float bufferedValue);
+        protected abstract void BeatUpdate();
 
         protected virtual void OnValidate()
         {

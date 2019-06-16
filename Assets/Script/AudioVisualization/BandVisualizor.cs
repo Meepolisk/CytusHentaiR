@@ -47,4 +47,6 @@ public class BandVisualizor : BandVisualizorBase
             name.text = bandType.ToString();
         }
     }
+
+    protected override void BeatUpdate() { }
 }

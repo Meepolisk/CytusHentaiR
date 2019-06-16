@@ -18,6 +18,9 @@ namespace RTool.AudioAnalyze
         [SerializeField, Range(1, 10)]
         private float totalBoost = 5f;
         public float TotalBoost => totalBoost;
+        [SerializeField, Range(0.1f, 0.5f)]
+        private float beatThreehold = 0.5f;
+        public float BeatThreehold => beatThreehold;
 
         [Header("Band config")]
         [SerializeField]

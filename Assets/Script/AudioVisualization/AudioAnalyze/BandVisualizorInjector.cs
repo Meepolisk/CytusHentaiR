@@ -18,5 +18,7 @@ namespace RTool.AudioAnalyze
             if (injector != null && injector.GetPersistentEventCount() > 0)
                 injector.Invoke(value);
         }
+
+        protected override void BeatUpdate() { }
     }
 }

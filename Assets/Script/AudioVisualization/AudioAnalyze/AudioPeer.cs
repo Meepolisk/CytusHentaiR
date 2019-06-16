@@ -19,6 +19,7 @@ namespace RTool.AudioAnalyze
         public float BfDownScale => rhymSetting.BfDownScale;
         public float BfSafeScale => rhymSetting.BfSafeScale;
         public float TotalBoost => rhymSetting.TotalBoost;
+        public float BeatThreehold => rhymSetting.BeatThreehold;
 
         [Header("Config")]
         [SerializeField, ReadOnlyWhenPlaying]

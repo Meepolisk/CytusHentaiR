@@ -62,8 +62,14 @@ namespace RTool.AudioAnalyze
         public float Value { get; private set; }
         public delegate void ValueUpdateDelegate(float value, float bufferedValue);
         public ValueUpdateDelegate onUpdateValue = null;
+        public delegate void BeatUpdateDelegate();
+        public BeatUpdateDelegate onBeat = null;
 
-
+        private float lastBeatFrame { get; set; }
+        private float lowestValue { get; set; }
+        private float lowestFrame { get; set; }
+        const float lowestFrameRange = 0.1f;
+        const float beatCooldown = 0.1f;
         public void UpdateValue()
         {
             Value = 0f;
@@ -75,9 +81,37 @@ namespace RTool.AudioAnalyze
             Value /= deltaSample;
             float max = BfValue * bfSafeScale;
             BfValue = (Value >= max) ? Value : Mathf.Clamp((BfValue - (bfDownScale * Time.deltaTime)), Value, BfValue);
-
             if (onUpdateValue != null)
                 onUpdateValue(Value, BfValue);
+            if (BfValue - lowestValue > Handler.BeatThreehold && Time.time - lastBeatFrame > beatCooldown)
+            {
+                lowestValue = BfValue;
+                lowestFrame = Time.time;
+                lastBeatFrame = Time.time;
+                if (onBeat != null)
+                    onBeat();
+            }
+
+
+            //update lowestRecord
+            if (lowestValue < BfValue)
+            {
+                lowestValue = BfValue;
+                lowestFrame = Time.time;
+            }
+            else
+            {
+                if (Time.time - lowestFrame > lowestFrameRange)
+                {
+                    lowestValue = BfValue;
+                    lowestFrame = Time.time;
+                }
+            }
+        }
+
+        private void DebugLog()
+        {
+            Debug.LogFormat("lowest: {0} at {1}", lowestValue, lowestFrame);
         }
     }
 }

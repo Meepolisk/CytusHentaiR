@@ -109,4 +109,6 @@ public class BandVisualizorTuneController : BandVisualizorBase
         vec.z = fogFirstPosZ + bufferedValue;
         fogCloth.transform.localPosition = vec;
     }
+
+    protected override void BeatUpdate() { }
 }

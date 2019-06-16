@@ -20,4 +20,6 @@ public class BandVisualizorParticleSpeed : BandVisualizorBaseInjector
     {
         mainModule.simulationSpeed = value;
     }
+
+    protected override void BeatUpdate() { }
 }
