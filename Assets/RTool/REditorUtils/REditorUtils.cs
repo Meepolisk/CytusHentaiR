@@ -1,10 +1,10 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
-using UObject = UnityEngine.Object;
 using UnityEditor;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
+using UObject = UnityEngine.Object;
 
 namespace REditor
 {
@@ -22,7 +22,7 @@ namespace REditor
             _handler = (T)target;
         }
     }
-    public class REditorUtils
+    public static class REditorUtils
     {
         public static List<GameObject> GetGameObjectLoaded()
         {

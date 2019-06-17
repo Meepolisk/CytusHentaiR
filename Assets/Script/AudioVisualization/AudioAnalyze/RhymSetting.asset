@@ -12,27 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b34e64da4ccc48429fc5f23a1b53e9d, type: 3}
   m_Name: RhymSetting
   m_EditorClassIdentifier: 
-  bfDownScale: 0.8
+  bfDownScale: 1.5
   bfSafeScale: 1.2
   totalBoost: 3
   beatThreehold: 0.25
   SubBass:
     hertzMin: 50
-    hertzMax: 200
-    boost: 1
+    hertzMax: 250
+    boost: 2
   Bass:
     hertzMin: 200
-    hertzMax: 1000
-    boost: 3
+    hertzMax: 5
+    boost: 1.5
   LowMid:
-    hertzMin: 1000
-    hertzMax: 5000
-    boost: 10
+    hertzMin: 200
+    hertzMax: 500
+    boost: 4.2
   HighMid:
-    hertzMin: 5000
-    hertzMax: 20000
-    boost: 15
+    hertzMin: 500
+    hertzMax: 1000
+    boost: 6.9
   Treble:
-    hertzMin: 20000
-    hertzMax: 40000
+    hertzMin: 10000
+    hertzMax: 20000
     boost: 20

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using REditor;
 
 namespace RTool.Database
 {
@@ -14,6 +15,7 @@ namespace RTool.Database
         internal abstract IEnumerable<string> keyIDs { get; }
 
         internal abstract string GetName(string _key);
+        internal abstract object GetObject(string _key);
         internal abstract void SetName(string _key, string _value);
         internal abstract void AddNewID(string _key);
         internal abstract void RemoveData(string _key);
@@ -310,20 +312,12 @@ namespace RTool.Database
                 private bool showEditRegion = false;
                 internal void DrawEditRegion()
                 {
-                    //showEditRegion = GUILayout.Toggle(showEditRegion, new GUIContent("Advanced Editor",
-                    //    "Show more detail on selected record"), EditorStyles.miniButton);
-                    //if (showEditRegion)
-                    //{
-                    //    GUI.enabled = !string.IsNullOrEmpty(selectedID);
-                    //    EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                    //    editingID = EditorGUILayout.TextField(editingID);
-
-                    //    for (int index = 0; index < handler.handler.languageID.Count; index++)
-                    //        DrawItemValue(index);
-
-                        
-                    //    EditorGUILayout.EndVertical();
-                    //}
+                    showEditRegion = GUILayout.Toggle(showEditRegion, new GUIContent("Advanced Editor",
+                        "Show more detail on selected record"), EditorStyles.miniButton);
+                    if (showEditRegion)
+                    {
+                        ClassObjectDrawer.Show(database.GetObject(selectedID));
+                    }
                 }
 
                 void Edit_Select(string _idKey = "")
@@ -426,6 +420,7 @@ namespace RTool.Database
         internal sealed override IEnumerable<string> keyIDs => dataDict.Keys;
 
         internal override string GetName(string _key) => dataDict[_key].Name;
+        internal override object GetObject(string _key) => dataDict[_key] as object;
         internal override void SetName(string _key, string _value) => dataDict[_key].Name = _value;
         internal override void AddNewID(string _key) => dataDict.Add(_key, new T());
         internal override void RemoveData(string _key) => dataDict.Remove(_key);
