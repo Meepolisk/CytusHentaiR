@@ -12,7 +12,7 @@ namespace RTool.Localization
     {
         [HideInInspector]
         [SerializeField]
-        protected LocalizedDataManager source;
+        protected LocalizedDataManager source = LocalizedDataManager.LastInstance;
 
         [HideInInspector]
         [SerializeField]

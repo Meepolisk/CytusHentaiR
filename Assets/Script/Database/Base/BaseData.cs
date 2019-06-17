@@ -7,31 +7,36 @@ namespace RTool.Database
     [System.Serializable]
     public abstract class IdenticalDataBase
     {
+        //change these value as we change variable name for later reflection
+        public const string KeyFieldName = "key";
+        public const string NameFieldName = "name";
+
         [SerializeField]
-        protected string key = "";
+        internal string key = "";
+        public string Key => key;
+
         [SerializeField]
-        protected string name = "";
+        internal string name = "";
         public string Name { get => name; set => name = value; }
 
-        public abstract string Key { get; }
+        public abstract string FullKey { get; }
     }
     [System.Serializable]
     public abstract class IdenticalData : IdenticalDataBase
     {
-        public sealed override string Key => key;
+        public sealed override string FullKey => key;
         
     }
     [System.Serializable]
     public abstract partial class IdenticalData<T> : IdenticalDataBase where T : IdenticalData
     {
         protected abstract T parentData { get; }
-
-        public string DataKey => key;
+        
         public string ParentKey => parentData.Key;
-        public sealed override string Key => parentData.Key + "." + key;
+        public sealed override string FullKey => parentData.Key + "." + key;
     }
     
-    public abstract partial class ScriptableDatabase: ScriptableObject
+    public abstract partial class ScriptableDatabase : ScriptableObject
     {
         [SerializeField, HideInInspector]
         protected ScriptableDatabase parentDatabase = null;
@@ -44,6 +49,7 @@ namespace RTool.Database
     public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
         [SerializeField, HideInInspector]
+        //[SerializeField]
         private List<T> dataList = new List<T>();
 
         private Dictionary<string, T> dataDict { get; set; }
@@ -58,7 +64,7 @@ namespace RTool.Database
         }
         public sealed override void SerializeToList()
         {
-            if (dataList == null || dataList.Count == 0)
+            if (dataDict == null)
                 return;
 
             dataList = new List<T>(dataDict.Values);
@@ -77,6 +83,7 @@ namespace RTool.Database
         public void Add (string _key, T _data)
         {
             CheckDeserialize();
+            if (_data.key == null)
 
             dataDict.Add(_key, _data);
         }

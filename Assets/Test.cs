@@ -10,6 +10,9 @@ using UnityEditor;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField, Reorderable]
+    private List<int> list;
+
     [SerializeField]
     private AudioSource source = null;
     [SerializeField]

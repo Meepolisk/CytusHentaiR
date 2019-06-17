@@ -9,6 +9,7 @@ public class SongData : IdenticalData
     [SerializeField]
     private string gerne = "";
     public string Gerne => gerne;
+
     [SerializeField]
     private string composer = "";
     public string Composer => composer;

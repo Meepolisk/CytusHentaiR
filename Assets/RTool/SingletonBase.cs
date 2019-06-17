@@ -38,3 +38,31 @@ public abstract class SingletonDontDestroy<T> : MonoBehaviour where T : Componen
         DontDestroyOnLoad(_instance.gameObject);
     }
 }
+public abstract class SemitonScriptableObject<T> : ScriptableObject where T : ScriptableObject
+{
+    private static T lastUsedInstance = null;
+    public static T LastInstance
+    {
+        get
+        {
+            return lastUsedInstance;
+        }
+    }
+    protected virtual void OnEnable()
+    {
+        if (lastUsedInstance == null)
+        {
+            Debug.LogFormat(this, "{0} Semiton applied", typeof(T).Name, name);
+            lastUsedInstance = (T)(ScriptableObject)this;
+        }
+    }
+    //public static T Instance
+    //{
+    //    get
+    //    {
+    //        if (!_instance)
+    //            _instance = Resources.FindObjectsOfTypeAll<T>().FirstOrDefault();
+    //        return _instance;
+    //    }
+    //}
+}

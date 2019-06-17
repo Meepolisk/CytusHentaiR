@@ -12,7 +12,7 @@ using UnityEditorInternal;
 namespace RTool.Localization
 {
     [CreateAssetMenu(menuName = "Localized Data Manager")]
-    public class LocalizedDataManager : ScriptableObject
+    public class LocalizedDataManager : SemitonScriptableObject<LocalizedDataManager>
     {
         [System.Serializable]
         public class StringDictionary : LocalizationDictionary<String>
@@ -75,9 +75,12 @@ namespace RTool.Localization
 #if UNITY_EDITOR
         private void DeserializeDictionaries()
         {
+            if (this == null)
+                return;
+
             foreach (var item in allDictionaries)
             {
-                item.SaveAndDeserialize();
+                item.SaveAndSerializeToList();
             }
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
@@ -133,9 +136,10 @@ namespace RTool.Localization
             textureLD.Reset(languageID, new List<string> { "textureA", "textureB" });
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            Debug.Log("LocalizedDataManager enabled...");
+            base.OnEnable();
+            Debug.Log("LocalizedDataManager enabled...", this);
             LoadDefaultLanguage();
         }
 
@@ -152,7 +156,7 @@ namespace RTool.Localization
             {
                 if (item.DataType == typeof(T))
                 {
-                    item.CheckToSerialize();
+                    item.CheckToDeserialize();
                     return item as LocalizationDictionary<T>;
                 }
             }
@@ -245,33 +249,14 @@ namespace RTool.Localization
 
             public Dictionary<int, Dictionary<string, T>> dict;
 
-            internal bool isSerialized
-            {
-                get
-                {
-                    return (dict != null);
-                }
-            }
-            internal Type dataType
-            {
-                get
-                {
-                    return typeof(T);
-                }
-            }
-
+            internal bool isSerialized => (dict != null);
+            internal Type dataType =>  typeof(T);
             public void Setup(LocalizedDataManager _handler)
             {
                 handler = _handler;
             }
 
-            internal virtual T DefaultData
-            {
-                get
-                {
-                    return default(T);
-                }
-            }
+            internal virtual T DefaultData =>  default;
             public void Reset(List<string> _keyLanguageDefault, List<string> _keyIDDefault)
             {
                 keyIDs = _keyIDDefault;
@@ -283,31 +268,19 @@ namespace RTool.Localization
                         dataSet.Add(DefaultData);
                     }
                 }
-                CheckToSerialize();
+                CheckToDeserialize();
             }
 
             #region public call
-            //internal sealed override bool checkValidKey(string _idKey)
-            //{
-            //    if (keyIDs.Contains(_idKey))
-            //        return true;
-            //    return false;
-            //}
-            internal sealed override Type DataType
-            {
-                get
-                {
-                    return typeof(T);
-                }
-            }
-            internal sealed override void CheckToSerialize()
+            internal sealed override Type DataType => typeof(T);
+            internal sealed override void CheckToDeserialize()
             {
                 if (!isSerialized)
-                    SerializeToDictionary();
+                    DeserializeToDictionary();
             }
-            internal sealed override void SerializeToDictionary()
+            internal sealed override void DeserializeToDictionary()
             {
-                Debug.Log("SerializeToDictionary " + this.GetType().Name + "...");
+                Debug.Log("DeserializeToDictionary " + this.GetType().Name + "...");
                 dict = new Dictionary<int, Dictionary<string, T>>();
                 int dataSetIndex = 0;
                 for (int languageIndex = 0; languageIndex < handler.languageID.Count; languageIndex++)
@@ -326,10 +299,10 @@ namespace RTool.Localization
             {
                 REditorUtils.DoField(_rect, GetData(handler.DefaultLanguageIndex, _key));
             }
-            internal sealed override void SaveAndDeserialize()
+            internal sealed override void SaveAndSerializeToList()
             {
-                CheckToSerialize();
-                Debug.Log("Deserialize and Save Data for " + this.GetType().Name + "...");
+                CheckToDeserialize();
+                Debug.Log("Serialize and Save Data for " + this.GetType().Name + "...");
 
                 dataSet = new List<T>();
                 for (int languageIndex = 0; languageIndex < handler.languageID.Count; languageIndex++)
@@ -364,7 +337,7 @@ namespace RTool.Localization
 
             internal void AddNewID(string _key)
             {
-                CheckToSerialize();
+                CheckToDeserialize();
                 keyIDs.Add(_key);
                 foreach (var keyDict in dict)
                 {
@@ -373,7 +346,7 @@ namespace RTool.Localization
             }
             internal void RemoveOldID(string _key)
             {
-                CheckToSerialize();
+                CheckToDeserialize();
 
                 if (!isSerialized)
                     return;
@@ -428,14 +401,13 @@ namespace RTool.Localization
 
 #if UNITY_EDITOR
             internal abstract void ShowDataPreview(Rect _rect, string _keyID);
-            internal abstract void SaveAndDeserialize();
+            internal abstract void SaveAndSerializeToList();
             internal abstract void AddNewLanguage(int _languageIndex);
             internal abstract void RemoveLanguage(int _languageIndex);
 #endif
-            //internal abstract bool checkValidKey(string _keyID);
             internal abstract Type DataType { get; }
-            internal abstract void CheckToSerialize();
-            internal abstract void SerializeToDictionary();
+            internal abstract void CheckToDeserialize();
+            internal abstract void DeserializeToDictionary();
         }
 
 
@@ -576,7 +548,7 @@ namespace RTool.Localization
                     handler = _handler;
                     foreach (var dict in handler.handler.allDictionaries)
                     {
-                        dict.CheckToSerialize();
+                        dict.CheckToDeserialize();
                     }
                     reorderableList = new ReorderableList(languageList, typeof(string), false, true, true, true);
                     reorderableList.drawElementCallback = (rect, index, isActive, isFocused) =>
@@ -691,7 +663,7 @@ namespace RTool.Localization
                     selectedLanguageIndex = 0;
                     handler = _handler;
                     localizeDictionaryRef = handler.handler.GetLocalizationDictionary<T>();
-                    localizeDictionaryRef.CheckToSerialize();
+                    localizeDictionaryRef.CheckToDeserialize();
                     filteredIDList = new List<string>();
                     RefreshFilter(filterText);
                     reorderableList = new ReorderableList(filteredIDList, typeof(T), false, false, true, true);
@@ -827,7 +799,7 @@ namespace RTool.Localization
                         }
                     }
                     EditorGUILayout.EndHorizontal();
-                    editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], "Unsupported value", null, GUILayout.Height(100f));
+                    editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], errorText: "Unsupported value", _options: GUILayout.Height(100f));
                     EditorGUILayout.EndVertical();
                 }
 

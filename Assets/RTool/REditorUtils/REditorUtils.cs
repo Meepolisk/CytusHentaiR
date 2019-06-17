@@ -85,7 +85,19 @@ namespace REditor
         { typeof(Bounds), (rect, value) => EditorGUI.BoundsField(rect, (Bounds)value) },
         { typeof(Rect), (rect, value) => EditorGUI.RectField(rect, (Rect)value) }
         };
-
+        private static readonly Dictionary<Type, Func<GUIContent, object, GUILayoutOption[], object>> _FieldsGuiLayout =
+            new Dictionary<Type, Func<GUIContent, object, GUILayoutOption[], object>>()
+        {
+        { typeof(int), (content, value, option) => EditorGUILayout.IntField(content, (int)value, option) },
+        { typeof(float), (content, value, option) => EditorGUILayout.FloatField(content, (float)value, option) },
+        { typeof(string), (content, value, option) => EditorGUILayout.TextField(content, (string)value, option) },
+        { typeof(bool), (content, value, option) => EditorGUILayout.Toggle(content, (bool)value, option) },
+        { typeof(Vector2), (content, value, option) => EditorGUILayout.Vector2Field(content, (Vector2)value, option) },
+        { typeof(Vector3), (content, value, option) => EditorGUILayout.Vector3Field(content, (Vector3)value, option) },
+        { typeof(Bounds), (content, value, option) => EditorGUILayout.BoundsField(content, (Bounds)value, option) },
+        { typeof(Rect), (content, value, option) => EditorGUILayout.RectField(content, (Rect)value, option) }
+        };
+        
         public static T DoField<T>(Rect rect, T value, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null)
         {
             Type type = typeof(T);
@@ -102,39 +114,33 @@ namespace REditor
             GUI.Label(rect, errorText, (errorGUIStyle == null) ? redFont : errorGUIStyle);
             return value;
         }
-
-        private static readonly Dictionary<Type, Func<object, GUILayoutOption[], object>> _FieldsGuiLayout =
-            new Dictionary<Type, Func<object, GUILayoutOption[], object>>()
+        public static object DoFieldGUILayout(object _value, Type _type, GUIContent guiContent = null, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null, params GUILayoutOption[] _options)
         {
-        { typeof(int), (value, option) => EditorGUILayout.IntField((int)value, option) },
-        { typeof(float), (value, option) => EditorGUILayout.FloatField((float)value, option) },
-        { typeof(string), (value, option) => EditorGUILayout.TextArea((string)value, option) },
-        { typeof(bool), (value, option) => EditorGUILayout.Toggle((bool)value, option) },
-        { typeof(Vector2), (value, option) => EditorGUILayout.Vector2Field(GUIContent.none, (Vector2)value, option) },
-        { typeof(Vector3), (value, option) => EditorGUILayout.Vector3Field(GUIContent.none, (Vector3)value, option) },
-        { typeof(Bounds), (value, option) => EditorGUILayout.BoundsField((Bounds)value, option) },
-        { typeof(Rect), (value, option) => EditorGUILayout.RectField((Rect)value, option) }
-        };
+            if (guiContent == null)
+                guiContent = GUIContent.none;
 
-        public static T DoFieldGUILayout<T>(T _value, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null, params GUILayoutOption[] _options)
-        {
-            Type type = typeof(T);
-            Func<object, GUILayoutOption[], object> field;
-            if (_FieldsGuiLayout.TryGetValue(type, out field))
-                return (T)field(_value, _options);
+            Func<GUIContent, object, GUILayoutOption[], object> field;
+            if (_FieldsGuiLayout.TryGetValue( _type, out field))
+                return field(guiContent, _value, _options);
 
-            if (type.IsEnum)
-                return (T)(object)EditorGUILayout.EnumPopup((Enum)(object)_value, _options);
+            if (_type.IsEnum)
+                return EditorGUILayout.EnumPopup(guiContent, (Enum)_value, _options);
 
-            if (typeof(UObject).IsAssignableFrom(type))
-                return (T)(object)EditorGUILayout.ObjectField((UObject)(object)_value, type, true, _options);
+            if (typeof(UObject).IsAssignableFrom(_type))
+            {
+                return EditorGUILayout.ObjectField(guiContent, (UObject)_value, _type, true, _options);
+            }
 
             EditorGUILayout.LabelField(errorText, (errorGUIStyle == null) ? redFont : errorGUIStyle);
             return _value;
         }
-        public static T DoFieldGUILayout<T>(T _value, params GUILayoutOption[] _options)
+        public static T DoFieldGUILayout<T>(T _value, GUIContent guiContent = null, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null, params GUILayoutOption[] _options)
         {
-            return DoFieldGUILayout(_value, "Unsupported value", null, _options);
+            return (T)DoFieldGUILayout(_value, typeof(T), guiContent, errorText, errorGUIStyle, _options);
+        }
+        public static T DoFieldGUILayout<T>(T _value, GUIContent guiContent = null, params GUILayoutOption[] _options)
+        {
+            return DoFieldGUILayout(_value, guiContent, "Unsupported value", null, _options);
         }
 
     }
