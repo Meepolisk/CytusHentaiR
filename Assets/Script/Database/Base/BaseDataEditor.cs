@@ -36,7 +36,7 @@ namespace RTool.Database
             protected void OnDisable()
             {
                 handler.SerializeToList();
-                EditorUtility.SetDirty(this);
+                EditorUtility.SetDirty(handler);
                 AssetDatabase.SaveAssets();
             }
 
@@ -108,18 +108,18 @@ namespace RTool.Database
                     {
                         rect.y += 2;
                         string keyID = filteredIDList[index];
-                        string languageControlName = "keyID_" + keyID;
+                        string keyControlName = "keyID_" + keyID;
 
                         Rect keyRect = new Rect(rect.x, rect.y, rect.width * 0.4f, EditorGUIUtility.singleLineHeight);
                         Rect valueRect = new Rect(rect.x + rect.width * 0.4f + 5f, rect.y, rect.width * 0.6f - 5f, EditorGUIUtility.singleLineHeight);
-                        if (FocusedControl == languageControlName)
+                        if (FocusedControl == keyControlName)
                         {
                             reorderableList_editingKeyID = keyID;
                         }
                         if (isActive)
                         {
-                            GUI.SetNextControlName(languageControlName);
-                            if (ActiveControl == languageControlName)
+                            GUI.SetNextControlName(keyControlName);
+                            if (ActiveControl == keyControlName)
                             {
                                 bool valid = CheckValidKey(keyID, reorderableList_editingKeyID, idList);
                                 if (!(reorderableList_editingKeyID == keyID || valid))
@@ -138,7 +138,7 @@ namespace RTool.Database
                             GUI.TextField(valueRect, database.GetName(keyID));
                             GUI.enabled = true;
                         }
-                        if (UnfocusedControl == languageControlName)
+                        if (UnfocusedControl == keyControlName)
                         {
                             bool save = CheckValidKey(keyID, reorderableList_editingKeyID, database.keyIDs);
                             if (save)

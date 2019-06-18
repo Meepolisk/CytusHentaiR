@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af58a079a281ef418c7909ba85dcaa6, type: 3}
+  m_Name: New Song Database
+  m_EditorClassIdentifier: 
+  parentDatabase: {fileID: 0}
+  dataList:
+  - key: newKey
+    name: 
+    gerne: 
+    composer: 
+    bpm: 120
+    previewImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    audioDemo: 15
+  - key: newKey1
+    name: 
+    gerne: 
+    composer: 
+    bpm: 120
+    previewImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    audioDemo: 15
+  - key: newKey2
+    name: 
+    gerne: 
+    composer: 
+    bpm: 120
+    previewImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    audioDemo: 15
+  - key: newKey3
+    name: 
+    gerne: 
+    composer: 
+    bpm: 120
+    previewImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    audioDemo: 15

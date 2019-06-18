@@ -48,8 +48,8 @@ namespace RTool.Database
 
     public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
-        [SerializeField, HideInInspector]
-        //[SerializeField]
+        //[SerializeField, HideInInspector]
+        [SerializeField]
         private List<T> dataList = new List<T>();
 
         private Dictionary<string, T> dataDict { get; set; }
