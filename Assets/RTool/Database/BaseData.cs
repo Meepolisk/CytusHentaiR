@@ -43,6 +43,7 @@ namespace RTool.Database
 
         public abstract void DeserializeToDict();
         public abstract void SerializeToList();
+        protected abstract bool IsDeserialized { get; }
         internal abstract void CheckDeserialize();
     }
 
@@ -71,9 +72,10 @@ namespace RTool.Database
         }
         internal sealed override void CheckDeserialize()
         {
-            if (dataDict == null)
+            if (!IsDeserialized)
                 DeserializeToDict();
         }
+        protected sealed override bool IsDeserialized => (dataDict != null);
         public T Get(string _key)
         {
             CheckDeserialize();
@@ -86,6 +88,14 @@ namespace RTool.Database
             if (_data.key == null)
 
             dataDict.Add(_key, _data);
+        }
+
+        protected virtual void Reset()
+        {
+            if (dataDict != null)
+                dataDict = null;
+            if (dataList != null)
+                dataList.Clear();
         }
     }
 }

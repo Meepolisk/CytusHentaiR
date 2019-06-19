@@ -2,6 +2,7 @@
 using REditor;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -21,14 +22,11 @@ namespace RTool.Database
         internal abstract void RemoveData(string _key);
         internal abstract void ChangeKey(string _oldID, string _newID);
 
-        internal abstract string TemporaryKey { get; set; }
         internal abstract void CreateTemporaryObject(string key);
-        internal abstract void SaveTemporaryObject();
+        internal abstract string TemporaryModifiedKey { get; }
+        internal abstract void SaveTemporaryObject(string targetKey = "");
 
-        protected virtual void OnEnable()
-        {
-            Debug.Log("Database loaded: " + name, this);
-        }
+        internal int dataJumper = -1;
 
         [CustomEditor(typeof(ScriptableDatabase),true)]
         private class CustomInspector : UnityObjectEditor<ScriptableDatabase>
@@ -36,7 +34,7 @@ namespace RTool.Database
             protected override void OnEnable()
             {
                 base.OnEnable();
-                editHelper = new EditHelper(this);
+                editHelper = new EditHelper(this, handler.dataJumper);
             }
             protected void OnDisable()
             {
@@ -51,13 +49,12 @@ namespace RTool.Database
 
                 //Draw Header
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(new GUIContent("Scriptable Database", "A small but purfect tool for SQL-database-like. E-meow me fur more detail at: hoa.nguyenduc1206@gmail.com"), EditorStyles.centeredGreyMiniLabel);
+                EditorGUILayout.LabelField(new GUIContent("Scriptable Database: " + handler.dataType.Name
+                    , "A small but purfect tool for SQL-database-like. E-meow me fur more detail at: hoa.nguyenduc1206@gmail.com"), EditorStyles.centeredGreyMiniLabel);
                 EditorGUILayout.EndHorizontal();
 
                 DrawParentController();
                 DrawingDetailHelper();
-
-                serializedObject.ApplyModifiedProperties();
 
                 if (RTool.IsDebug)
                 {
@@ -81,7 +78,7 @@ namespace RTool.Database
                     if (handler.parentDatabase == null)
                     {
                         EditorGUILayout.HelpBox(
-                           "Should assign " + typeof(ScriptableDatabase).Name + ". Otherwise all data of parent class cant modify", MessageType.Warning, true);
+                           "Should assign " + typeof(ScriptableDatabase).Name + " to show full information", MessageType.Warning, true);
                     }
                 }
                 EditorGUILayout.EndVertical();
@@ -106,11 +103,14 @@ namespace RTool.Database
                 protected string filter = "";
                 private string reorderableList_editingKeyID = "";
 
-                public EditHelper(CustomInspector _handler)
+                public EditHelper(CustomInspector _handler, int _jumpToData)
                 {
                     handler = _handler;
+                    InitReorderableList();
+                }
+                private void InitReorderableList()
+                {
                     database.CheckDeserialize();
-                    
                     filteredIDList = new List<string>();
                     RefreshFilter(filterText);
                     reorderableList = new ReorderableList(filteredIDList, typeof(string), false, false, true, true);
@@ -244,6 +244,9 @@ namespace RTool.Database
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     DrawSearchFilter();
                     scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(200f));
+                    //Hack: if reset called --> dict = null;
+                    if (!database.IsDeserialized)
+                        InitReorderableList();
                     reorderableList.DoLayoutList();
                     EditorGUILayout.EndScrollView();
                     EditorGUILayout.EndVertical();
@@ -271,19 +274,76 @@ namespace RTool.Database
                 }
                 internal void DrawEditRegion()
                 {
-                    EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                    //EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     bool hasData = !string.IsNullOrEmpty(selectedKey);
+                    GUIContent content = new GUIContent(hasData ?
+                        "Selected " + database.dataType.Name + " (" +selectedKey + ")"
+                        : "New " + database.dataType.Name);
 
                     SerializedProperty property = handler.serializedObject.FindProperty("temporaryData");
-                    property.isExpanded = true;
-                    EditorGUILayout.PropertyField(property, new GUIContent("SelectedData"), true, GUILayout.Height(EditorGUI.GetPropertyHeight(property)));
-                    EditorGUILayout.EndVertical();
+                    EditorGUILayout.PropertyField(property, content, true, GUILayout.Height(EditorGUI.GetPropertyHeight(property)));
+
+                    if (property.isExpanded)
+                    {
+                        GUILayout.BeginHorizontal();
+                        GUI.enabled = hasData;
+                        if (GUILayout.Button("Save"))
+                            Edit_Save(selectedKey);
+                        GUI.enabled = true;
+                        if (GUILayout.Button("Add New"))
+                        {
+                            Edit_Save();
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                }
+
+                void Edit_Save(string targetKey = null)
+                {
+                    handler.serializedObject.Update();
+                    string newKey = database.TemporaryModifiedKey;
+                    if (CheckErrorAndLeave(ref newKey))
+                        return;
+                    //if (selectedKey != newKey)
+                    //{
+                    //    localizeDictionaryRef.ChangeID(selectedKey, newKey);
+                    //    int index = filteredIDList.IndexOf(selectedID);
+                    //    filteredIDList[index] = newKey;
+                    //}
+                    database.SaveTemporaryObject(targetKey);
+                    selectedKey = newKey;
                 }
 
                 void Edit_Select(string _idKey = "")
                 {
                     selectedKey = _idKey;
                     database.CreateTemporaryObject(selectedKey);
+                    handler.serializedObject.Update();
+                }
+                private bool CheckErrorAndLeave(ref string newKey)
+                { 
+                    if (string.IsNullOrEmpty(newKey) || Regex.Match(newKey, @"^[/^\w+$/]+$").Success == false)
+                    {
+                        newKey = UniqueID("newKey", filteredIDList);
+                        return (!EditorUtility.DisplayDialog(
+                            "Invalid Key Format",
+                            "Key can not be empty or contain special character. Save as \"" + newKey + "\"?",
+                            "OK", "Cancel"));
+                    }
+                    List<string> listIDs = new List<string>(database.keyIDs);
+                    if (!string.IsNullOrEmpty(selectedKey))
+                        listIDs.Remove(selectedKey);
+
+                    if (listIDs.Contains(newKey) == true)
+                    {
+                        string lastKey = newKey;
+                        newKey = UniqueID(newKey, filteredIDList);
+                        return (!EditorUtility.DisplayDialog(
+                            "Key existed",
+                            "Already contain member \"" + lastKey + "\". Save as \"" + newKey + "\"?",
+                            "OK", "Cancel"));
+                    }
+                    return false;
                 }
             }
 
@@ -315,7 +375,7 @@ namespace RTool.Database
     public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
         protected sealed override Type dataType => typeof(T);
-        internal sealed override IEnumerable<string> keyIDs => dataDict.Keys;
+        internal sealed override IEnumerable<string> keyIDs => dataDict?.Keys;
 
         internal sealed override string GetName(string _key) => dataDict[_key].Name;
         internal sealed override object GetObject(string _key) => dataDict[_key] as object;
@@ -339,25 +399,18 @@ namespace RTool.Database
         
         [SerializeField]
         internal T temporaryData = null; //do not rename this variable
-        internal sealed override string TemporaryKey { get; set; }
         internal sealed override void CreateTemporaryObject(string key = "")
         {
             if (string.IsNullOrEmpty(key) == false)
-            {
-                TemporaryKey = key;
                 temporaryData = dataDict[key];
-            }
             else
-            {
-                TemporaryKey = "";
                 temporaryData = new T();
-            }
         }
-
-        internal sealed override void SaveTemporaryObject()
+        internal sealed override string TemporaryModifiedKey => temporaryData.Key;
+        internal sealed override void SaveTemporaryObject(string targetKey = "")
         {
-            if (string.IsNullOrEmpty(TemporaryKey) == false)
-                dataDict.Remove(TemporaryKey);
+            if (string.IsNullOrEmpty(targetKey) == false)
+                dataDict.Remove(targetKey);
             dataDict.Add(temporaryData.key, temporaryData);
         }
     }

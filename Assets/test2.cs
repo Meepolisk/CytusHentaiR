@@ -7,4 +7,6 @@ public class test2 : MonoBehaviour
 {
     [SerializeField]
     List<LocalizedString> StringLoasdasd;
+
+
 }

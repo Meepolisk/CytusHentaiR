@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityObject = UnityEngine.Object;
 
 #if UNITY_EDITOR
 using REditor;
@@ -89,10 +88,7 @@ namespace RTool.Localization
 
         private void DefaultLanguageChangeNoti()
         {
-            if (onChangeDefaultLanguage != null)
-            {
-                onChangeDefaultLanguage();
-            }
+            onChangeDefaultLanguage?.Invoke();
         }
         private const string defaultLanguageCode = "DefaultLocalizedLanguage";
         private void SaveDefaultLanguage()

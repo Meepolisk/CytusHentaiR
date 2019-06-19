@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f376b33253495df4490cad0c5fc376ce, type: 3}
   m_Name: Note Database
   m_EditorClassIdentifier: 
-  parentDatabase: {fileID: 11400000, guid: 6a9e5cb19a84b0942844b5cb11d5176d, type: 2}
+  parentDatabase: {fileID: 0}
   dataList:
   - key: newKey
     name: 

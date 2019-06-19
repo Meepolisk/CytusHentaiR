@@ -5,15 +5,15 @@ using UnityEditor.SceneManagement;
 using UnityEditor;
 namespace RTool
 {
-    internal static class RTool
+    public static partial class RTool
     {
         internal const string rootNameSpace = "RTool";
 
         //todo: chỗ này làm List<Action> để reg / unreg action như kiểu SetHideFlag cho PopupCanvasMesh
 
         internal static bool IsDebug = false;
-
         private const string menuNameOn = rootNameSpace + " / " + "Debug ON";
+
         [MenuItem(menuNameOn)]
         private static void DebugOn()
         {

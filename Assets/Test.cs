@@ -10,49 +10,43 @@ using UnityEditor;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField, Reorderable]
-    private List<int> list;
 
-    [SerializeField]
-    private AudioSource source = null;
-    [SerializeField]
-    private AudioClip clip = null;
-    [SerializeField]
-    private int ofsetSamples;
-
-    [SerializeField, ReadOnly]
-    float[] samples;
-
-    private void Zo()
+    public void TraceMessage(string message,
+            [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+            [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
     {
-        if (clip == null)
-            return;
-        float[] newArray = new float[100];
-        clip.GetData(newArray, ofsetSamples);
-        for (int i = 0; i < newArray.Length; i++)
-            Debug.LogFormat("[{0}]: {1}", i.ToString(), newArray[i].ToString());
+        Debug.Log("message: " + message);
+        Debug.Log("member name: " + memberName);
+        Debug.Log("source file path: " + sourceFilePath);
+        Debug.Log("source line number: " + sourceLineNumber);
     }
-    #if UNITY_EDITOR
-        [CustomEditor(typeof(Test))]
-        private class editor : Editor
+
+    private void BtnHit()
+    {
+        TraceMessage("oh no");
+    }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(Test))]
+    private class editor : Editor
+    {
+        Test handler;
+
+        private void OnEnable()
         {
-            Test handler;
+            handler = target as Test;
+        }
 
-            private void OnEnable()
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            if (GUILayout.Button("YEAH"))
             {
-                handler = target as Test;
-            }
-
-            public override void OnInspectorGUI()
-            {
-                base.OnInspectorGUI();
-
-                if (GUILayout.Button("YEAH"))
-                {
-                    handler.Zo();
-                }
-                
+                handler.TraceMessage("asdf");
             }
         }
-    #endif
+    }
+#endif
 }
