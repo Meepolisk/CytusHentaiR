@@ -11,27 +11,27 @@ namespace RTool
 
         //todo: chỗ này làm List<Action> để reg / unreg action như kiểu SetHideFlag cho PopupCanvasMesh
 
-        //internal static bool IsDebug = false;
+        internal static bool IsDebug = false;
 
-        //private const string menuNameOn = rootNameSpace + " / " + "Debug ON";
-        //[MenuItem(menuNameOn)]
-        //private static void DebugOn()
-        //{
-        //    Debug.Log("RTool debug set to [ON]");
-        //    IsDebug = true;
-        //}
-        //[MenuItem(menuNameOn, true)]
-        //private static bool CanDebugOn() => IsDebug == false;
+        private const string menuNameOn = rootNameSpace + " / " + "Debug ON";
+        [MenuItem(menuNameOn)]
+        private static void DebugOn()
+        {
+            Debug.Log("RTool debug set to [ON]");
+            IsDebug = true;
+        }
+        [MenuItem(menuNameOn, true)]
+        private static bool CanDebugOn() => IsDebug == false;
 
-        //private const string menuNameOff = rootNameSpace + " / " + "Debug OFF";
-        //[MenuItem(menuNameOff)]
-        //private static void DebugOff()
-        //{
-        //    Debug.Log("RTool debug set to [OFF]");
-        //    IsDebug = false;
-        //}
-        //[MenuItem(menuNameOff, true)]
-        //private static bool CanDebugOFF() => IsDebug == true;
+        private const string menuNameOff = rootNameSpace + " / " + "Debug OFF";
+        [MenuItem(menuNameOff)]
+        private static void DebugOff()
+        {
+            Debug.Log("RTool debug set to [OFF]");
+            IsDebug = false;
+        }
+        [MenuItem(menuNameOff, true)]
+        private static bool CanDebugOFF() => IsDebug == true;
 
         [MenuItem(rootNameSpace + " / Clear PlayerPrefs")]
         private static void NewMenuOption()
@@ -50,22 +50,11 @@ namespace RTool
 }
 public class UnityObjectEditor<T> : Editor where T : UnityEngine.Object
 {
-    private T _handler;
-    public T handler
-    {
-        protected set
-        {
-            _handler = value;
-        }
-        get
-        {
-            return _handler;
-        }
-    }
+    protected T handler { private set; get; }
 
     protected virtual void OnEnable()
     {
-        _handler = (T)target;
+        handler = (T)target;
     }
 }
 #endif

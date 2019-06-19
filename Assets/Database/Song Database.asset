@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af58a079a281ef418c7909ba85dcaa6, type: 3}
-  m_Name: New Song Database
+  m_Name: Song Database
   m_EditorClassIdentifier: 
   parentDatabase: {fileID: 0}
   dataList:
@@ -31,14 +31,15 @@ MonoBehaviour:
     audioClip: {fileID: 0}
     audioDemo: 15
   - key: newKey2
-    name: 
+    name: dasdasd
     gerne: 
     composer: 
     bpm: 120
     previewImage: {fileID: 0}
     audioClip: {fileID: 0}
     audioDemo: 15
-  - key: newKey3
+  temporaryData:
+    key: 
     name: 
     gerne: 
     composer: 

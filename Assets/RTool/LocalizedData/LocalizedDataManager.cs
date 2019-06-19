@@ -799,7 +799,7 @@ namespace RTool.Localization
                         }
                     }
                     EditorGUILayout.EndHorizontal();
-                    editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], errorText: "Unsupported value", _options: GUILayout.Height(100f));
+                    editingValue[_index] = REditorUtils.DoFieldGUILayout(editingValue[_index], _options: GUILayout.Height(100f));
                     EditorGUILayout.EndVertical();
                 }
 

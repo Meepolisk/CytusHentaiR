@@ -30,50 +30,7 @@ namespace REditor
                 GUIContent guiContent = GetContent(field, fieldName);
 
                 // Draw fields
-                //REditorUtils.DoFieldGUILayout(obj, field.FieldType);
                 field.SetValue(obj, REditorUtils.DoFieldGUILayout(field.GetValue(obj), field.FieldType, guiContent));
-                //if (field.FieldType == typeof(string))
-                //{
-                //    string value = (string)field.GetValue(obj);
-                //    string editorValue = EditorGUILayout.TextField(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.FieldType == typeof(int))
-                //{
-                //    int value = (int)field.GetValue(obj);
-                //    int editorValue = EditorGUILayout.IntField(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.FieldType == typeof(float))
-                //{
-                //    float value = (float)field.GetValue(obj);
-                //    float editorValue = EditorGUILayout.FloatField(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.FieldType == typeof(Color))
-                //{
-                //    Color value = (Color)field.GetValue(obj);
-                //    Color editorValue = EditorGUILayout.ColorField(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.FieldType == typeof(bool))
-                //{
-                //    bool value = (bool)field.GetValue(obj);
-                //    bool editorValue = EditorGUILayout.Toggle(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.FieldType.IsEnum)
-                //{
-                //    Enum value = (Enum)field.GetValue(obj);
-                //    Enum editorValue = EditorGUILayout.EnumPopup(guiContent, value);
-                //    field.SetValue(obj, editorValue);
-                //}
-                //if (field.GetValue(obj) is UObject)
-                //{
-                //    UObject value = (UObject)field.GetValue(obj);
-                //    UObject editorValue = EditorGUILayout.ObjectField(guiContent, value, value.GetType(), true);
-                //    field.SetValue(obj, editorValue);
-                //}
             }
         }
         private static GUIContent GetContent(FieldInfo field, string fieldName)

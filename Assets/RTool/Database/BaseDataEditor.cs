@@ -15,10 +15,15 @@ namespace RTool.Database
 
         internal abstract string GetName(string _key);
         internal abstract object GetObject(string _key);
+        internal abstract object GetTemporaryObject();
         internal abstract void SetName(string _key, string _value);
         internal abstract void AddNewKey(string _key);
         internal abstract void RemoveData(string _key);
         internal abstract void ChangeKey(string _oldID, string _newID);
+
+        internal abstract string TemporaryKey { get; set; }
+        internal abstract void CreateTemporaryObject(string key);
+        internal abstract void SaveTemporaryObject();
 
         protected virtual void OnEnable()
         {
@@ -42,7 +47,7 @@ namespace RTool.Database
 
             public override void OnInspectorGUI()
             {
-                //UpdateFocusedControl();
+                UpdateFocusedControl();
 
                 //Draw Header
                 EditorGUILayout.BeginHorizontal();
@@ -51,8 +56,15 @@ namespace RTool.Database
 
                 DrawParentController();
                 DrawingDetailHelper();
-                
-                DrawDefaultInspector();
+
+                serializedObject.ApplyModifiedProperties();
+
+                if (RTool.IsDebug)
+                {
+                    GUILayout.BeginVertical();
+                    DrawDefaultInspector();
+                    GUILayout.EndVertical();
+                }
             }
 
             const int settingSize = 25;
@@ -88,7 +100,6 @@ namespace RTool.Database
                 private CustomInspector handler;
                 private ScriptableDatabase database => handler.handler;
                 private IEnumerable<string> idList => database.keyIDs;
-                //private IEnumerable<string> idList;
 
                 private ReorderableList reorderableList;
                 protected List<string> filteredIDList;
@@ -99,7 +110,6 @@ namespace RTool.Database
                 {
                     handler = _handler;
                     database.CheckDeserialize();
-                    //idList = database.keyIDs;
                     
                     filteredIDList = new List<string>();
                     RefreshFilter(filterText);
@@ -220,8 +230,8 @@ namespace RTool.Database
                         reorderableList.index = -1;
                     Edit_Select();
                 }
-                private string selectedID = "";
-                private string editingID = "";
+
+                private string selectedKey = "";
 
                 Vector2 scrollPos;
                 internal void DrawingStuff()
@@ -233,7 +243,7 @@ namespace RTool.Database
                 {
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     DrawSearchFilter();
-                    scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(250f));
+                    scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(200f));
                     reorderableList.DoLayoutList();
                     EditorGUILayout.EndScrollView();
                     EditorGUILayout.EndVertical();
@@ -261,81 +271,19 @@ namespace RTool.Database
                 }
                 internal void DrawEditRegion()
                 {
-                    if (string.IsNullOrEmpty(selectedID) == false)
-                    {
-                        ClassObjectDrawer.Show(database.GetObject(selectedID), IdenticalDataBase.KeyFieldName, IdenticalDataBase.NameFieldName);
-                    }
-                    else
-                    {
+                    EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                    bool hasData = !string.IsNullOrEmpty(selectedKey);
 
-                    }
+                    SerializedProperty property = handler.serializedObject.FindProperty("temporaryData");
+                    property.isExpanded = true;
+                    EditorGUILayout.PropertyField(property, new GUIContent("SelectedData"), true, GUILayout.Height(EditorGUI.GetPropertyHeight(property)));
+                    EditorGUILayout.EndVertical();
                 }
 
                 void Edit_Select(string _idKey = "")
                 {
-                    selectedID = _idKey;
-                    Edit_Refresh();
-                }
-                void Edit_Save()
-                {
-                    //string errorTitle = "";
-                    //string errorDecr = "";
-                    //string newName = "";
-                    //if (checkIDError(ref errorTitle, ref errorDecr, ref newName))
-                    //{
-                    //    if (EditorUtility.DisplayDialog(errorTitle, errorDecr, "OK", "Cancel") == false)
-                    //    {
-                    //        return;
-                    //    }
-                    //}
-                    //if (selectedID != newName)
-                    //{
-                    //    localizeDictionaryRef.ChangeID(selectedID, newName);
-                    //    int index = filteredIDList.IndexOf(selectedID);
-                    //    filteredIDList[index] = newName;
-                    //}
-                    //for (int index = 0; index < handler.handler.languageID.Count; index++)
-                    //{
-                    //    localizeDictionaryRef.SetData(index, newName, editingValue[index]);
-                    //}
-                    selectedID = editingID;
-                }
-                bool checkIDError(ref string _title, ref string _description, ref string _newName, string dataName = "ID")
-                {
-                    //if (string.IsNullOrEmpty(editingID))
-                    //{
-                    //    _title = "Invalid " + dataName;
-                    //    _newName = UniqueID("newData", filteredIDList);
-                    //    _description = "New " + dataName + " can not be blank. Save as \"" + _newName + "\"?";
-                    //    return true;
-                    //}
-                    //if (localizeDictionaryRef.keyIDs.Contains(editingID) == true)
-                    //{
-                    //    if (editingID != selectedID)
-                    //    {
-                    //        _title = "Invalid " + dataName;
-                    //        _newName = UniqueID(editingID, filteredIDList);
-                    //        _description = "Already contain " + dataName + "  \"" + editingID + "\". Save as \"" + _newName + "\"?";
-                    //        return true;
-                    //    }
-                    //}
-                    //_newName = editingID;
-                    return false;
-                }
-
-                void Edit_Cancel()
-                {
-                    reorderableList.index = -1;
-                    selectedID = "";
-                    Edit_Refresh();
-                }
-                void Edit_Refresh()
-                {
-                    editingID = selectedID;
-                    //for (int langIndex = 0; langIndex < handler.handler.languageID.Count; langIndex++)
-                    //{
-                    //    editingValue.Add(langIndex, localizeDictionaryRef.GetData(langIndex, editingID));
-                    //}
+                    selectedKey = _idKey;
+                    database.CreateTemporaryObject(selectedKey);
                 }
             }
 
@@ -369,10 +317,11 @@ namespace RTool.Database
         protected sealed override Type dataType => typeof(T);
         internal sealed override IEnumerable<string> keyIDs => dataDict.Keys;
 
-        internal override string GetName(string _key) => dataDict[_key].Name;
-        internal override object GetObject(string _key) => dataDict[_key] as object;
-        internal override void SetName(string _key, string _value) => dataDict[_key].Name = _value;
-        internal override void AddNewKey(string _key)
+        internal sealed override string GetName(string _key) => dataDict[_key].Name;
+        internal sealed override object GetObject(string _key) => dataDict[_key] as object;
+        internal sealed override object GetTemporaryObject() => new T() as object;
+        internal sealed override void SetName(string _key, string _value) => dataDict[_key].Name = _value;
+        internal sealed override void AddNewKey(string _key)
         {
             T newData = new T();
             newData.key = _key;
@@ -386,6 +335,30 @@ namespace RTool.Database
 
             dataDict.Add(_newID, dataDict[_oldID]);
             dataDict.Remove(_oldID);
+        }
+        
+        [SerializeField]
+        internal T temporaryData = null; //do not rename this variable
+        internal sealed override string TemporaryKey { get; set; }
+        internal sealed override void CreateTemporaryObject(string key = "")
+        {
+            if (string.IsNullOrEmpty(key) == false)
+            {
+                TemporaryKey = key;
+                temporaryData = dataDict[key];
+            }
+            else
+            {
+                TemporaryKey = "";
+                temporaryData = new T();
+            }
+        }
+
+        internal sealed override void SaveTemporaryObject()
+        {
+            if (string.IsNullOrEmpty(TemporaryKey) == false)
+                dataDict.Remove(TemporaryKey);
+            dataDict.Add(temporaryData.key, temporaryData);
         }
     }
 }

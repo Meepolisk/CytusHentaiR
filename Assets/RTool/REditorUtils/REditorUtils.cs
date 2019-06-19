@@ -114,7 +114,7 @@ namespace REditor
             GUI.Label(rect, errorText, (errorGUIStyle == null) ? redFont : errorGUIStyle);
             return value;
         }
-        public static object DoFieldGUILayout(object _value, Type _type, GUIContent guiContent = null, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null, params GUILayoutOption[] _options)
+        public static object DoFieldGUILayout(object _value, Type _type, GUIContent guiContent = null, params GUILayoutOption[] _options)
         {
             if (guiContent == null)
                 guiContent = GUIContent.none;
@@ -125,24 +125,19 @@ namespace REditor
 
             if (_type.IsEnum)
                 return EditorGUILayout.EnumPopup(guiContent, (Enum)_value, _options);
-
+            
             if (typeof(UObject).IsAssignableFrom(_type))
             {
                 return EditorGUILayout.ObjectField(guiContent, (UObject)_value, _type, true, _options);
             }
 
-            EditorGUILayout.LabelField(errorText, (errorGUIStyle == null) ? redFont : errorGUIStyle);
+            EditorGUILayout.LabelField("[" + _type.Name + "]", redFont);
             return _value;
-        }
-        public static T DoFieldGUILayout<T>(T _value, GUIContent guiContent = null, string errorText = "Unsupported value", GUIStyle errorGUIStyle = null, params GUILayoutOption[] _options)
-        {
-            return (T)DoFieldGUILayout(_value, typeof(T), guiContent, errorText, errorGUIStyle, _options);
         }
         public static T DoFieldGUILayout<T>(T _value, GUIContent guiContent = null, params GUILayoutOption[] _options)
         {
-            return DoFieldGUILayout(_value, guiContent, "Unsupported value", null, _options);
+            return (T)DoFieldGUILayout(_value, typeof(T), guiContent, _options);
         }
-
     }
     
 }
