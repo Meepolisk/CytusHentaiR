@@ -25,7 +25,7 @@ namespace RTool.Database
 
         internal abstract void CreateTemporaryObject(string key);
         internal abstract string TemporaryModifiedKey { get; }
-        internal abstract void SaveTemporaryObject(string targetKey = "");
+        internal abstract void SaveTemporaryObject(string newKey, string targetKey = "");
 
         internal int dataJumper = -1;
 
@@ -163,12 +163,14 @@ namespace RTool.Database
                         string newName = UniqueID("newKey", idList);
                         database.AddNewKey(newName);
                         filteredIDList.Add(newName);
+                        //Edit_Select(newName);
                     };
                     reorderableList.onRemoveCallback = (list) =>
                     {
                         string removedKey = filteredIDList[reorderableList.index];
                         filteredIDList.RemoveAt(reorderableList.index);
                         database.RemoveData(removedKey);
+                        Edit_Select();
                     };
                 }
 
@@ -308,7 +310,7 @@ namespace RTool.Database
                     else
                         filteredIDList[filteredIDList.IndexOf(selectedKey)] = newKey;
                                         
-                    database.SaveTemporaryObject(targetKey);
+                    database.SaveTemporaryObject(newKey, targetKey);
                     selectedKey = newKey;
                     reorderableList.index = filteredIDList.IndexOf(selectedKey);
                 }
@@ -382,14 +384,14 @@ namespace RTool.Database
                 temporaryData = dataDict[key].DeepClone();
         }
         internal sealed override string TemporaryModifiedKey => temporaryData.Key;
-        internal sealed override void SaveTemporaryObject(string targetKey = "")
+        internal sealed override void SaveTemporaryObject(string newKey, string targetKey = "")
         {
-            string temporaryKey = temporaryData.key;
+            temporaryData.key = newKey;
             if (string.IsNullOrEmpty(targetKey) == false)
                 dataDict.Remove(targetKey);
-            dataDict.Add(temporaryKey, temporaryData);
+            dataDict.Add(newKey, temporaryData);
 
-            CreateTemporaryObject(temporaryKey);
+            CreateTemporaryObject(newKey);
         }
     }
 }
