@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using RTool.Attribute;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,7 +45,8 @@ public class Test : MonoBehaviour
 
             if (GUILayout.Button("YEAH"))
             {
-                handler.TraceMessage("asdf");
+                Type newType = Type.GetType(typeof(NoteProfile[]).FullName.Replace("[]", string.Empty));
+                Debug.Log(newType.Name);
             }
         }
     }

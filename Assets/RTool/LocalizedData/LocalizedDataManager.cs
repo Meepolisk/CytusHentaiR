@@ -14,7 +14,7 @@ namespace RTool.Localization
     public class LocalizedDataManager : SemitonScriptableObject<LocalizedDataManager>
     {
         [System.Serializable]
-        public class StringDictionary : LocalizationDictionary<String>
+        public class StringDictionary : LocalizationDictionary<string>
         {
             internal override string DefaultData => string.Empty;
         }
@@ -25,7 +25,6 @@ namespace RTool.Localization
         public int DefaultLanguageIndex
         {
             get => _defaultLanguageIndex;
-
             private set
             {
                 if (_defaultLanguageIndex == value)

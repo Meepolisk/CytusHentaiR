@@ -434,17 +434,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 184701009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a678df666020a4fa73449153555320, type: 3}
+  m_Script: {fileID: 11500000, guid: bed484df6ea7d1f4e8b9ecc94f621f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 11400000, guid: cee891525e9242242bd23ba40e66d841, type: 2}
-  _keyLanguage: 
-  _keyID: stringA
-  stringChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: LocalizedStringInjector+StringEvent, RTool, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!4 &184701011
 Transform:
   m_ObjectHideFlags: 0

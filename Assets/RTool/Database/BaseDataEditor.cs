@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using RTool.Extension;
 
 namespace RTool.Database
 {
@@ -53,6 +54,8 @@ namespace RTool.Database
                 DrawParentController();
                 DrawingDetailHelper();
                 DrawingJsonController();
+
+                serializedObject.ApplyModifiedPropertiesWithoutUndo();
 
                 if (RTool.IsDebug)
                     DrawDefaultInspector();
@@ -295,19 +298,19 @@ namespace RTool.Database
 
                 void Edit_Save(string targetKey = null)
                 {
-                    //handler.serializedObject.Update();
-                    handler.serializedObject.ApplyModifiedPropertiesWithoutUndo();
                     string newKey = database.TemporaryModifiedKey;
                     if (CheckErrorAndLeave(out newKey))
                         return;
-                    //if (selectedKey != newKey)
-                    //{
-                    //    localizeDictionaryRef.ChangeID(selectedKey, newKey);
-                    //    int index = filteredIDList.IndexOf(selectedID);
-                    //    filteredIDList[index] = newKey;
-                    //}
+
+                    bool isCreateNew = string.IsNullOrEmpty(targetKey);
+                    if (string.IsNullOrEmpty(targetKey)) //new key
+                        filteredIDList.Add(newKey);
+                    else
+                        filteredIDList[filteredIDList.IndexOf(selectedKey)] = newKey;
+                                        
                     database.SaveTemporaryObject(targetKey);
                     selectedKey = newKey;
+                    reorderableList.index = filteredIDList.IndexOf(selectedKey);
                 }
 
                 void Edit_Select(string _idKey = "")
@@ -374,17 +377,19 @@ namespace RTool.Database
         internal T temporaryData = null; //do not rename this variable
         internal sealed override void CreateTemporaryObject(string key = "")
         {
+            temporaryData = new T();
             if (string.IsNullOrEmpty(key) == false)
-                temporaryData = dataDict[key];
-            else
-                temporaryData = new T();
+                temporaryData = dataDict[key].DeepClone();
         }
         internal sealed override string TemporaryModifiedKey => temporaryData.Key;
         internal sealed override void SaveTemporaryObject(string targetKey = "")
         {
+            string temporaryKey = temporaryData.key;
             if (string.IsNullOrEmpty(targetKey) == false)
                 dataDict.Remove(targetKey);
-            dataDict.Add(temporaryData.key, temporaryData);
+            dataDict.Add(temporaryKey, temporaryData);
+
+            CreateTemporaryObject(temporaryKey);
         }
     }
 }
