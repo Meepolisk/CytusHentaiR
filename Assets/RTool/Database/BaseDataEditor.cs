@@ -270,11 +270,10 @@ namespace RTool.Database
                 }
                 internal void DrawEditRegion()
                 {
-                    //EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     bool hasData = !string.IsNullOrEmpty(selectedKey);
                     if (hasData && handler.linkedParent != null)
                     {
-                        
+                        DrawSelectParent();
                     }
 
                     GUIContent content = new GUIContent(hasData ?
@@ -296,6 +295,20 @@ namespace RTool.Database
                         GUI.enabled = true;
                         GUILayout.EndHorizontal();
                     }
+                }
+                private List<String> parentKey { get; set; }
+                private List<String> parentName { get; set; }
+                private void SetParentKeyIndex(string _parentKey )
+                {
+
+                }
+                private void GetParentKey (string _parentKey)
+                {
+
+                }
+                private void DrawSelectParent()
+                {
+                    EditorGUILayout.Popup(new GUIContent("Parent", "Parent data"))
                 }
 
                 void Edit_Save(string targetKey = null)
