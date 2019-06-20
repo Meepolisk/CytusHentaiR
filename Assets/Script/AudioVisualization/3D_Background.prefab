@@ -116,7 +116,6 @@ MonoBehaviour:
   beatMin: 0.25
   beatMax: 0.32
   fogCloth: {fileID: 4019156562823936582}
-  fogVibrateRate: 1
   rotator: {fileID: 4019156560938977501}
   rotateRate: 10
   lights:

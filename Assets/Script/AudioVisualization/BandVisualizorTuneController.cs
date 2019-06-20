@@ -49,8 +49,6 @@ public class BandVisualizorTuneController : BandVisualizorBase
     [SerializeField]
     private Cloth fogCloth = null;
     [SerializeField]
-    private float fogVibrateRate = 1f;
-    [SerializeField]
     private Transform rotator = null;
     [SerializeField]
     private float rotateRate = 10f;

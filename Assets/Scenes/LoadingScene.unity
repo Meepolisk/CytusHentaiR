@@ -6610,7 +6610,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BASS
+  m_Text: HighMid
 --- !u!222 &435636139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6630,7 +6630,7 @@ GameObject:
   - component: {fileID: 439026384}
   - component: {fileID: 439026385}
   m_Layer: 0
-  m_Name: RandomNoteLight
+  m_Name: HighMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6666,6 +6666,8 @@ MonoBehaviour:
   beatMin: 0.25
   beatMax: 0.32
   fogCloth: {fileID: 650000766}
+  rotator: {fileID: 0}
+  rotateRate: 10
   lights:
   - {fileID: 763111657}
   - {fileID: 1289842642}
@@ -6689,7 +6691,7 @@ GameObject:
   - component: {fileID: 460009670}
   - component: {fileID: 460009671}
   m_Layer: 0
-  m_Name: BandPrefab (2)
+  m_Name: Bass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7095,7 +7097,7 @@ GameObject:
   - component: {fileID: 588844577}
   - component: {fileID: 588844576}
   m_Layer: 5
-  m_Name: PNL_StartMenu
+  m_Name: PNL_SongSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7335,7 +7337,6 @@ MonoBehaviour:
     height: 150
   uiScoreText: {fileID: 1196464575}
   uiComboText: {fileID: 1272530467}
-  song: {fileID: 0}
   musicPlayer: {fileID: 598363961}
 --- !u!1 &604580285
 GameObject:
@@ -11260,7 +11261,7 @@ GameObject:
   - component: {fileID: 861168238}
   - component: {fileID: 861168239}
   m_Layer: 0
-  m_Name: BandPrefab (5)
+  m_Name: Treble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11456,7 +11457,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BASS
+  m_Text: LowMid
 --- !u!222 &916541622
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11962,7 +11963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BASS
+  m_Text: Treble
 --- !u!222 &1016995331
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12607,7 +12608,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BASS
+  m_Text: SubBass
 --- !u!222 &1251132419
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13944,7 +13945,7 @@ GameObject:
   - component: {fileID: 1665123827}
   - component: {fileID: 1665123828}
   m_Layer: 0
-  m_Name: Trebble
+  m_Name: Treble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14007,7 +14008,7 @@ GameObject:
   - component: {fileID: 1668515309}
   - component: {fileID: 1668515310}
   m_Layer: 0
-  m_Name: BandPrefab (3)
+  m_Name: LowMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14144,7 +14145,7 @@ GameObject:
   - component: {fileID: 1683281483}
   - component: {fileID: 1683281484}
   m_Layer: 0
-  m_Name: SubBass
+  m_Name: Bass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14340,7 +14341,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BASS
+  m_Text: Bass
 --- !u!222 &1718494511
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14439,7 +14440,7 @@ GameObject:
   - component: {fileID: 1754352863}
   - component: {fileID: 1754352864}
   m_Layer: 0
-  m_Name: BandPrefab (4)
+  m_Name: HighMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15313,7 +15314,7 @@ GameObject:
   - component: {fileID: 2059879251}
   - component: {fileID: 2059879252}
   m_Layer: 0
-  m_Name: BandPrefab (1)
+  m_Name: SubBass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

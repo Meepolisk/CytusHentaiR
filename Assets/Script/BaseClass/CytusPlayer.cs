@@ -33,8 +33,6 @@ public abstract class CorePlayerBase : CPlayer
     private ScoreDisplayer uiScoreText = null;
     [SerializeField]
     private ComboDisplayer uiComboText = null;
-    [SerializeField]
-    private ComboDisplayer song = null;
 
     public static CorePlayerBase ActivePlayer { get; set; }
     private int _score { get; set; }
