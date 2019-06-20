@@ -49,7 +49,6 @@ namespace RTool.Database
 
     public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
     {
-        //[SerializeField, HideInInspector]
         [SerializeField]
         private List<T> dataList = new List<T>();
 
@@ -58,10 +57,7 @@ namespace RTool.Database
         public sealed override void DeserializeToDict()
         {
             dataDict = new Dictionary<string, T>();
-            foreach (var item in dataList)
-            {
-                dataDict.Add(item.Key, item);
-            }
+            dataList.ForEach(item => { dataDict.Add(item.Key, item); });
         }
         public sealed override void SerializeToList()
         {

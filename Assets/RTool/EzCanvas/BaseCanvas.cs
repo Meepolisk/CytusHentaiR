@@ -194,7 +194,7 @@ namespace RTool.EzCanvas
         }
 
         [CustomEditor(typeof(BaseCanvas), true, isFallback = true)]
-        internal class BaseCanvasInspector : UnityObjectEditor<BaseCanvas>
+        internal class BaseCanvasInspector : RInspector<BaseCanvas>
         {
             protected override void OnEnable()
             {
@@ -205,12 +205,10 @@ namespace RTool.EzCanvas
                     handler.canvasGroup.hideFlags = HideFlags.None;
             }
 
-            public override void OnInspectorGUI()
+            protected override void DrawGUI()
             {
-                GUILayout.BeginVertical(EditorStyles.helpBox);
                 DrawControlBox();
-                GUILayout.EndVertical();
-                base.OnInspectorGUI();
+                DrawDefaultInspector();
             }
             protected virtual void DrawControlBox()
             {

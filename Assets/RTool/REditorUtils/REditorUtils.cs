@@ -8,18 +8,39 @@ using UObject = UnityEngine.Object;
 
 namespace REditor
 {
-    public class UnityObjectEditor<T> : Editor where T : UObject
+    public abstract class RInspector<T> : Editor where T : UObject
     {
-        private T _handler;
-        public T handler
-        {
-            protected set => _handler = value;
-            get => _handler;
-        }
+        protected T handler { private set; get; }
 
-        protected virtual void OnEnable()
+        protected virtual void OnEnable() => handler = target as T;
+
+        public override void OnInspectorGUI()
         {
-            _handler = (T)target;
+            UpdateFocusedControl();
+            DrawGUI();
+        }
+        protected abstract void DrawGUI();
+
+        protected static string ActiveControl { get; set; }
+        protected static string UnfocusedControl { get; set; }
+        protected static string FocusedControl { get; set; }
+        private static void UpdateFocusedControl()
+        {
+            FocusedControl = null;
+            UnfocusedControl = null;
+            string checkingControl = GUI.GetNameOfFocusedControl();
+            if (checkingControl != ActiveControl)
+            {
+                if (UnfocusedControl == null)
+                {
+                    UnfocusedControl = ActiveControl;
+                }
+                if (FocusedControl == null)
+                {
+                    FocusedControl = checkingControl;
+                }
+                ActiveControl = checkingControl;
+            }
         }
     }
     public static class REditorUtils

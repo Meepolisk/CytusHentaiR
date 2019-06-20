@@ -48,13 +48,4 @@ namespace RTool
         }
     }
 }
-public class UnityObjectEditor<T> : Editor where T : UnityEngine.Object
-{
-    protected T handler { private set; get; }
-
-    protected virtual void OnEnable()
-    {
-        handler = (T)target;
-    }
-}
 #endif

@@ -109,7 +109,6 @@ namespace RTool.Localization
         void GetCurentLanguageOfDevice()
         {
             SystemLanguage language = Application.systemLanguage;
-            Debug.Log("XXXXXXX Default language of Device = " + language.ToString());
             switch(language)
             {
                 case SystemLanguage.Japanese: defaultLanguageID = "Japanese"; break;
@@ -409,7 +408,7 @@ namespace RTool.Localization
 
 #if UNITY_EDITOR
         [CustomEditor(typeof(LocalizedDataManager))]
-        public class LocalizationEditor : UnityObjectEditor<LocalizedDataManager>
+        public class LocalizationEditor : RInspector<LocalizedDataManager>
         {
             protected override void OnEnable()
             {
@@ -421,27 +420,22 @@ namespace RTool.Localization
                 handler.DeserializeDictionaries();
             }
 
-            public override void OnInspectorGUI()
+            protected override void DrawGUI()
             {
-                UpdateFocusedControl();
-
-                //Draw Header
+                DrawLabel();
+                DrawMenuSelector();
+                DrawingDetailHelper();
+            }
+            private void DrawLabel()
+            {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(new GUIContent("Localized Data", "A small but purfect tool for localization. E-meow me fur more detail at: hoa.nguyenduc1206@gmail.com"), EditorStyles.centeredGreyMiniLabel);
                 EditorGUILayout.EndHorizontal();
-
-                DrawMenuSelector();
-                DrawingDetailHelper();
-
-                //DrawDefaultInspector();
             }
             private int _currentDataTypeIndex = 0;
             private int currentDataTypeIndex
             {
-                get
-                {
-                    return _currentDataTypeIndex;
-                }
+                get => _currentDataTypeIndex;
                 set
                 {
                     if (_currentDataTypeIndex == value)
@@ -501,7 +495,7 @@ namespace RTool.Localization
 
             private abstract class EditHelper
             {
-                protected LocalizationEditor handler;
+                protected LocalizationEditor editor;
 
                 internal ReorderableList reorderableList;
                 internal abstract void DrawingStuff();
@@ -541,8 +535,8 @@ namespace RTool.Localization
                 string editingData = "";
                 internal LanguageEditHelper(LocalizationEditor _handler)
                 {
-                    handler = _handler;
-                    foreach (var dict in handler.handler.allDictionaries)
+                    editor = _handler;
+                    foreach (var dict in editor.handler.allDictionaries)
                     {
                         dict.CheckToDeserialize();
                     }
@@ -556,8 +550,8 @@ namespace RTool.Localization
                         Rect defaultRect = new Rect(rect.x, rect.y, defaultW, EditorGUIUtility.singleLineHeight);
                         Rect fullLanguageRect = new Rect(defaultRect.xMax, rect.y, rect.width - defaultW, EditorGUIUtility.singleLineHeight);
 
-                        if (GUI.Toggle(defaultRect, (handler.handler.DefaultLanguageIndex == index), GUIContent.none))
-                            handler.handler.DefaultLanguageIndex = index;
+                        if (GUI.Toggle(defaultRect, (editor.handler.DefaultLanguageIndex == index), GUIContent.none))
+                            editor.handler.DefaultLanguageIndex = index;
 
                         if (FocusedControl == languageControlName)
                         {
@@ -612,23 +606,10 @@ namespace RTool.Localization
                         }
                     };
                 }
-                private void AddLanguage(string _language)
-                {
-                    handler.handler.AddLanguage(_language);
-                }
+                private void AddLanguage(string _language) => editor.handler.AddLanguage(_language);
+                private void RemoveLanguage(int _languageIndex) => editor.handler.RemoveLanguage(_languageIndex);
+                List<String> languageList => editor.handler.languageID;
 
-                private void RemoveLanguage(int _languageIndex)
-                {
-                    handler.handler.RemoveLanguage(_languageIndex);
-                }
-
-                List<String> languageList
-                {
-                    get
-                    {
-                        return handler.handler.languageID;
-                    }
-                }
                 internal override void DrawingStuff()
                 {
                     reorderableList.DoLayoutList();
@@ -645,20 +626,14 @@ namespace RTool.Localization
             private class DataEditHelper<T> : DataEditHelper
             {
                 private LocalizationDictionary<T> localizeDictionaryRef;
-                private List<string> idList
-                {
-                    get
-                    {
-                        return localizeDictionaryRef.keyIDs;
-                    }
-                }
+                private List<string> idList => localizeDictionaryRef.keyIDs;
 
                 private string reorderableList_editingKeyID = "";
                 public DataEditHelper(LocalizationEditor _handler)
                 {
                     selectedLanguageIndex = 0;
-                    handler = _handler;
-                    localizeDictionaryRef = handler.handler.GetLocalizationDictionary<T>();
+                    editor = _handler;
+                    localizeDictionaryRef = editor.handler.GetLocalizationDictionary<T>();
                     localizeDictionaryRef.CheckToDeserialize();
                     filteredIDList = new List<string>();
                     RefreshFilter(filterText);
@@ -769,7 +744,7 @@ namespace RTool.Localization
                 public override void DrawItemValue(int _index)
                 {
                     bool isDirty = CheckValueDirty(_index);
-                    string label = handler.handler.languageID[_index];
+                    string label = editor.handler.languageID[_index];
 
                     EditorGUILayout.BeginVertical();
                     EditorGUILayout.BeginHorizontal();
@@ -827,7 +802,7 @@ namespace RTool.Localization
                     Rect labelRect = new Rect(r.x, r.y, 85f, r.height);
                     Rect popupRect = new Rect(labelRect.xMax, r.y, r.width - labelRect.width, r.height);
                     EditorGUI.LabelField(labelRect, new GUIContent("Language", "Choose preview language"));
-                    selectedLanguageIndex = EditorGUI.Popup(popupRect, selectedLanguageIndex, handler.handler.languageID.ToArray());
+                    selectedLanguageIndex = EditorGUI.Popup(popupRect, selectedLanguageIndex, editor.handler.languageID.ToArray());
                     EditorGUILayout.EndHorizontal();
                 }
                 string filterText = "";
@@ -863,7 +838,7 @@ namespace RTool.Localization
                         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                         editingID = EditorGUILayout.TextField(editingID);
 
-                        for (int index = 0; index < handler.handler.languageID.Count; index++)
+                        for (int index = 0; index < editor.handler.languageID.Count; index++)
                             DrawItemValue(index);
 
                         EditorGUILayout.BeginHorizontal();
@@ -929,7 +904,7 @@ namespace RTool.Localization
                         int index = filteredIDList.IndexOf(selectedID);
                         filteredIDList[index] = newName;
                     }
-                    for (int index = 0; index < handler.handler.languageID.Count; index++)
+                    for (int index = 0; index < editor.handler.languageID.Count; index++)
                     {
                         localizeDictionaryRef.SetData(index, newName, editingValue[index]);
                     }
@@ -968,7 +943,7 @@ namespace RTool.Localization
                 {
                     editingID = selectedID;
                     editingValue.Clear();
-                    for (int langIndex = 0; langIndex < handler.handler.languageID.Count; langIndex++)
+                    for (int langIndex = 0; langIndex < editor.handler.languageID.Count; langIndex++)
                     {
                         editingValue.Add(langIndex, localizeDictionaryRef.GetData(langIndex, editingID));
                     }
@@ -986,34 +961,9 @@ namespace RTool.Localization
 
 
             #endregion
-
-            internal static string ActiveControl { get; private set; }
-            internal static string UnfocusedControl { get; private set; }
-            internal static string FocusedControl { get; private set; }
-            private static void UpdateFocusedControl()
-            {
-                FocusedControl = null;
-                UnfocusedControl = null;
-                string checkingControl = GUI.GetNameOfFocusedControl();
-                if (checkingControl != ActiveControl)
-                {
-                    if (UnfocusedControl == null)
-                    {
-                        UnfocusedControl = ActiveControl;
-                        //Debug.Log("---Unfocus: " + ActiveControl);
-                    }
-                    if (FocusedControl == null)
-                    {
-                        FocusedControl = checkingControl;
-                        //Debug.Log("---Focus: " + ActiveControl);
-                    }
-                    ActiveControl = checkingControl;
-                }
-            }
             #endregion
         }
 #endif
-
     }
     
 }

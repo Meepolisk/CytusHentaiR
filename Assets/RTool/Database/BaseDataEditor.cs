@@ -29,12 +29,16 @@ namespace RTool.Database
         internal int dataJumper = -1;
 
         [CustomEditor(typeof(ScriptableDatabase),true)]
-        private class CustomInspector : UnityObjectEditor<ScriptableDatabase>
+        private partial class CustomInspector : RInspector<ScriptableDatabase>
         {
+            private bool dataCanHaveParrent => !handler.dataType.IsSubclassOf(typeof(IdenticalData));
+            private ScriptableDatabase linkedParent => handler.parentDatabase;
+            private ReorderableDictionaryHelper editHelper { get; set; }
+
             protected override void OnEnable()
             {
                 base.OnEnable();
-                editHelper = new EditHelper(this, handler.dataJumper);
+                editHelper = new ReorderableDictionaryHelper(this, handler.dataJumper);
             }
             protected void OnDisable()
             {
@@ -43,29 +47,21 @@ namespace RTool.Database
                 AssetDatabase.SaveAssets();
             }
 
-            public override void OnInspectorGUI()
+            protected override void DrawGUI()
             {
-                UpdateFocusedControl();
-
-                //Draw Header
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(new GUIContent("Scriptable Database: " + handler.dataType.Name
-                    , "A small but purfect tool for SQL-database-like. E-meow me fur more detail at: hoa.nguyenduc1206@gmail.com"), EditorStyles.centeredGreyMiniLabel);
-                EditorGUILayout.EndHorizontal();
-
+                DrawHeader();
                 DrawParentController();
                 DrawingDetailHelper();
+                DrawingJsonController();
 
                 if (RTool.IsDebug)
-                {
-                    GUILayout.BeginVertical();
                     DrawDefaultInspector();
-                    GUILayout.EndVertical();
-                }
             }
-
-            const int settingSize = 25;
-            private bool dataCanHaveParrent => !handler.dataType.IsSubclassOf(typeof(IdenticalData));
+            private new void DrawHeader()
+            {
+                EditorGUILayout.LabelField(new GUIContent("Scriptable Database: " + handler.dataType.Name
+                    , "A small but purfect tool for SQL-database-like. E-meow me fur more detail at: hoa.nguyenduc1206@gmail.com"), EditorStyles.centeredGreyMiniLabel);
+            }
             private void DrawParentController()
             {
                 EditorGUILayout.BeginVertical();
@@ -83,27 +79,22 @@ namespace RTool.Database
                 }
                 EditorGUILayout.EndVertical();
             }
-            private void DrawingDetailHelper()
+            private void DrawingDetailHelper() => editHelper?.DrawGUI();
+            private class ReorderableDictionaryHelper
             {
-                if (editHelper != null)
-                {
-                    editHelper.DrawingStuff();
-                }
-            }
-            #region Draw ReorderableList
-            private EditHelper editHelper;
-            private class EditHelper
-            {
+                internal float ContentHeight = 200f;
+
                 private CustomInspector handler;
                 private ScriptableDatabase database => handler.handler;
                 private IEnumerable<string> idList => database.keyIDs;
 
-                private ReorderableList reorderableList;
-                protected List<string> filteredIDList;
-                protected string filter = "";
-                private string reorderableList_editingKeyID = "";
+                private string selectedKey { get; set; }
+                private ReorderableList reorderableList { get; set; }
+                private string reorderableList_editingKeyID { get; set; }
+                protected List<string> filteredIDList { get; set; }
+                protected string filter { get; set; }
 
-                public EditHelper(CustomInspector _handler, int _jumpToData)
+                public ReorderableDictionaryHelper(CustomInspector _handler, int _jumpToData)
                 {
                     handler = _handler;
                     InitReorderableList();
@@ -132,7 +123,7 @@ namespace RTool.Database
                             if (ActiveControl == keyControlName)
                             {
                                 bool valid = CheckValidKey(keyID, reorderableList_editingKeyID, idList);
-                                if (!(reorderableList_editingKeyID == keyID || valid))
+                                if (valid == false && reorderableList_editingKeyID != keyID)
                                     GUI.backgroundColor = new Color(1, 0.3f, 0.3f, 0.75f);
                                 reorderableList_editingKeyID = GUI.TextField(keyRect, reorderableList_editingKeyID);
                                 GUI.backgroundColor = Color.white;
@@ -150,7 +141,7 @@ namespace RTool.Database
                         }
                         if (UnfocusedControl == keyControlName)
                         {
-                            bool save = CheckValidKey(keyID, reorderableList_editingKeyID, database.keyIDs);
+                            bool save = CheckValidKey(keyID, reorderableList_editingKeyID, idList);
                             if (save)
                             {
                                 reorderableList.GrabKeyboardFocus();
@@ -195,15 +186,16 @@ namespace RTool.Database
                 }
                 internal static bool CheckValidKey(string _old, string _new, IEnumerable<string> _checkList)
                 {
-                    if (_old == _new)
-                        return false;
-                    if (string.IsNullOrEmpty(_new))
-                        return false;
-                    List<string> compare = new List<string>(_checkList);
-                    compare.Remove(_old);
-                    if (compare.Contains(_new))
-                        return false;
-                    return true;
+                    return ValidKeySyntax(_new) && ValidKeyUnique(_old, _new, _checkList);
+                }
+                private static bool ValidKeySyntax(string key) => !string.IsNullOrEmpty(key) && new Regex(@"^[a-zA-Z0-9_]+$").IsMatch(key);
+                private static bool ValidKeyUnique(string selectedKey, string newKey, IEnumerable<string> keyList)
+                {
+                    List<string> listIDs = new List<string>(keyList);
+                    if (!string.IsNullOrEmpty(selectedKey))
+                        listIDs.Remove(selectedKey);
+
+                    return listIDs.Contains(newKey) == false;
                 }
 
                 private void ChangeKeyID(string _old, string _new)
@@ -231,19 +223,18 @@ namespace RTool.Database
                     Edit_Select();
                 }
 
-                private string selectedKey = "";
-
-                Vector2 scrollPos;
-                internal void DrawingStuff()
+                internal void DrawGUI()
                 {
                     DrawSelectRegion();
                     DrawEditRegion();
                 }
+
+                Vector2 scrollPos;
                 internal void DrawSelectRegion()
                 {
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     DrawSearchFilter();
-                    scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(200f));
+                    scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(ContentHeight));
                     //Hack: if reset called --> dict = null;
                     if (!database.IsDeserialized)
                         InitReorderableList();
@@ -276,6 +267,11 @@ namespace RTool.Database
                 {
                     //EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     bool hasData = !string.IsNullOrEmpty(selectedKey);
+                    if (hasData && handler.linkedParent != null)
+                    {
+                        
+                    }
+
                     GUIContent content = new GUIContent(hasData ?
                         "Selected " + database.dataType.Name + " (" +selectedKey + ")"
                         : "New " + database.dataType.Name);
@@ -289,20 +285,20 @@ namespace RTool.Database
                         GUI.enabled = hasData;
                         if (GUILayout.Button("Save"))
                             Edit_Save(selectedKey);
-                        GUI.enabled = true;
+                        GUI.enabled = (string.IsNullOrEmpty(selectedKey) || (selectedKey != database.TemporaryModifiedKey));
                         if (GUILayout.Button("Add New"))
-                        {
                             Edit_Save();
-                        }
+                        GUI.enabled = true;
                         GUILayout.EndHorizontal();
                     }
                 }
 
                 void Edit_Save(string targetKey = null)
                 {
-                    handler.serializedObject.Update();
+                    //handler.serializedObject.Update();
+                    handler.serializedObject.ApplyModifiedPropertiesWithoutUndo();
                     string newKey = database.TemporaryModifiedKey;
-                    if (CheckErrorAndLeave(ref newKey))
+                    if (CheckErrorAndLeave(out newKey))
                         return;
                     //if (selectedKey != newKey)
                     //{
@@ -320,9 +316,10 @@ namespace RTool.Database
                     database.CreateTemporaryObject(selectedKey);
                     handler.serializedObject.Update();
                 }
-                private bool CheckErrorAndLeave(ref string newKey)
-                { 
-                    if (string.IsNullOrEmpty(newKey) || Regex.Match(newKey, @"^[/^\w+$/]+$").Success == false)
+                private bool CheckErrorAndLeave(out string newKey)
+                {
+                    newKey = database.TemporaryModifiedKey;
+                    if (ValidKeySyntax(newKey) == false)
                     {
                         newKey = UniqueID("newKey", filteredIDList);
                         return (!EditorUtility.DisplayDialog(
@@ -330,11 +327,8 @@ namespace RTool.Database
                             "Key can not be empty or contain special character. Save as \"" + newKey + "\"?",
                             "OK", "Cancel"));
                     }
-                    List<string> listIDs = new List<string>(database.keyIDs);
-                    if (!string.IsNullOrEmpty(selectedKey))
-                        listIDs.Remove(selectedKey);
 
-                    if (listIDs.Contains(newKey) == true)
+                    if (ValidKeyUnique(selectedKey, newKey, idList) == false)
                     {
                         string lastKey = newKey;
                         newKey = UniqueID(newKey, filteredIDList);
@@ -346,29 +340,7 @@ namespace RTool.Database
                     return false;
                 }
             }
-
-            internal static string ActiveControl { get; private set; }
-            internal static string UnfocusedControl { get; private set; }
-            internal static string FocusedControl { get; private set; }
-            private static void UpdateFocusedControl()
-            {
-                FocusedControl = null;
-                UnfocusedControl = null;
-                string checkingControl = GUI.GetNameOfFocusedControl();
-                if (checkingControl != ActiveControl)
-                {
-                    if (UnfocusedControl == null)
-                    {
-                        UnfocusedControl = ActiveControl;
-                    }
-                    if (FocusedControl == null)
-                    {
-                        FocusedControl = checkingControl;
-                    }
-                    ActiveControl = checkingControl;
-                }
-            }
-            #endregion
+            partial void DrawingJsonController();
         }
     }
 
@@ -394,6 +366,7 @@ namespace RTool.Database
                 return;
 
             dataDict.Add(_newID, dataDict[_oldID]);
+            dataDict[_newID].key = _newID;
             dataDict.Remove(_oldID);
         }
         

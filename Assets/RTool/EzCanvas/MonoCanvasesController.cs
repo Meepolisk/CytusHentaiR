@@ -196,7 +196,7 @@ namespace RTool.EzCanvas
             }
         }
         [CustomEditor(typeof(MonoCanvasesController), true, isFallback = true)]
-        private class CustomInspector : UnityObjectEditor<MonoCanvasesController>
+        private class CustomInspector : RInspector<MonoCanvasesController>
         {
             private ReorderableList visualCanvasList;
             private ReorderableList visualStackList;
@@ -318,7 +318,7 @@ namespace RTool.EzCanvas
                 }
             }
 
-            public override void OnInspectorGUI()
+            protected override void DrawGUI()
             {
                 GUILayout.BeginVertical();
                 EditorGUILayout.LabelField(new GUIContent("Mono Canvas Controller",
