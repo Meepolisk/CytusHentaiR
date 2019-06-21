@@ -2,13 +2,25 @@
 using UnityEngine;
 using RTool.Database;
 
+[System.Serializable]
+public enum MusicGerne
+{
+    GlitchHop,
+    ChipTune,
+    ElectroSwing,
+    Dubstep
+}
 
 [System.Serializable]
-public class SongData : IdenticalData
+public class SongData
 {
     [SerializeField]
-    private string gerne = "";
-    public string Gerne => gerne;
+    private string name = "";
+    public string Name => name;
+
+    [SerializeField]
+    private MusicGerne gerne;
+    public MusicGerne Gerne => gerne;
 
     [SerializeField]
     private string composer = "";
@@ -32,16 +44,34 @@ public class SongData : IdenticalData
 }
 
 [System.Serializable]
-public class NoteDataset : IdenticalData<SongData>
+public class PlayRecord
 {
+    [SerializeField]
+    private NoteDataset[] noteDataset;
+    public NoteDataset[] NoteDataset => noteDataset;
+}
+
+[System.Serializable]
+public enum RecordType
+{
+    Bubble,
+    Cystus,
+    PumpItUp,
+}
+
+[System.Serializable]
+public class NoteDataset
+{
+    [SerializeField]
+    private RecordType recordType = RecordType.Bubble;
+    private RecordType RecordType => recordType;
+
     [SerializeField]
     private List<NoteProfile> noteList = new List<NoteProfile>();
     public List<NoteProfile> NoteList => new List<NoteProfile>(noteList);
     public Queue<NoteProfile> NoteQueue => new Queue<NoteProfile>(noteList);
 
     public int NoteCount => noteList.Count;
-
-    protected override SongData parentData => throw new System.NotImplementedException();
 
     public void UpdateNote(List<NoteProfile> newNoteList)
     {

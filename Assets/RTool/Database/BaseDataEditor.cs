@@ -32,7 +32,7 @@ namespace RTool.Database
         [CustomEditor(typeof(ScriptableDatabase),true)]
         private partial class CustomInspector : RInspector<ScriptableDatabase>
         {
-            private bool dataCanHaveParrent => !handler.dataType.IsSubclassOf(typeof(IdenticalData));
+            private bool dataCanHaveParrent => handler.GetType().IsSubclassOf(typeof(LinkedScriptableDatabase<>);
             private ScriptableDatabase linkedParent => handler.parentDatabase;
             private ReorderableDictionaryHelper editHelper { get; set; }
 
@@ -308,7 +308,7 @@ namespace RTool.Database
                 }
                 private void DrawSelectParent()
                 {
-                    EditorGUILayout.Popup(new GUIContent("Parent", "Parent data"))
+                    //EditorGUILayout.Popup(new GUIContent("Parent", "Parent data"))
                 }
 
                 void Edit_Save(string targetKey = null)
