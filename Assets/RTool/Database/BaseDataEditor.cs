@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using RTool.Extension;
+using REditor.GUIHelper;
 
 namespace RTool.Database
 {
@@ -32,27 +33,32 @@ namespace RTool.Database
         [CustomEditor(typeof(ScriptableDatabase),true)]
         private partial class CustomInspector : RInspector<ScriptableDatabase>
         {
-            private bool dataCanHaveParrent => handler.GetType().IsSubclassOf(typeof(LinkedScriptableDatabase<>);
-            private ScriptableDatabase linkedParent => handler.parentDatabase;
-            private ReorderableDictionaryHelper editHelper { get; set; }
+            //private bool dataCanHaveParrent => handler.GetType().IsSubclassOf(typeof(LinkedScriptableDatabase<>);
+            //private ScriptableDatabase linkedParent => handler.parentDatabase;
+            private ReorderableDictionaryGUIHelper<CustomInspector, string> editHelper { get; set; }
 
             protected override void OnEnable()
             {
                 base.OnEnable();
-                editHelper = new ReorderableDictionaryHelper(this, handler.dataJumper);
+                SetupDictionaryGUIHelper();
             }
             protected void OnDisable()
             {
-                handler.SerializeToList();
                 EditorUtility.SetDirty(handler);
                 AssetDatabase.SaveAssets();
+            }
+            private void SetupDictionaryGUIHelper()
+            {
+                editHelper = new ReorderableDictionaryGUIHelper<CustomInspector, string>(this);
+                editHelper.setValue = (value, selectedID) => { handler.SetName(selectedID, value); };
+                editHelper.drawValue = (rect, selectedID) => { return GUI.TextField(rect, handler.GetName(selectedID)); };
             }
 
             protected override void DrawGUI()
             {
                 DrawHeader();
+                editHelper?.DrawGUI();
                 DrawParentController();
-                DrawingDetailHelper();
                 DrawingJsonController();
 
                 serializedObject.ApplyModifiedPropertiesWithoutUndo();
@@ -68,22 +74,18 @@ namespace RTool.Database
             private void DrawParentController()
             {
                 EditorGUILayout.BeginVertical();
-                if (dataCanHaveParrent)
+                handler.parentDatabase = EditorGUILayout.ObjectField(new GUIContent("ParentDatabase",
+                handler.dataType.Name + " need a parent database"),
+                handler.parentDatabase,
+                typeof(ScriptableDatabase), true) as ScriptableDatabase;
+                if (handler.parentDatabase == null)
                 {
-                    handler.parentDatabase = EditorGUILayout.ObjectField(new GUIContent("ParentDatabase",
-                    handler.dataType.Name + " need a parent database"),
-                    handler.parentDatabase,
-                    typeof(ScriptableDatabase), true) as ScriptableDatabase;
-                    if (handler.parentDatabase == null)
-                    {
-                        EditorGUILayout.HelpBox(
-                           "Should assign " + typeof(ScriptableDatabase).Name + " to show full information", MessageType.Warning, true);
-                    }
+                    EditorGUILayout.HelpBox(
+                       "Should assign " + typeof(ScriptableDatabase).Name + " to show full information", MessageType.Warning, true);
                 }
                 EditorGUILayout.EndVertical();
             }
-            private void DrawingDetailHelper() => editHelper?.DrawGUI();
-            private class ReorderableDictionaryHelper
+            private class asdasf
             {
                 internal float ContentHeight = 200f;
 
