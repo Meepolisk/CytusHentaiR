@@ -22,8 +22,10 @@ namespace REditor.GUIHelper
         public delegate void KeyKeyDelegate(string oldID, string newID);
         public KeyKeyDelegate onKeyChanged;
 
+        public delegate bool KeyConstraint(string key);
+        public KeyConstraint keyConstraint = ((key) => { return true; });
+
         public Func<IEnumerable<string>> getListID;
-        public Func<string, bool> keyConstraint = ((id) => true);
         public delegate TValue1 GetValueRectDelegate(Rect rect, string selectedID);
         public delegate void SetValueRectDelegate(TValue1 value, string selectedID);
         public GetValueRectDelegate drawValue;
@@ -141,7 +143,6 @@ namespace REditor.GUIHelper
         {
             return keyConstraint(_new) && ValidKeyUnique(_old, _new, _checkList);
         }
-        private static bool ValidKeySyntax(string key) => !string.IsNullOrEmpty(key) && new Regex(@"^[a-zA-Z0-9_]+$").IsMatch(key);
         private static bool ValidKeyUnique(string selectedKey, string newKey, IEnumerable<string> keyList)
         {
             List<string> listIDs = new List<string>(keyList);

@@ -2,11 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace RTool.Database
 {
-    public abstract partial class ScriptableDatabase : ScriptableObject { }
+    public abstract partial class ScriptableDatabase : ScriptableObject
+    {
+        private static bool ValidKeySyntax(string key) => (!string.IsNullOrEmpty(key) && new Regex(@"^[a-zA-Z0-9_]+$").IsMatch(key));
+        private static bool ValidKeyUnique(string selectedKey, string newKey, IEnumerable<string> keyList)
+        {
+            List<string> listIDs = new List<string>(keyList);
+            if (!string.IsNullOrEmpty(selectedKey))
+                listIDs.Remove(selectedKey);
+
+            return listIDs.Contains(newKey) == false;
+        }
+        private static bool CheckValidKey(string _old, string _new, IEnumerable<string> _checkList)
+        {
+            return ValidKeySyntax(_new) && ValidKeyUnique(_old, _new, _checkList);
+        }
+        private static string UniqueID(string _id, IEnumerable<string> _checkList)
+        {
+            List<string> checkList = new List<string>(_checkList);
+            if (checkList.Contains(_id) == false)
+                return _id;
+
+            ushort count = 1;
+            while (true)
+            {
+                string result = _id + count.ToString();
+                if (checkList.Contains(result) == false)
+                    return result;
+                count++;
+            }
+        }
+    }
 
     public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : class, new()
     {
