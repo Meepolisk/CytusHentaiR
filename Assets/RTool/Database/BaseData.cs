@@ -1,97 +1,105 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace RTool.Database
 {
-    [System.Serializable]
-    public abstract class IdenticalDataBase
-    {
-        //change these value as we change variable name for later reflection
-        public const string KeyFieldName = "key";
-        public const string NameFieldName = "name";
-
-        [SerializeField]
-        internal string key = "";
-        public string Key => key;
-
-        [SerializeField]
-        internal string name = "";
-        public string Name { get => name; set => name = value; }
-
-        public abstract string FullKey { get; }
-    }
-    [System.Serializable]
-    public abstract class IdenticalData : IdenticalDataBase
-    {
-        public sealed override string FullKey => key;
-        
-    }
-    [System.Serializable]
-    public abstract partial class IdenticalData<T> : IdenticalDataBase where T : IdenticalData
-    {
-        protected abstract T parentData { get; }
-        
-        public string ParentKey => parentData.Key;
-        public sealed override string FullKey => parentData.Key + "." + key;
-    }
-    
     public abstract partial class ScriptableDatabase : ScriptableObject
     {
-        [SerializeField, HideInInspector]
-        protected ScriptableDatabase parentDatabase = null;
+        private static bool ValidKeySyntax(string key) => (!string.IsNullOrEmpty(key) && new Regex(@"^[a-zA-Z0-9_]+$").IsMatch(key));
+        private static bool ValidKeyUnique(string selectedKey, string newKey, IEnumerable<string> keyList)
+        {
+            List<string> listIDs = new List<string>(keyList);
+            if (!string.IsNullOrEmpty(selectedKey))
+                listIDs.Remove(selectedKey);
 
-        public abstract void DeserializeToDict();
-        public abstract void SerializeToList();
-        protected abstract bool IsDeserialized { get; }
-        internal abstract void CheckDeserialize();
+            return listIDs.Contains(newKey) == false;
+        }
+        private static bool CheckValidKey(string _old, string _new, IEnumerable<string> _checkList)
+        {
+            return ValidKeySyntax(_new) && ValidKeyUnique(_old, _new, _checkList);
+        }
+        private static string UniqueID(string _id, IEnumerable<string> _checkList)
+        {
+            List<string> checkList = new List<string>(_checkList);
+            if (checkList.Contains(_id) == false)
+                return _id;
+
+            ushort count = 1;
+            while (true)
+            {
+                string result = _id + count.ToString();
+                if (checkList.Contains(result) == false)
+                    return result;
+                count++;
+            }
+        }
     }
 
-    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
+    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : class, new()
     {
+        protected class IdenticalData
+        {
+            public string key;
+            public T value;
+            
+            public IdenticalData(string _key, T _value)
+            {
+                key = _key; value = _value;
+            }
+        }
         [SerializeField]
-        private List<T> dataList = new List<T>();
+        private List<IdenticalData> data = null;
 
-        private Dictionary<string, T> dataDict { get; set; }
-
-        public sealed override void DeserializeToDict()
+        public T this[string key]
         {
-            dataDict = new Dictionary<string, T>();
-            dataList.ForEach(item => { dataDict.Add(item.Key, item); });
-        }
-        public sealed override void SerializeToList()
-        {
-            if (dataDict == null)
-                return;
-
-            dataList = new List<T>(dataDict.Values);
-        }
-        internal sealed override void CheckDeserialize()
-        {
-            if (!IsDeserialized)
-                DeserializeToDict();
-        }
-        protected sealed override bool IsDeserialized => (dataDict != null);
-        public T Get(string _key)
-        {
-            CheckDeserialize();
-
-            return dataDict[_key];
-        }
-        public void Add (string _key, T _data)
-        {
-            CheckDeserialize();
-            if (_data.key == null)
-
-            dataDict.Add(_key, _data);
+            get => data.Single(x => x.key == key).value;
+            set => data.Single(x => x.key == key).value = value;
         }
 
-        protected virtual void Reset()
+        public void Add(string key, T value)
         {
-            if (dataDict != null)
-                dataDict = null;
-            if (dataList != null)
-                dataList.Clear();
+            if (ContainsKey(key))
+                throw new Exception("Key already exist");
+
+            data.Add(new IdenticalData(key, value));
         }
+
+        public void Clear()
+        {
+            data.Clear();
+        }
+        public bool ContainsKey(string key) => data.FirstOrDefault(x => x.key == key) != null;
+        
+        public bool Remove(string key)
+        {
+            try
+            { 
+                data.Remove(data.Single(x => x.key == key));
+                return true;
+            }
+            catch { return false; }
+        }
+
+        public bool TryGetValue(string key, out T value)
+        {
+            try
+            {
+                value = data.Single(x => x.key == key).value;
+                return true;
+            }
+            catch
+            {
+                value = default;
+                return false;
+            }
+        }
+    }
+    public abstract partial class LinkedScriptableDatabase<T> : ScriptableDatabase<T> where T : class, new()
+    {
+       
     }
 }
