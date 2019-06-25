@@ -1,74 +1,97 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace RTool.Database
 {
-    public abstract partial class ScriptableDatabase : ScriptableObject { }
-
-    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : class, new()
+    [System.Serializable]
+    public abstract class IdenticalDataBase
     {
-        protected class IdenticalData
-        {
-            public string key;
-            public T value;
-            
-            public IdenticalData(string _key, T _value)
-            {
-                key = _key; value = _value;
-            }
-        }
+        //change these value as we change variable name for later reflection
+        public const string KeyFieldName = "key";
+        public const string NameFieldName = "name";
+
         [SerializeField]
-        private List<IdenticalData> data = null;
+        internal string key = "";
+        public string Key => key;
 
-        public T this[string key]
-        {
-            get => data.Single(x => x.key == key).value;
-            set => data.Single(x => x.key == key).value = value;
-        }
+        [SerializeField]
+        internal string name = "";
+        public string Name { get => name; set => name = value; }
 
-        public void Add(string key, T value)
-        {
-            if (ContainsKey(key))
-                throw new Exception("Key already exist");
-
-            data.Add(new IdenticalData(key, value));
-        }
-
-        public void Clear()
-        {
-            data.Clear();
-        }
-        public bool ContainsKey(string key) => data.FirstOrDefault(x => x.key == key) != null;
-        
-        public bool Remove(string key)
-        {
-            try
-            { 
-                data.Remove(data.Single(x => x.key == key));
-                return true;
-            }
-            catch { return false; }
-        }
-
-        public bool TryGetValue(string key, out T value)
-        {
-            try
-            {
-                value = data.Single(x => x.key == key).value;
-                return true;
-            }
-            catch
-            {
-                value = default;
-                return false;
-            }
-        }
+        public abstract string FullKey { get; }
     }
-    public abstract partial class LinkedScriptableDatabase<T> : ScriptableDatabase<T> where T : class, new()
+    [System.Serializable]
+    public abstract class IdenticalData : IdenticalDataBase
     {
-       
+        public sealed override string FullKey => key;
+        
+    }
+    [System.Serializable]
+    public abstract partial class IdenticalData<T> : IdenticalDataBase where T : IdenticalData
+    {
+        protected abstract T parentData { get; }
+        
+        public string ParentKey => parentData.Key;
+        public sealed override string FullKey => parentData.Key + "." + key;
+    }
+    
+    public abstract partial class ScriptableDatabase : ScriptableObject
+    {
+        [SerializeField, HideInInspector]
+        protected ScriptableDatabase parentDatabase = null;
+
+        public abstract void DeserializeToDict();
+        public abstract void SerializeToList();
+        protected abstract bool IsDeserialized { get; }
+        internal abstract void CheckDeserialize();
+    }
+
+    public abstract partial class ScriptableDatabase<T> : ScriptableDatabase where T : IdenticalDataBase, new()
+    {
+        [SerializeField]
+        private List<T> dataList = new List<T>();
+
+        private Dictionary<string, T> dataDict { get; set; }
+
+        public sealed override void DeserializeToDict()
+        {
+            dataDict = new Dictionary<string, T>();
+            dataList.ForEach(item => { dataDict.Add(item.Key, item); });
+        }
+        public sealed override void SerializeToList()
+        {
+            if (dataDict == null)
+                return;
+
+            dataList = new List<T>(dataDict.Values);
+        }
+        internal sealed override void CheckDeserialize()
+        {
+            if (!IsDeserialized)
+                DeserializeToDict();
+        }
+        protected sealed override bool IsDeserialized => (dataDict != null);
+        public T Get(string _key)
+        {
+            CheckDeserialize();
+
+            return dataDict[_key];
+        }
+        public void Add (string _key, T _data)
+        {
+            CheckDeserialize();
+            if (_data.key == null)
+
+            dataDict.Add(_key, _data);
+        }
+
+        protected virtual void Reset()
+        {
+            if (dataDict != null)
+                dataDict = null;
+            if (dataList != null)
+                dataList.Clear();
+        }
     }
 }
