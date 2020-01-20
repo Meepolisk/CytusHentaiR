@@ -1,4 +1,4 @@
-﻿using RTool.Attribute;
+﻿using RTool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine;
 public class CytusNotePlayer : BubbleNotePlayer
 {
     [Header("Config: Cytus")]
-    [SerializeField, Range(1, 5), ReadOnlyWhenPlaying]
+    [SerializeField, Range(1, 5), ReadOnly]
     private float cytusRoundTime = 2.5f;
     [SerializeField]
     private Transform cytusBar = null;

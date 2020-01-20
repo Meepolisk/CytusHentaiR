@@ -1,11 +1,11 @@
-﻿using RTool.Attribute;
+﻿using RTool;
 using UnityEngine;
 
 namespace RTool.AudioAnalyze
 {
     public abstract class BandVisualizorBase : MonoBehaviour
     {
-        [SerializeField, ReadOnlyWhenPlaying]
+        [SerializeField, ReadOnly]
         protected BandType bandType = BandType.SubBass;
 
         public AudioPeer AudioPeer => AudioPeer.Instance;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using RTool.Attribute;
+using RTool;
 
 namespace RTool.AudioAnalyze
 {
@@ -15,10 +15,10 @@ namespace RTool.AudioAnalyze
     [System.Serializable]
     public class BandProfile
     {
-        [SerializeField, ReadOnlyWhenPlaying]
+        [SerializeField, ReadOnly]
         private float hertzMin = 20f;
         public float HertzMin => hertzMin;
-        [SerializeField, ReadOnlyWhenPlaying]
+        [SerializeField, ReadOnly]
         private float hertzMax = 60f;
         public float HertzMax => hertzMax;
         [SerializeField, Range(1f, 20f)]

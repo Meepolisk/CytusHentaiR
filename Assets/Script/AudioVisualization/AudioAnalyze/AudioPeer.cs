@@ -1,4 +1,4 @@
-﻿using RTool.Attribute;
+﻿using RTool;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace RTool.AudioAnalyze
         public float BeatThreehold => rhymSetting.BeatThreehold;
 
         [Header("Config")]
-        [SerializeField, ReadOnlyWhenPlaying]
+        [SerializeField, ReadOnly]
         private FFTWindow fftWindow = FFTWindow.Blackman;
         [SerializeField, Range(8, 12)]
         private int sampleRate = 10;

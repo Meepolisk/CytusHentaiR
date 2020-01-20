@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RTool.EzCanvas;
-using RTool.Attribute;
+using RTool;
 
 public class GameplayController : MonoBehaviour
 {

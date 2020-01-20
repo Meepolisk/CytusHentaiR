@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using RTool.Attribute;
+using RTool;
 using System.Collections.Generic;
 
 namespace RTool.AudioAnalyze

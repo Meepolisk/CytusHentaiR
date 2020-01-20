@@ -1,0 +1,3 @@
+[submodule "Assets/RTool"]
+	path = Assets/RTool
+	url = https://gitlab.com/Meepolisk/idlegamecore.git

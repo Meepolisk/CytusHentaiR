@@ -1,4 +1,4 @@
-﻿using RTool.Attribute;
+﻿using RTool;
 using RTool.AudioAnalyze;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ public class BandDrawerController : MonoBehaviour
 {
     [SerializeField]
     private RectTransform content = null;
-    [SerializeField, Range(10f, 100f), ReadOnlyWhenPlaying]
+    [SerializeField, Range(10f, 100f), ReadOnly]
     private float contentSpeed = 30f;
-    [SerializeField, ReadOnlyWhenPlaying]
+    [SerializeField, ReadOnly]
     private float initWidth = 30f;
 
     private void Update()
